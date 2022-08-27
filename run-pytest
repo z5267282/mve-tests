@@ -1,3 +1,4 @@
 #!/bin/dash
 
-cp ../mve/* . || exit $?
+[ -d mve ] && rm -r mve
+cp ../mve/* mve || exit $?
