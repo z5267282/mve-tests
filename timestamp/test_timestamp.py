@@ -22,11 +22,20 @@ def test_timestamp_seconds_hour():
 
 # check good time
 
+def test_check_good_time_negative_int():
+    assert timestamp.check_good_time('../videos/03.mp4', '-3')
+
+def test_check_good_time_timestamp():
+    assert timestamp.check_good_time('../videos/03.mp4', '01:01')
+
 def test_check_good_time_int():
     assert timestamp.check_good_time('../videos/03.mp4', '74')
 
-def test_check_good_time_negative_int():
-    assert timestamp.check_good_time('../videos/03.mp4', '-3')
+def test_check_good_time_bad_negative_int():
+    assert not timestamp.check_good_time('../videos/03.mp4', '-500')
+
+def test_check_good_time_bad_timestamp():
+    assert not timestamp.check_good_time('../videos/03.mp4', '02:01')
 
 def test_check_good_time_bad_int():
     assert not timestamp.check_good_time('../videos/03.mp4', '104')
