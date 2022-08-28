@@ -1,0 +1,16 @@
+#!/bin/dash
+
+SRC='../videos/03.mp4'
+
+echo 'import subprocess' > timestamp.py
+
+sed -E -n '/def get_duration/,/def edit_video/p' ../../mve/src/treater.py | sed -E '$d' >> timestamp.py
+dur="$(python3 -c "from timestamp import *; print(get_duration('$SRC'))")"
+
+sed -E -i '' "1a\\
+SRC = '$SRC'
+" timestamp.py 
+
+sed -E -i '' "2a\\
+DUR = $dur
+" timestamp.py 
