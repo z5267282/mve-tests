@@ -1,0 +1,6 @@
+#!/bin/dash
+
+echo 'import re' > misc.py
+sed -E -n '/def parse_timestamp/,/^$/p' ../../mve/src/viewer.py >> misc.py
+
+pytest

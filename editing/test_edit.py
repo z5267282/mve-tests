@@ -18,7 +18,12 @@ def good_helper(name, start, end):
     except CalledProcessError as c:
         assert False, str(c)
 
-# TESTS
+BAD = generate_out_name('bad')
+def bad_helper(start, end):
+    with pytest.raises(CalledProcessError):
+        edit.edit_video(SRC, BAD, start, end)
+
+# GOOD TESTS 
 
 def test_good_seconds_start_end():
     good_helper('start end', '2', '4')
@@ -32,6 +37,7 @@ def test_good_positive_second():
 def test_good_negative_end():
     good_helper('negative end', '-2', end=None)
 
+# BAD TESTS
+
 def test_bad_over_bounds():
-    with pytest.raises(CalledProcessError):
-        edit.edit_video(SRC, 'bad', '1:14', '1:17')
+    bad_helper('1:22', '1:24')
