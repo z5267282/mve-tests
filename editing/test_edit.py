@@ -1,6 +1,7 @@
 from subprocess import CalledProcessError
 
 import edit
+import pytest
 
 # HELPERS
 
@@ -30,3 +31,7 @@ def test_good_positive_second():
 
 def test_good_negative_end():
     good_helper('negative end', '-2', end=None)
+
+def test_bad_over_bounds():
+    with pytest.raises(CalledProcessError):
+        edit.edit_video(SRC, 'bad', '1:14', '1:17')
