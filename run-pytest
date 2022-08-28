@@ -1,4 +1,5 @@
 #!/bin/dash
 
-[ -d mve ] && rm -r mve
-cp ../mve/* mve || exit $?
+PATH="$PATH:$(pwd)"
+
+get-mve-files
