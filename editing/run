@@ -1,0 +1,6 @@
+#!/bin/dash
+
+echo 'import subprocess' > edit.py
+sed -E -n '/^def edit_video\(/,/^$/p' ../../mve/src/treater.py >> edit.py
+
+pytest
