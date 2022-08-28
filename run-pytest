@@ -1,7 +1,0 @@
-#!/bin/dash
-
-PATH="$PATH:$(pwd)"
-
-get-mve-files
-
-pytest

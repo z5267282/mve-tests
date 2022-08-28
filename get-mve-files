@@ -1,4 +1,0 @@
-#!/bin/dash
-
-[ -d mve ] && rm -rf mve
-cp -r ../mve . && rm -rf mve/.git
