@@ -1,6 +1,4 @@
 import subprocess
-SRC = '../videos/03.mp4'
-DUR = 75
 def get_duration(joined_src_path):
     args = [
         'ffprobe',
@@ -18,20 +16,22 @@ def get_duration(joined_src_path):
 
     return int(float(result.stdout))
 
-def check_timestamp(timestamp, duration):
+def get_timestamp_seconds(timestamp):
     return sum(
         int(t) * (60 ** i)
-            for t, i in enumerate(reversed(timestamp.split(':')), start=1)
-    ) <= duration
+            for i, t in enumerate(reversed(timestamp.split(':')))
+    )
 
 def check_good_time(joined_src_path, time):
     duration = get_duration(joined_src_path)
 
+    seconds = None
     if time.startswith('-'):
-        return int(time[1:]) <= duration 
+        seconds = int(time[1:]) 
+    elif ':' in time:
+        seconds = get_timestamp_seconds(time)
+    else:
+        seconds = int(time)
 
-    if ':' in time:
-        return check_timestamp(time)
-
-    return int(time) <= duration
+    return seconds >= 0 and seconds <= duration
 
