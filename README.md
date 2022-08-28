@@ -1,4 +1,5 @@
 `mve` must exist in the parent level folder  
++ ie. `../mve` should be the path to access `mve`  
 
-`run-pytest` will copy the most recent version of `mve` to the current folder
-+ first runs `get-mve-files`
+folders are tests  
+each folder has a shell script called `run` which will perform the test
