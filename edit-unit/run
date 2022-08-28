@@ -1,0 +1,5 @@
+#!/bin/dash
+
+cp -r ../../mve/src .
+cd src
+echo '[]' > remaining.json
