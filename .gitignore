@@ -2,4 +2,7 @@ __pycache__
 videos
 .DS_Store
 */outputs
+*/history
+*/queue
+*/errors
 edit-unit/src
