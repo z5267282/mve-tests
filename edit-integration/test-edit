@@ -45,7 +45,7 @@ EOF
     python3 viewer.py < "$session" >/dev/null
     check_in_folder "$file_name" ../queue || exit "$errno"
 
-    python3 treater.py || exit "$errno"
+    python3 treater.py 2>/dev/null || exit "$errno"
     check_in_folder "$file_name" ../history || exit "$errno"
     if ! [ -e "../outputs/$file_name.mp4" ]
     then
@@ -62,18 +62,13 @@ test_end () {
     end="$1"
     file_name="$2"
     errno="$3"
-    suppress="$4"
-    if [ -n "$suppress" ]
-    then
-        test_helper "e $end" "$file_name" "$errno" >/dev/null 2>&1
-    else
-        test_helper "e $end" "$file_name" "$errno"
-    fi
+    test_helper "e $end" "$file_name" "$errno"
 }
 
-test_end '-2' 'negative number' 1 a
-test_end '48' 'natural number' 2 a
-test_end '00-53' 'timestamp' 3 a
-test_end '0-54' 'timestamp no leading 0' 4
+test_end '-2' 'negative number' 1
+test_end '48' 'natural number' 2
+test_end '00-53' 'timestamp' 3
+test_end '0-34' 'timestamp no leading 0'
 
-clr 'cyan' "passed all tests in $0"
+clr 'cyan' "passed all tests"
+echo " $0"
