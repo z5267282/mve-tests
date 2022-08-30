@@ -22,7 +22,7 @@ fail () {
 check_in_folder () {
     file_name="$1"
     folder="$2"
-    if ! grep -F "$file_name" -r "$folder"
+    if ! grep -F -q "$file_name" -r "$folder"
     then
         fail
         echo ": $file_name wasn't placed in $folder" >&2
@@ -42,11 +42,10 @@ $cmd $file_name
 q
 EOF
 
-    cat remaining.json
-    python3 viewer.py < "$session" > /dev/null
+    python3 viewer.py < "$session" >/dev/null
     check_in_folder "$file_name" ../queue || exit "$errno"
 
-    python3 treater.py > /dev/null 2>&1
+    python3 treater.py || exit "$errno"
     check_in_folder "$file_name" ../history || exit "$errno"
     if ! [ -e "../outputs/$file_name.mp4" ]
     then
@@ -63,9 +62,18 @@ test_end () {
     end="$1"
     file_name="$2"
     errno="$3"
-    test_helper "e $end" "$file_name" "$errno"
+    suppress="$4"
+    if [ -n "$suppress" ]
+    then
+        test_helper "e $end" "$file_name" "$errno" >/dev/null 2>&1
+    else
+        test_helper "e $end" "$file_name" "$errno"
+    fi
 }
 
-test_end '-2' 'negative number' 1 > /dev/null
-test_end '48' 'natural number' 2 > /dev/null
-test_end '00:53' 'timestamp' 3
+test_end '-2' 'negative number' 1 a
+test_end '48' 'natural number' 2 a
+test_end '00-53' 'timestamp' 3 a
+test_end '0-54' 'timestamp no leading 0' 4
+
+clr 'cyan' "passed all tests in $0"
