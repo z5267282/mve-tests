@@ -22,7 +22,7 @@ def get_timestamp_seconds(timestamp):
             for i, t in enumerate(reversed(timestamp.split(':')))
     )
 
-def check_good_time(joined_src_path, time):
+def in_duration_bounds(joined_src_path, time):
     duration = get_duration(joined_src_path)
 
     seconds = None

@@ -22,20 +22,20 @@ def test_timestamp_seconds_hour():
 
 # check good time
 
-def test_check_good_time_negative_int():
-    assert timestamp.check_good_time('../videos/03.mp4', '-3')
+def test_in_duration_bounds_negative_int():
+    assert timestamp.in_duration_bounds('../videos/03.mp4', '-3')
 
-def test_check_good_time_timestamp():
-    assert timestamp.check_good_time('../videos/03.mp4', '01:01')
+def test_in_duration_bounds_timestamp():
+    assert timestamp.in_duration_bounds('../videos/03.mp4', '01:01')
 
-def test_check_good_time_int():
-    assert timestamp.check_good_time('../videos/03.mp4', '74')
+def test_in_duration_bounds_int():
+    assert timestamp.in_duration_bounds('../videos/03.mp4', '74')
 
-def test_check_good_time_bad_negative_int():
-    assert not timestamp.check_good_time('../videos/03.mp4', '-500')
+def test_in_duration_bounds_bad_negative_int():
+    assert not timestamp.in_duration_bounds('../videos/03.mp4', '-500')
 
-def test_check_good_time_bad_timestamp():
-    assert not timestamp.check_good_time('../videos/03.mp4', '02:01')
+def test_in_duration_bounds_bad_timestamp():
+    assert not timestamp.in_duration_bounds('../videos/03.mp4', '02:01')
 
-def test_check_good_time_bad_int():
-    assert not timestamp.check_good_time('../videos/03.mp4', '104')
+def test_in_duration_bounds_bad_int():
+    assert not timestamp.in_duration_bounds('../videos/03.mp4', '104')
