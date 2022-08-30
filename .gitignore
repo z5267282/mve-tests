@@ -1,6 +1,11 @@
+# apple things
 __pycache__
-videos
 .DS_Store
+
+# sample videos for testing
+videos
+
+# mve directory structure
 */outputs
 */history
 */queue
