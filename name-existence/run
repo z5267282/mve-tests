@@ -2,6 +2,4 @@
 
 ../setup-env
 
-touch outputs/already.mp4
-
-check-rename-err
+test-rename-error
