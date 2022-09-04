@@ -1,0 +1,12 @@
+#!/bin/dash
+
+../setup-env
+
+[ -d input ] && rm -r inputs
+mkdir inputs
+
+cd inputs
+seq 200 | xargs touch
+cd ..
+
+sed -E -i '' '/^SOURCE/s%\[.*\]%["..", "inputs"]%' src/config.py
