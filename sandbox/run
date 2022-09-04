@@ -1,0 +1,5 @@
+#!/bin/dash
+
+../setup-env
+
+cd src && python3 viewer.py
