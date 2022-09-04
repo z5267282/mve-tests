@@ -2,11 +2,15 @@
 
 ../setup-env
 
-[ -d input ] && rm -r inputs
+[ -d inputs ] && rm -r inputs
 mkdir inputs
 
 cd inputs
 seq 200 | xargs touch
 cd ..
 
-sed -E -i '' '/^SOURCE/s%\[.*\]%["..", "inputs"]%' src/config.py
+cd src
+echo '[]' > remaining.json
+sed -E -i '' '/^SOURCE/s%\[.*\]%["..", "inputs"]%' config.py
+python3 generator.py
+yes d | python3 viewer.py > output.txt
