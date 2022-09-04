@@ -2,4 +2,7 @@
 
 ../setup-env
 
-cd src && python3 viewer.py
+cd src
+sed -E -i '' '/^TESTING/s%True%False%' config.py
+
+python3 viewer.py
