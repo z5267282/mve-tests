@@ -1,0 +1,7 @@
+#!/bin/dash
+
+../setup-env
+
+touch outputs/already.mp4
+
+check-rename-err
