@@ -1,22 +1,5 @@
 #!/bin/dash
 
-for dir in 'errors' 'history' 'queue' 'outputs'
-do
-    [ -d "$dir" ] && rm -r "$dir"
-    mkdir "$dir"
-done
-
-cp -r ../../mve/src .
-
-cd src
-echo '[]' > remaining.json
-
-sed -E -i '' '2s%\[.*\]%["../", "../", "videos"]%
-3s%\[.*\]%["../"]%
-4s%\[.*\]%["../", "outputs"]%' config.py
-
-python3 generator.py
-
-cd ..
+../setup-env
 
 test-edit
