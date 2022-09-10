@@ -1,0 +1,11 @@
+#!/bin/dash
+
+echo 'import subprocess, sys' > duration.py
+sed -E -n '/^def get_duration\(/,/^def/p' ../../mve/src/viewer.py | sed '$d' >> duration.py
+echo 'print(get_duration(sys.argv[1]))' >> duration.py
+
+for video in ../videos/*
+do
+    echo -n "$video: "
+    python3 duration.py "$video"
+done
