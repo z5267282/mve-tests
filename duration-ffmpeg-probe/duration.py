@@ -1,4 +1,4 @@
-import subprocess, sys
+import subprocess, sys, re
 def get_duration(joined_src_path):
     args = [
         'ffprobe',
@@ -13,12 +13,8 @@ def get_duration(joined_src_path):
         'default=noprint_wrappers=1:nokey=1'
     ]
     result = subprocess.run(args, capture_output=True, text=True)
-    return result.stdout
-
-    # return int(
-    #     round(
-    #         float(result.stdout), 0
-    #     )
-    # )
+    match = re.match(r'([(0-9)]+)\.([0-9])', result.stdout)
+    whole_number, tenths = int(match.group(1)), int(match.group(2))
+    return whole_number + (tenths >= 5)
 
 print(get_duration(sys.argv[1]))

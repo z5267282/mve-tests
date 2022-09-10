@@ -1,6 +1,6 @@
 #!/bin/dash
 
-echo 'import subprocess, sys' > duration.py
+echo 'import subprocess, sys, re' > duration.py
 sed -E -n '/^def get_duration\(/,/^def/p' ../../mve/src/viewer.py | sed '$d' >> duration.py
 echo 'print(get_duration(sys.argv[1]))' >> duration.py
 
