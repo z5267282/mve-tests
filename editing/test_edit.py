@@ -7,7 +7,6 @@ import pytest
 
 OUT = 'outputs'
 def generate_out_name(name):
-    global OUT
     return f'{OUT}/{name}.mp4'
 
 SRC = '../videos/03.mp4'
@@ -21,10 +20,10 @@ def bad_helper(start, end):
         edit.edit_video(SRC, BAD, start, end)
 
 def test_good_seconds_start_end():
-    helper('start end', '2', '4')
+    helper('start end', '4', '10')
 
 def test_good_timestamp():
-    helper('2 timestamps', '00:22', '00:24')
+    helper('2 timestamps', '00:25', '00:30')
 
 def test_good_positive_second():
     helper('only start', '60')
