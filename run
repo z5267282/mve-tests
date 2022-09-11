@@ -1,0 +1,27 @@
+#!/bin/dash
+
+alias nl='echo "" && echo ""'
+for dir in *
+do
+    [ -d "$dir" ] || continue
+    [ -f "$dir/run" ] || continue
+    cd "$dir"
+    if run
+    then
+        nl
+        ../clr cyan 'passed'
+        echo " tests in: $dir"
+        nl
+    else
+        nl
+        ../clr magenta 'failed'
+        echo " tests in: $dir"
+        nl
+        exit 1
+    fi
+    cd ..
+done
+
+nl
+clr green 'passed'
+echo ' all tests!'
