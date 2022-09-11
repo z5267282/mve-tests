@@ -14,3 +14,4 @@ echo '[]' > remaining.json
 sed -E -i '' '/^SOURCE/s%\[.*\]%["..", "inputs"]%' config.py
 python3 generator.py
 yes d | python3 viewer.py > output.txt
+cat output.txt
