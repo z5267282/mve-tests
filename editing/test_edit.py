@@ -2,17 +2,17 @@ import edit
 
 # TESTS
 
-# def test_good_seconds_start_end():
-#     helper('start end', '4', '10')
+def test_good_seconds_start_end():
+    helper('start end', '4', '10')
 
-# def test_good_timestamp():
-#     helper('2 timestamps', '00:25', '00:30')
+def test_good_timestamp():
+    helper('2 timestamps', '00:25', '00:30')
 
-# def test_good_positive_second():
-#     helper('only start', '01:01')
+def test_good_positive_second():
+    helper('only start', '01:01')
 
-# def test_good_negative_end():
-#     helper('negative end', '-4')
+def test_good_negative_end():
+    helper('negative end', '-4')
 
 # HELPERS
 
@@ -25,5 +25,3 @@ def helper(name, start, end=None):
     output_name = generate_out_name(name)
     print(start, end)
     edit.edit_video(SRC, output_name, start, end)
-
-helper('only start', '01:01')

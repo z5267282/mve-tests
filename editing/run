@@ -16,4 +16,4 @@ EOF
 
 sed -E -n '/^def edit_video\(/,/^def handle_error\(/p' ../../mve/src/treater.py | sed -E '$d' >> edit.py
 
-pytest
+pytest --disable-warnings
