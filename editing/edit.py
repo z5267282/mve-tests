@@ -3,7 +3,6 @@ import moviepy.editor as mvp
 import config as cfg
 import video_editing as vde
 
-import subprocess
 def edit_video(joined_src_path, joined_dst_path, start, end):
     if cfg.USE_MOVIEPY:
         edit_moviepy(joined_src_path, joined_dst_path, start, end)
