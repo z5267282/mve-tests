@@ -11,7 +11,7 @@ def generate_out_name(name):
     return f'{OUT}/{name}.mp4'
 
 SRC = '../videos/03.mp4'
-def good_helper(name, start, end):
+def good_helper(name, start, end=None):
     try:
         output_name = generate_out_name(name)
         edit.edit_video(SRC, output_name, start, end)
@@ -32,10 +32,10 @@ def test_good_timestamp():
     good_helper('2 timestamps', '00:22', '00:24')
 
 def test_good_positive_second():
-    good_helper('only start', '71', end=None)
+    good_helper('only start', '71')
 
 def test_good_negative_end():
-    good_helper('negative end', '-2', end=None)
+    good_helper('negative end', '-2')
 
 # BAD TESTS
 
