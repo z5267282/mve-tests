@@ -3,11 +3,10 @@ import timestamp
 # get_duration()
 
 def test_duration():
-    assert timestamp.get_duration('../videos/03.mp4') == 75
-    assert timestamp.get_duration('../videos/04.mp4') == 50
-    # probably < 56.5
-    assert timestamp.get_duration('../videos/05.mp4') == 56
-    assert timestamp.get_duration('../videos/06.mp4') == 40
+    assert timestamp.get_duration('../videos/01.mp4') == 22
+    assert timestamp.get_duration('../videos/02.mp4') == 60
+    assert timestamp.get_duration('../videos/03.mp4') == 68
+    assert timestamp.get_duration('../videos/04.mp4') == 46
 
 # timestamp_seconds()
 
