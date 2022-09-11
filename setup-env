@@ -16,4 +16,4 @@ sed -E -i '' '/^SOURCE/s%\[.*\]%["..", "..", "videos"]%
 /^DESTINATION/s%\[.*\]%["..", "outputs"]%
 /^TESTING/s%False%True%' config.py
 
-python3 generator.py
+python3 generator.py > /dev/null
