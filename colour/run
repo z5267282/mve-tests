@@ -3,6 +3,7 @@
 # note this should be run in a terminal not the vscode one
 # colours don't properly register
 
+cp ../../mve/src/config.py .
 cp ../../mve/src/constants/colour.py .
 
 python3 run-tests.py
