@@ -1,5 +1,8 @@
 #!/bin/dash
 
+[ -d outputs ] && rm -r outputs
+mkdir outputs
+
 cp ../../mve/src/config.py .
 cp ../../mve/src/constants/video_editing.py .  
 
