@@ -19,23 +19,3 @@ def test_timestamp_seconds_min():
 
 def test_timestamp_seconds_hour():
     assert timestamp.get_timestamp_seconds('01:10:32') == 4232
-
-# check good time
-
-def test_in_duration_bounds_negative_int():
-    assert timestamp.in_duration_bounds('../videos/03.mp4', '-3')
-
-def test_in_duration_bounds_timestamp():
-    assert timestamp.in_duration_bounds('../videos/03.mp4', '01:01')
-
-def test_in_duration_bounds_int():
-    assert timestamp.in_duration_bounds('../videos/03.mp4', '74')
-
-def test_in_duration_bounds_bad_negative_int():
-    assert not timestamp.in_duration_bounds('../videos/03.mp4', '-500')
-
-def test_in_duration_bounds_bad_timestamp():
-    assert not timestamp.in_duration_bounds('../videos/03.mp4', '02:01')
-
-def test_in_duration_bounds_bad_int():
-    assert not timestamp.in_duration_bounds('../videos/03.mp4', '104')
