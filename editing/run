@@ -1,6 +1,6 @@
 #!/bin/dash
 
-cp ../../mve/src/config.py
+cp ../../mve/src/config.py .
 cp ../../mve/src/constants/video_editing.py .  
 
 cat << EOF > edit.py
