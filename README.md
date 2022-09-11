@@ -4,3 +4,5 @@
 folders are tests  
 + automated tests have a root-level file called `run`
 + manual tests have a root-level file called `start`
+
+tests that need additional information have a root-level file called `info.md`
