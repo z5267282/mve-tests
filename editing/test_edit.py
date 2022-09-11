@@ -27,7 +27,7 @@ def test_good_timestamp():
     helper('2 timestamps', '00:22', '00:24')
 
 def test_good_positive_second():
-    helper('only start', '67')
+    helper('only start', '60')
 
 def test_good_negative_end():
-    helper('negative end', '-2')
+    helper('negative end', '-4')
