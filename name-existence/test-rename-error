@@ -16,6 +16,8 @@ EOF
 
 python3 viewer.py < $input > $out 2>$err
 
+cat $out
+
 if ! grep -E -q 'the file .*already\.mp4.* exists in the folder \[.*\]' $err
 then
     echo "existence error message was not printed to stderr"
