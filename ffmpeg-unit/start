@@ -1,6 +1,6 @@
 #!/bin/dash
 
-echo 'import subprocess, sys' > run_test.py
+echo 'import subprocess' > run_test.py
 echo 'import time_handlers' >> run_test.py
 
 cp ../../mve/src/helpers/time_handlers.py .
@@ -8,6 +8,13 @@ cp ../../mve/src/helpers/time_handlers.py .
 sed -E -n '/^def edit_ffmpeg/,/^def/p' ../../mve/src/treater.py | sed '$d' >> run_test.py
 sed -E -n '/^def generate_ffmpeg_args/,/^def/p' ../../mve/src/treater.py | sed '$d' >> run_test.py
 
-echo 'edit_ffmpeg(*sys.argv[1:])' >> run_test.py
+echo 'edit_ffmpeg("../videos/01.mp4", "out.mp4", "-1", None)' >> run_test.py
 
-python3 run_test.py ../videos/01.mp4 -2
+base="(basename "$0")"
+if python3 run_test.py
+then
+    echo "passed test $base"
+else
+    echo "failed test $base"
+    exit 1
+fi
