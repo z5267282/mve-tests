@@ -10,17 +10,57 @@ m
 q
 EOF
 
-run-test 'negative start time' '[ error ] the start time must be in the format [ natural number | timestamp in form <[hour]-min-sec> ]' << EOF
+run-test 'negative start time (integer)' '[ error ] the start time must be in the format [ natural number | timestamp in form <[hour]-min-sec> ]' << EOF
 m -3 1 bad
 q
 EOF
 
-run-test 'negative end time' '[ error ] the end time must be in the format [ natural number | timestamp in form <[hour]-min-sec> ]' << EOF
+run-test 'negative end time (integer)' '[ error ] the end time must be in the format [ natural number | timestamp in form <[hour]-min-sec> ]' << EOF
 m 10 -4 bad
+q
+EOF
+
+run-test 'start out of bounds via timestamp' "[ error ] the start time '1:54:29' is not in the bounds of video 01.mp4" << EOF
+m 1-54-29 3 bad start
+q
+EOF
+
+run-test 'end out of bounds via timestamp' "[ error ] the end time '1:40:20' is not in the bounds of video 01.mp4" << EOF
+m 3 1-40-20 bad start
+q
+EOF
+
+run-test 'start out of bounds via seconds' "[ error ] the start time '987654' is not in the bounds of video 01.mp4" << EOF
+m 987654 3 bad start
+q
+EOF
+
+run-test 'end out of bounds via seconds' "[ error ] the end time '1234567' is not in the bounds of video 01.mp4" << EOF
+m 3 1234567 bad start
+q
+EOF
+
+run-test 'end out of bounds via seconds realistic' "[ error ] the end time '30' is not in the bounds of video 01.mp4" << EOF
+m 3 30 bad start
 q
 EOF
 
 run-test 'seconds timestamp errors; end bigger than start' "[ error ] the end time '5' must be bigger than the start time '10'" << EOF
 m 10 5 bad
+q
+EOF
+
+run-test 'timestamp same' "[ error ] the end time '0:2' must be bigger than the start time '0:2'" << EOF
+m 0-2 0-2 bad
+q
+EOF
+
+run-test 'seconds same' "[ error ] the end time '4' must be bigger than the start time '4'" << EOF
+m 4 4 bad
+q
+EOF
+
+run-test 'file exists' "[ error ] the file 'exists.mp4' exists in the folder ['..', 'outputs']" << EOF
+m 1 4 exists
 q
 EOF

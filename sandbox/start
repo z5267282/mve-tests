@@ -5,6 +5,8 @@ VIEW=''
 
 ../setup-env
 
+touch outputs/exists.mp4
+
 cd src
 
 [ -n "$VIEW" ] && sed -E -i '' '/^TESTING/s%True%False%' config.py
