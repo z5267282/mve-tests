@@ -1,0 +1,7 @@
+#!/bin/dash
+
+../setup-env
+
+sed -E -i '' '/^USE_MOVIEPY/s/True/False/' src/config.py
+
+test-edit
