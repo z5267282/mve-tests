@@ -1,5 +1,39 @@
 #!/bin/dash
 
+PASS=$(../clr green passed)
+FAIL=$(../clr red failed)
+
+cmds=$(mktemp)
+out=$(mktemp)
+err=$(mktemp)
+exp_out=$(mktemp)
+exp_err=$(mktemp)
+trap 'rm -f $cmds $out $err $exp_out $exp_err' EXIT
+
+echo '[ 4 ] - 01.mp4 : [ 4 ] - 01.mp4 : [ success ] viewer exited with 4 files remaining' > $exp_out
+
 cd src
 
-python3 viewer.py << EOF 
+# too few args
+
+python3 viewer.py << EOF > $out 2>$err
+m 1 2
+q
+EOF
+
+../../clr-remover $out
+if ! diff $out $exp_out > /dev/null
+then
+    echo "$FAIL test too few args: stdout incorrect"
+    exit 1
+fi
+
+echo '[ error ] usage: [m]iddle | [ start ] [ end ] [ name ]' > $exp_err
+../../clr-remover $err
+if ! diff $err $exp_err > /dev/null
+then
+    echo "$FAIL test: stderr incorrect"
+    exit 1
+fi
+
+echo "$PASS test: too few args"
