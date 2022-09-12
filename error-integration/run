@@ -1,0 +1,8 @@
+#!/bin/dash
+
+# set to a non-empty string value to turn on
+VIEW=''
+
+../setup-env
+
+test-middle
