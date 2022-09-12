@@ -1,0 +1,9 @@
+#!/bin/dash
+
+echo 'import subprocess' > run_test.py
+echo 'import time_handlers' >> run_test.py
+
+cp ../../mve/src/helpers/time_handlers.py .
+
+sed -E -n '/^def edit_ffmpeg/,/^def/p' ../../mve/src/treater.py | sed '$d' >> run_test.py
+sed -E -n '/^def generate_ffmpeg_args/,/^def/p' ../../mve/src/treater.py | sed '$d' >> run_test.py
