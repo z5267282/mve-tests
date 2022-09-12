@@ -19,3 +19,8 @@ run-test 'negative end time' '[ error ] the end time must be in the format [ nat
 m 10 -4 bad
 q
 EOF
+
+run-test 'seconds timestamp errors; end bigger than start' "[ error ] the end time '5' must be bigger than the start time '10'" << EOF
+m 10 5 bad
+q
+EOF
