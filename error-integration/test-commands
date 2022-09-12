@@ -1,0 +1,14 @@
+#!/bin/dash
+
+cmds=$(mktemp)
+trap 'rm -f $cmds' EXIT
+
+cat << EOF > $cmds
+e -1 end command
+s 0-58 start command
+m 1 2 middle command
+w whole command
+q
+EOF
+
+start < $cmds
