@@ -2,16 +2,18 @@
 
 ../setup-env
 
+touch outputs/exists.mp4
+
 run_all() {
     file="$1"
     if ! "$1"
     then
-        echo "failed $0"
+        echo "failed $file"
         exit 1
     fi
 
     echo ''
-    echo "passed tests: $0"
+    echo "passed tests: $file"
 }
 
 run_all test-middle
