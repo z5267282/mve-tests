@@ -1,0 +1,3 @@
+the sandbox is mainly for seeing what expected output should be  
+commands fed to the viewer are placed in the file `cmds`  
+since the sandbox testing constantly changes, this file should be ignored by git  
