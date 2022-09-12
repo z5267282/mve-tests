@@ -6,13 +6,12 @@ cmds=$(mktemp)
 trap 'rm -f $cmds' EXIT
 
 # s 0-58 start command
-# m 1 2 middle command
 # w whole command
 
 cat << EOF > $cmds
-w whole command
+m 1 2 middle command
 q
 EOF
 
-python3 viewer.py < $cmds
+python3 viewer.py < $cmds > /dev/null
 python3 treater.py
