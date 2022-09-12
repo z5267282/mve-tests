@@ -1,7 +1,25 @@
 #!/bin/dash
 
-echo '\033[1;34mfish\033[1;0ming in the river' > clr
+main () {
+    full
+}
 
-sed -E -i '' -e 's///g' clr
+working () {
+    echo '\033[1;34mfish\033[1;0ming in the river' > clr
+    sed -E -i '' -e 's///g' clr
+    grep -F -q '[1;34mfish[1;0ming in the river' clr
+}
 
-grep -F -q '[1;34mfish[1;0ming in the river' clr
+bracket_semicolon () {
+    echo '\033[1;34mfish\033[1;0ming in the river' > clr
+    sed -E -i '' -e 's///g' -e 's/\[.;//g' clr
+    grep -F '34mfish0ming in the river' clr
+}
+
+full () {
+    echo '\033[1;34mfish\033[1;0ming in the river' > clr
+    sed -E -i '' -e 's///g' -e 's/\[.;(0|3[0-7])m//g' clr
+    grep -F 'fishing in the river' clr
+}
+
+main
