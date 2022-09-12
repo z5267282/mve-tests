@@ -5,7 +5,7 @@ out=$(mktemp)
 err=$(mktemp)
 trap 'rm -f $input $out $err' EXIT
 
-touch outputs/already.mp4
+touch already.mp4
 
 cd src
 
@@ -16,7 +16,7 @@ EOF
 
 python3 viewer.py < $input > $out 2>$err
 
-if ! grep -E -q 'the file .*already\.mp4.* exists in the folder \[.*\]' $err
+if ! grep -E -q 'the file .*already\.mp4.* exists in the folder \[..*\]' $err
 then
     echo "existence error message was not printed to stderr"
     exit 1
