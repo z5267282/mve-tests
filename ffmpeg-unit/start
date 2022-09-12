@@ -8,7 +8,7 @@ cp ../../mve/src/helpers/time_handlers.py .
 sed -E -n '/^def edit_ffmpeg/,/^def/p' ../../mve/src/treater.py | sed '$d' >> run_test.py
 sed -E -n '/^def generate_ffmpeg_args/,/^def/p' ../../mve/src/treater.py | sed '$d' >> run_test.py
 
-echo 'edit_ffmpeg("../videos/01.mp4", "out.mp4", "-1", None)' >> run_test.py
+echo 'edit_ffmpeg("../videos/01.mp4", "out.mp4", "-5", None)' >> run_test.py
 
 base="(basename "$0")"
 if python3 run_test.py

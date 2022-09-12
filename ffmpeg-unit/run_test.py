@@ -17,4 +17,4 @@ def generate_ffmpeg_args(source, start, end):
     
     return ['-ss', start, *source, '-to', time_handlers.get_seconds(end) - time_handlers.get_seconds(start)]
 
-edit_ffmpeg("../videos/01.mp4", "out.mp4", "-1", None)
+edit_ffmpeg("../videos/01.mp4", "out.mp4", "-5", None)
