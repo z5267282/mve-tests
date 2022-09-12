@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, sys
 import time_handlers
 def edit_ffmpeg(joined_src_path, joined_dst_path, start, end):
     source = ['-accurate_seek', '-i', joined_src_path]
@@ -17,3 +17,4 @@ def generate_ffmpeg_args(source, start, end):
     
     return ['-ss', start, *source, '-to', time_handlers.get_seconds(end) - time_handlers.get_seconds(start)]
 
+edit_ffmpeg(*sys.argv[1:])
