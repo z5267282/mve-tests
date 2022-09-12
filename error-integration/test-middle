@@ -1,3 +1,5 @@
 #!/bin/dash
 
-echo hello
+cd src
+
+python3 viewer.py << EOF 

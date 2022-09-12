@@ -1,0 +1,7 @@
+#!/bin/dash
+
+echo '\033[1;34mfish\033[1;0ming in the river' > clr
+
+sed -E -i '' -e 's///g' clr
+
+grep -F -q '[1;34mfish[1;0ming in the river' clr
