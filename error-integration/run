@@ -6,7 +6,6 @@ run_all() {
     file="$1"
     if ! "$1"
     then
-        echo ''
         echo "failed $0"
         exit 1
     fi
