@@ -5,12 +5,14 @@ mkdir outputs
 
 cp ../../mve/src/config.py .
 cp ../../mve/src/constants/video_editing.py .  
+cp ../../mve/src/helpers/time_handlers.py .
 
 cat << EOF > edit.py
 import subprocess
 import moviepy.editor as mvp
 import config as cfg
 import video_editing as vde
+import time_handlers
 
 EOF
 
