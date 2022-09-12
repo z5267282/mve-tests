@@ -1,0 +1,6 @@
+#!/bin/dash
+
+[ $# -eq 1 ] || exit 1
+file="$1"
+[ -f "$file" ] || exit 2
+sed -E -i '' -e 's///g' -e 's/\[.;(0|3[0-7])m//g' "$file" 
