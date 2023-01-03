@@ -30,7 +30,7 @@ do_test() {
     if [ $status -ne $exp ]
     then
         fail
-        echo "the viewer didn't exit with error code $exp (NO_QUEUE)"
+        echo "the $script didn't exit with error code $exp (NO_QUEUE)"
         exit 2
     fi
 
