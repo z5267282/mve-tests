@@ -2,15 +2,37 @@
 
 ../setup-env
 
-number() { grep -E -o '[0-9]+' }
+number() {
+    grep -E -o '[0-9]+'
+}
 
-if [ $(ls -1 queue | number) -ne 0 ]
+if [ $(ls -1 queue | wc -l | number) -ne 0 ]
 then
     echo 'the queue was not empty after initial setup'
     exit 1
 fi
 
 cd src
+exp=$(sed -E -n '/NO_QUEUE/p' constants/error.py | number)
 
-# python3 treater.py > /dev/null
-# status=$?
+do_test() {
+    file=$1
+    python3 treater.py > /dev/null
+    status=$?
+
+    if [ $exp -ne $status ]
+    then
+        ../../clr 'red' 'failed'
+        echo ": $file did not exit with an exit status of $exp (NO_QUEUE)"
+        exit 1
+    fi
+
+    ../../clr 'cyan' $file
+    echo ': exited with NO_QUEUE'
+}
+
+do_test viewer.py
+do_test treater.py
+
+../../clr 'green' 'passed'
+echo " test empty-queue"
