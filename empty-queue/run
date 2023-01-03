@@ -13,26 +13,17 @@ then
 fi
 
 cd src
-exp=$(sed -E -n '/NO_QUEUE/p' constants/error.py | number)
+exp=$(sed -E -n '/EMPTY_QUEUE/p' constants/error.py | number)
 
-do_test() {
-    file=$1
-    python3 treater.py > /dev/null
-    status=$?
+python3 treater.py > /dev/null
+status=$?
 
-    if [ $exp -ne $status ]
-    then
-        ../../clr 'red' 'failed'
-        echo ": $file did not exit with an exit status of $exp (NO_QUEUE)"
-        exit 1
-    fi
+if [ $exp -ne $status ]
+then
+    ../../clr 'red' 'failed'
+    echo ": $treater.py did not exit with an exit status of $exp (EMPTY_QUEUE)"
+    exit 1
+fi
 
-    ../../clr 'cyan' $file
-    echo ': exited with NO_QUEUE'
-}
-
-do_test viewer.py
-do_test treater.py
-
-../../clr 'green' 'passed'
+../../clr cyan passed
 echo " test empty-queue"
