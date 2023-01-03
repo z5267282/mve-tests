@@ -1,17 +1,17 @@
 # folder paths
-SOURCE      = ['D:', '\\', 'TF2 BIG', 'Team Fortress 2', '3']
-RENAMES     = ['D:', '\\', 'Videos', 'MC Renames']
-DESTINATION = ['C:', '\\', 'Users', 'Sunny', 'Videos', 'Edits', 'Minecraft']
+SOURCE      = ['D:', '\\', 'Videos', 'Team Fortress 2']
+RENAMES     = ['D:', '\\', 'Videos', 'Renames']
+DESTINATION = ['C:', '\\', 'Users', 'Sunny', 'Videos', 'Edits', 'TF2', '17']
 
 # multi threading and processing
 NUM_THREADS   = 4
-NUM_PROCESSES = 4 
+NUM_PROCESSES = 4
 
 # MoviePy
-USE_MOVIEPY = True
+USE_MOVIEPY = False
 
 # testing
-TESTING = False
+TESTING = False 
 
 # colours
-BOLD = False 
+BOLD = False
