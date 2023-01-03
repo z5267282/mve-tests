@@ -1,0 +1,44 @@
+#!/bin/dash
+
+cd ..
+root_level="$(pwd)"
+fail() {
+    "$root_level/clr" red failed && printf ': '
+}
+
+cd - > /dev/null
+../setup-env
+
+rm -r queue
+if [ -d queue ]
+then
+    fail
+    echo "queue wasn't properly deleted"
+    exit 1
+fi
+cd src
+
+out=$(mktemp)
+err=$(mktemp)
+trap 'rm -f $out $err' EXIT
+
+python3 viewer.py > $out 2>$err
+status=$?
+exp=$(sed -E -n '/NO_QUEUE/p' constants/error.py | grep -E -o [0-9]+)
+if [ $status -ne $exp ]
+then
+    fail
+    echo "the viewer didn't exit with error code $exp (NO_QUEUE)"
+    exit 2
+fi
+
+if [ -s $out ]
+then
+    fail
+    echo "standard output was produced"
+    ls -l $out
+    exit 3
+fi
+
+# echo 'out' && cat $out
+# echo 'err' && cat $err
