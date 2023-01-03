@@ -22,23 +22,40 @@ out=$(mktemp)
 err=$(mktemp)
 trap 'rm -f $out $err' EXIT
 
-python3 viewer.py > $out 2>$err
-status=$?
-exp=$(sed -E -n '/NO_QUEUE/p' constants/error.py | grep -E -o [0-9]+)
-if [ $status -ne $exp ]
-then
-    fail
-    echo "the viewer didn't exit with error code $exp (NO_QUEUE)"
-    exit 2
-fi
+do_test() {
+    script=$1
+    python3 $script > $out 2>$err
+    status=$?
+    exp=$(sed -E -n '/NO_QUEUE/p' constants/error.py | grep -E -o [0-9]+)
+    if [ $status -ne $exp ]
+    then
+        fail
+        echo "the viewer didn't exit with error code $exp (NO_QUEUE)"
+        exit 2
+    fi
 
-if [ -s $out ]
-then
-    fail
-    echo "standard output was produced"
-    ls -l $out
-    exit 3
-fi
+    if [ -s $out ]
+    then
+        fail
+        echo "standard output was produced"
+        exit 3
+    fi
 
-# echo 'out' && cat $out
-# echo 'err' && cat $err
+    if ! grep -E -x -q "queue folder .* does not exist" $err
+    then
+        fail
+        echo "error message wasn't correct"
+        cat $err
+        exit 4
+    fi
+
+    ../../clr blue 'passed'
+    echo ": $script"
+}
+
+do_test viewer.py
+do_test treater.py
+
+echo ''
+../../clr cyan 'passed'
+echo ': no-queue'
