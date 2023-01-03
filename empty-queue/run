@@ -1,0 +1,16 @@
+#!/bin/dash
+
+../setup-env
+
+number() { grep -E -o '[0-9]+' }
+
+if [ $(ls -1 queue | number) -ne 0 ]
+then
+    echo 'the queue was not empty after initial setup'
+    exit 1
+fi
+
+cd src
+
+# python3 treater.py > /dev/null
+# status=$?
