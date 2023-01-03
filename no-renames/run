@@ -1,0 +1,58 @@
+#!/bin/dash
+
+cd ..
+root_level="$(pwd)"
+fail() {
+    "$root_level/clr" red failed && printf ': '
+}
+
+cd - > /dev/null
+../setup-env
+cd src
+# adjust renames folder
+sed -E -i '' '/^RENAMES/s%\[.*\]%["..", "renames"]%' config.py
+
+out=$(mktemp)
+err=$(mktemp)
+trap 'rm -f $out $err' EXIT
+
+do_test() {
+    script=$1
+    python3 $script > $out 2>$err
+    status=$?
+    exp=$(sed -E -n '/NO_RENAMES_FOLDER/p' constants/error.py | grep -E -o [0-9]+)
+    if [ $status -ne $exp ]
+    then
+        fail
+        echo "the $script didn't exit with error code $exp (NO_RENAMES_FOLDER)"
+        echo $status
+        exit 2
+    fi
+
+    if [ -s $out ]
+    then
+        fail
+        echo "standard output was produced"
+        exit 3
+    fi
+
+    if ! grep -E -x -q "renames folder .* does not exist" $err
+    then
+        fail
+        echo "error message wasn't correct:"
+        sed -E 's/^/    /' $err
+        exit 4
+    fi
+
+    ../../clr blue 'passed'
+    echo ": $script"
+}
+
+do_test viewer.py
+# add a throwaway file so the queue isn't empty
+touch ../queue/blank.txt
+do_test treater.py
+
+echo ''
+../../clr cyan 'passed'
+echo ': no-destination'
