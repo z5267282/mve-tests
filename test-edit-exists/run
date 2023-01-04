@@ -1,0 +1,27 @@
+#!/bin/dash
+
+../setup-env
+touch outputs/already.mp4
+
+err=$(mktemp)
+trap 'rm -f $err' EXIT
+
+cd src
+session=$(mktemp)
+trap 'rm -f $session' EXIT
+cat << EOF > $session
+e -1 already
+q
+EOF
+
+python3 viewer.py < $session >/dev/null 2>$err
+if ! grep -E -q -x ".*the file '.*already.mp4.*' exists in the folder .*" $err
+then
+    ../../clr red failed
+    echo ': incorrect message produced'
+    sed 's/^/    /' $err
+    exit 2
+fi
+
+../../clr cyan passed
+echo ' test edit existence protection'
