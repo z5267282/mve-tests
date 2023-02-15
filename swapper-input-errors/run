@@ -13,6 +13,6 @@ fail() {
 }
 
 test-args || fail args
-no-config || fail 'no config'
+no-configs-folder || fail 'no config'
 
 exit 0
