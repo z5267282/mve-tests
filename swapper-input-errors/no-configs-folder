@@ -7,8 +7,12 @@ mv configs _configs
 
 out=$(mktemp)
 err=$(mktemp)
-trap 'rm $out $err' EXIT
-trap 'mv _configs configs' EXIT
+
+clean() {
+    rm $out $err
+    mv _configs configs
+}
+trap clean EXIT
 
 python3 swapper.py mc >$out 2>$err
 [ $? -eq $exp ] || exit 10
