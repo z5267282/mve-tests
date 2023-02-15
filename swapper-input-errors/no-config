@@ -1,0 +1,14 @@
+#!/bin/dash
+
+exp=$(get-err NO_CONFIGS_FOLDER)
+cd src
+mv configs _configs
+
+out=$(mktemp)
+err=$(mktemp)
+trap 'rm $out $err' EXIT
+
+python3 swapper.py mc >$out 2>$err
+[ $? -eq $exp ] || exit 10
+
+exit 0

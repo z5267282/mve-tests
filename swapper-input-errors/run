@@ -1,5 +1,18 @@
 #!/bin/dash
 
 ../setup-env
-test-args
 
+fail() {
+    test_name="$1"
+    if [ $? -ne 0 ]
+    then
+        ../clr red failed
+        echo >&2 ": $test_name"
+        exit 1
+    fi
+}
+
+test-args || fail args
+no-config || fail 'no config'
+
+exit 0
