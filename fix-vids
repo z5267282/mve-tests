@@ -1,0 +1,12 @@
+#!/bin/dash
+
+[ -d _videos ] && rm -r _videos
+mkdir _videos
+cd videos
+
+# 1 -> 4, 2 -> 3, 3 -> 2, 1 -> 4
+
+for i in 4 3 2 1
+do
+    cp "0${i}.mp4" "../_videos/0$((5 - i)).mp4"
+done
