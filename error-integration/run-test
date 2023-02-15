@@ -12,7 +12,7 @@ exp_out=$(mktemp)
 exp_err=$(mktemp)
 trap 'rm -f $cmds $out $err $exp_out $exp_err' EXIT
 
-echo '[ 4 ] - 04.mp4 : [ 4 ] - 04.mp4 : [ success ] viewer exited with 4 files remaining' > $exp_out
+echo '[ 4 ] - 01.mp4 : [ 4 ] - 01.mp4 : [ success ] viewer exited with 4 files remaining' > $exp_out
 
 cd src
 
