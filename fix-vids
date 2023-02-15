@@ -6,7 +6,21 @@ cd videos
 
 # 1 -> 4, 2 -> 3, 3 -> 2, 1 -> 4
 
-for i in 4 3 2 1
+# vid (time) -> cannot be
+
+# 4 (46s) -> {1,2,3}
+# 3 (1m8s) 
+# 2 (1m) -> 2
+# 1 (22s) -> {2,3,4}
+
+# mapping
+
+# 4 -> 4th file (oldest = 4)
+# 3             ... = 2
+# 2 -> 2nd file (second oldest = 3)
+# 1 -> 1st file (newest = 1)
+
+for i in 1 2 3 4
 do
     cp "0${i}.mp4" "../_videos/0$((5 - i)).mp4"
 done
