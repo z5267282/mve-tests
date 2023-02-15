@@ -68,7 +68,7 @@ test_end () {
 test_end '-2' 'negative number' 1
 test_end '48' 'natural number' 2
 test_end '00-53' 'timestamp' 3
-test_end '0-34' 'timestamp no leading 0'
+test_end '0-10' 'timestamp no leading 0' 4
 
 clr 'cyan' "passed all tests"
 echo " $0"
