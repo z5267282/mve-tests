@@ -2,8 +2,6 @@
 
 ../setup-env
 
-cat src/remaining.json
-
 touch outputs/exists.mp4
 
 run_all() {
