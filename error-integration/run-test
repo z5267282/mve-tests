@@ -12,7 +12,7 @@ exp_out=$(mktemp)
 exp_err=$(mktemp)
 trap 'rm -f $cmds $out $err $exp_out $exp_err' EXIT
 
-echo '[ 4 ] - 01.mp4 : [ 4 ] - 01.mp4 : [ success ] viewer exited with 4 files remaining' > $exp_out
+echo '[ 4 ] - 04.mp4 : [ 4 ] - 04.mp4 : [ success ] viewer exited with 4 files remaining' > $exp_out
 
 cd src
 
@@ -24,6 +24,10 @@ python3 viewer.py > $out 2>$err
 ../../clr-remover $out
 if ! diff $out $exp_out > /dev/null
 then
+    echo 'out:'
+    cat $out
+    echo 'exp:'
+    cat $exp_out
     echo "$FAIL test $name: stdout incorrect"
     exit 1
 fi
