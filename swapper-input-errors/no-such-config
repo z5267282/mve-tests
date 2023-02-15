@@ -1,6 +1,6 @@
 #!/bin/dash
 
-exp=$(get-err NO_CONFIG)
+exp=$(get-err 'NO_CONFIG *=')
 cd src
 
 out=$(mktemp)

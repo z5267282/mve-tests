@@ -14,5 +14,6 @@ fail() {
 
 test-args || fail args
 no-configs-folder || fail 'no configs folder'
+no-such-config || fail "given config doesn't exist"
 
 exit 0
