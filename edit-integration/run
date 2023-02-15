@@ -2,4 +2,6 @@
 
 ../setup-env
 
+cat src/remaining.json
+
 test-edit
