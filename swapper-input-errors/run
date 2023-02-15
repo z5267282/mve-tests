@@ -16,5 +16,6 @@ test-args || fail args
 no-configs-folder || fail 'no configs folder'
 no-such-config || fail "given config doesn't exist"
 no-current-file || fail 'no current.json in configs'
+no-config-pair || fail 'no config pair src'
 
 exit 0
