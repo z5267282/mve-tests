@@ -1,0 +1,29 @@
+#!/bin/dash
+
+[ -d configs ] && rm -r configs
+mkdir configs
+cd configs
+mkdir tokyo osaka
+cd ..
+
+change_cfg() {
+    cfg="$1"
+    sed -E -i '' "/^SOURCE/s/\[.*\]/['..', 'vids', '$cfg']/" $cfg.py
+}
+
+for cfg in tokyo osaka
+do
+    cp src/config.py $cfg.py
+    change_cfg $cfg
+done
+
+echo '"tokyo"' > configs/current.json
+mv osaka.py configs/osaka/config.py
+echo '[]' > configs/osaka/remaining.json
+
+cd src
+mv ../tokyo.py config.py
+rm -r configs
+mv ../configs .
+[ -f remaining.json ] && rm remaining.json
+
