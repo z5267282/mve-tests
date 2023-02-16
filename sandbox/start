@@ -11,5 +11,7 @@ cd src
 
 [ -n "$VIEW" ] && sed -E -i '' '/^TESTING/s%True%False%' config.py
 
-python3 viewer.py < ../cmds
+# python3 viewer.py < ../cmds
+
+true
 

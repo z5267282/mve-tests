@@ -1,0 +1,19 @@
+#!/bin/dash
+
+[ -d vids ] && rm -r vids
+mkdir vids
+cd vids
+
+for dir in tokyo osaka
+do
+    mkdir $dir
+    cp -r ../../videos .
+    cd ..
+done
+
+# tokyo -> [1,2]
+rm -f tokyo/0[34]*.mp4
+
+# osaka -> [3,4]
+rm -f osaka/0[12]*.mp4
+
