@@ -40,8 +40,8 @@ m 3 1234567 bad start
 q
 EOF
 
-run-test 'end out of bounds via seconds realistic' "[ error ] the end time '30' is not in the bounds of video 01.mp4" << EOF
-m 3 30 bad start
+run-test 'end out of bounds via seconds realistic' "[ error ] the end time '110' is not in the bounds of video 01.mp4" << EOF
+m 3 110 bad start
 q
 EOF
 
