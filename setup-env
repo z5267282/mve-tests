@@ -11,9 +11,13 @@ cp -r ../../mve/src .
 cd src
 echo '[]' > remaining.json
 
+# fix config
 sed -E -i '' '/^SOURCE/s%\[.*\]%["..", "..", "videos"]%
 /^RENAMES/s%\[.*\]%[".."]%
 /^DESTINATION/s%\[.*\]%["..", "outputs"]%
 /^TESTING/s%False%True%' config.py
+
+# tests were written when files generated in order of creation
+sed -E -i '' '/RECENT/s%True%False$' constants/generation.py
 
 python3 generator.py > /dev/null
