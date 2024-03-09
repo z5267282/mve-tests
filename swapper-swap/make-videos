@@ -6,8 +6,10 @@ cd vids
 
 for dir in tokyo osaka
 do
+    [ -d $dir ] && rm -r $dir 
     mkdir $dir
     cp -r ../../videos .
+    cd $dir
     cd ..
 done
 
