@@ -18,6 +18,6 @@ sed -E -i '' '/^SOURCE/s%\[.*\]%["..", "..", "videos"]%
 /^TESTING/s%False%True%' config.py
 
 # tests were written when files generated in order of creation
-sed -E -i '' '/RECENT/s%True%False$' constants/generation.py
+sed -E -i '' '/RECENT/s%True%False%' constants/generation.py
 
 python3 generator.py > /dev/null
