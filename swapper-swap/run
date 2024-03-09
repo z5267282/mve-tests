@@ -27,11 +27,15 @@ trap 'rm $out $err' EXIT
 cd src
 
 python3 generator.py > $out 2>$err || fail 'first generator failed' 10
+
 # here the output will look like:
 # 01
 # 02
 # so there will be an extra newline
-result="$(grep -E -o 0. remaining.json | tr '\n' ' ')"
+
+# have to sort the file to fix the heisenbug as per issue #10
+
+result="$(grep -E -o 0. remaining.json | sort -n | tr '\n' ' ')"
 answer='01 02 '
 test "$result" = "$answer" || fail "didn't generate right remaining first time" "$result" "$answer" 20 
 
