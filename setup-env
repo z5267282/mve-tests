@@ -1,6 +1,6 @@
 #!/bin/dash
 
-for dir in 'errors' 'history' 'queue' 'outputs'
+for dir in errors history queue outputs configs
 do
     [ -d "$dir" ] && rm -r "$dir"
     mkdir "$dir"
