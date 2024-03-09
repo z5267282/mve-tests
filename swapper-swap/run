@@ -18,6 +18,9 @@ err=$(mktemp)
 trap 'rm $out $err' EXIT
 
 cd src
+cat config.py
+cat constants/generation.py
+
 python3 generator.py > $out 2>$err || fail 'first generator failed' 10
 set -x
 test "$(grep -E -o 0. remaining.json | tr '\n' ' ')" = '01 02' || fail "didn't generate right remaining first time" 20
