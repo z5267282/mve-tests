@@ -11,6 +11,6 @@ in videos, 4 videos are meant to be placed:
 
 - 01..04.mp4
 - where the files are named in order of creation
-- each is expected to be a minute long
+- each is expected to be 1 minute and 37 seconds long
 
 tests that need additional information have a root-level file called `info.md`
