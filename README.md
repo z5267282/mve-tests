@@ -5,4 +5,8 @@ folders are tests
 + automated tests have a root-level file called `run`
 + manual tests have a root-level file called `start`
 
+in videos, 4 videos are meant to be placed:
++ 00..04.mp4
++ each is expected to be a minute long
+
 tests that need additional information have a root-level file called `info.md`
