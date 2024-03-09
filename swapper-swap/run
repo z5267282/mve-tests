@@ -8,9 +8,16 @@ make-configs
 export PATH="$PATH:$(dirname "$(pwd)")"
 
 fail() {
+    msg="$1"
+    exp="$2"
+    ans="$3"
+    code="$4"
+
     clr red failed
-    echo " : $1"
-    exit $2
+    echo " : $msg"
+    echo "expected: '$exp'"
+    echo "got: '$ans'"
+    exit $code
 }
 
 out=$(mktemp)
@@ -24,5 +31,7 @@ python3 generator.py > $out 2>$err || fail 'first generator failed' 10
 # 01
 # 02
 # so there will be an extra newline
-test "$(grep -E -o 0. remaining.json | tr '\n' ' ')" = '01 02 ' || fail "didn't generate right remaining first time" 20
+result="$(grep -E -o 0. remaining.json | tr '\n' ' ')"
+answer='01 02 '
+test "$result" = "$answer" || fail "didn't generate right remaining first time" "$result" "$answer" 20 
 
