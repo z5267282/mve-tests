@@ -3,7 +3,7 @@ __pycache__
 .DS_Store
 
 # sample videos for testing
-videos
+vid*s
 */*.mp4
 
 # mve directory structure
@@ -16,3 +16,6 @@ videos
 
 # commands
 */cmds
+
+# swapper configs
+swapper*/*/config.py
