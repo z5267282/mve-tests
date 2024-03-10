@@ -4,7 +4,7 @@ __pycache__
 
 # sample videos for testing
 vid*s
-*/*.mp4
+*.mp4
 
 # mve directory structure
 */outputs
