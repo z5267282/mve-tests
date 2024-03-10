@@ -1,9 +1,0 @@
-#!/bin/dash
-
-fail() {
-    msg="$1"
-    code=$2
-    clr red failed
-    echo "$msg"
-    exit $code
-}
