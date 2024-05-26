@@ -2,7 +2,17 @@
 
 ../setup-env
 
-sed -E -i '' '/^USE_MOVIEPY/s/True/False/' src/config.py
+cat << EOF > configs/$CONFIG/config.json
+{
+    "SOURCE": ["..", "..", "videos"],
+    "RENAMES": [".."],
+    "DESTINATION": ["..", "outputs"],
+
+    "TESTING": true,
+    "RECENT": false,
+    "USE_MOVIEPY": false
+}
+EOF
 
 # test-edit
-other-commands
+. ./other-commands

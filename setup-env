@@ -1,10 +1,12 @@
 #!/bin/dash
 
-# the default config used for testing
 export CONFIG=testing
 
 [ -d configs ] && rm -r configs
 mkdir configs
+
+[ -d outputs ] && rm -r outputs
+mkdir outputs
 
 cd configs
 mkdir $CONFIG

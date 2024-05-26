@@ -13,5 +13,5 @@ m 1 2 middle command
 q
 EOF
 
-python3 viewer.py < $cmds > /dev/null
-python3 treater.py
+python3 viewer.py $CONFIG < $cmds > /dev/null
+python3 treater.py $CONFIG
