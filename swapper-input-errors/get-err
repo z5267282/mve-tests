@@ -1,5 +1,0 @@
-#!/bin/dash
-
-[ $# -eq 1 ] || exit 42
-cd src/constants
-sed -n "/$1/p" error.py | grep -E -o '[0-9]+'
