@@ -1,23 +1,31 @@
 #!/bin/dash
 
-for dir in errors history queue outputs configs
+# the default config used for testing
+export CONFIG=testing
+
+[ -d configs ] && rm -r configs
+mkdir configs
+
+cd configs
+mkdir $CONFIG
+cd $CONFIG
+for dir in errors history queue
 do
-    [ -d "$dir" ] && rm -r "$dir"
-    mkdir "$dir"
+    mkdir $dir
 done
+echo '[]' > remaining.json
+cat << EOF > config.json
+{
+    "SOURCE": ["..", "..", "videos"],
+    "RENAMES": [".."],
+    "DESTINATION": ["..", "outputs"],
+
+    "TESTING": true,
+    "RECENT": false
+}
+EOF
+cd ../..
 
 cp -r ../../mve/src .
-
 cd src
-echo '[]' > remaining.json
-
-# fix config
-sed -E -i '' '/^SOURCE/s%\[.*\]%["..", "..", "videos"]%
-/^RENAMES/s%\[.*\]%[".."]%
-/^DESTINATION/s%\[.*\]%["..", "outputs"]%
-/^TESTING/s%False%True%' config.py
-
-# tests were written when files generated in order of creation
-sed -E -i '' '/RECENT/s%True%False%' constants/generation.py
-
-python3 generator.py > /dev/null
+python3 generator.py $CONFIG > /dev/null
