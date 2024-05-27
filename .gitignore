@@ -1,6 +1,11 @@
 # apple things
-__pycache__
 .DS_Store
+
+# python
+__pycache__
+
+# pytest
+.pytest_cache/
 
 # sample videos for testing
 vid*s
