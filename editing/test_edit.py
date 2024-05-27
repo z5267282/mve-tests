@@ -1,7 +1,8 @@
 '''Note that neither `moviepy` nor `ffmpeg` can direclty check for errors.
 Hence only working timestamps are testedh'''
 
-import edit
+import lib.edit as edit
+
 
 # TESTS
 
@@ -34,4 +35,4 @@ def helper(name, start, end=None):
     SRC = '../videos/03.mp4'
     output_name = generate_out_name(name)
     print(start, end)
-    edit.edit_video(SRC, output_name, start, end)
+    edit.edit_video(False, 4, SRC, output_name, start, end)

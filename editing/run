@@ -3,18 +3,8 @@
 [ -d outputs ] && rm -r outputs
 mkdir outputs
 
-cp ../../mve/src/ .
-cd src
+cp -r ../../mve/src .
 
-# cat << EOF > edit.py
-# import subprocess
-# import moviepy.editor as mvp
-# import config as cfg
-# import video_editing as vde
-# import time_handlers
+export PYTHONPATH="src:$PYTHONPATH"
 
-# EOF
-
-# sed -E -n '/^def edit_video\(/,/^def handle_error\(/p' ../../mve/src/treater.py | sed -E '$d' >> edit.py
-
-pytest --disable-warnings
+pytest
