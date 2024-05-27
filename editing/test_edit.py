@@ -4,6 +4,9 @@ Hence only working timestamps are testedh'''
 import lib.edit as edit
 
 
+OUT = 'outputs'
+SRC = '../videos/03.mp4'
+
 # TESTS
 
 
@@ -27,12 +30,10 @@ def test_good_negative_end():
 
 
 def generate_out_name(name):
-    OUT = 'outputs'
     return f'{OUT}/{name}.mp4'
 
 
 def helper(name, start, end=None):
-    SRC = '../videos/03.mp4'
     output_name = generate_out_name(name)
     print(start, end)
     edit.edit_video(False, 4, SRC, output_name, start, end)
