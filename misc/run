@@ -1,6 +1,12 @@
 #!/bin/dash
 
-echo 'import re' > misc.py
-sed -E -n '/def parse_timestamp/,/^$/p' ../../mve/src/viewer.py >> misc.py
+#!/bin/dash
 
-pytest
+[ -d outputs ] && rm -r outputs
+mkdir outputs
+
+cp -r ../../mve/src .
+
+export PYTHONPATH="src:$PYTHONPATH"
+
+pytest --disable-warnings
