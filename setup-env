@@ -1,6 +1,9 @@
 #!/bin/dash
 
 export CONFIG=testing
+export MVE_CONFIGS='../configs'
+
+root="$(pwd)"
 
 [ -d configs ] && rm -r configs
 mkdir configs
@@ -31,3 +34,4 @@ cd ../..
 cp -r ../../mve/src .
 cd src
 python3 generator.py $CONFIG > /dev/null
+cd "$root"
