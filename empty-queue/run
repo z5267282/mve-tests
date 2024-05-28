@@ -1,12 +1,14 @@
 #!/bin/dash
 
-../setup-env
+. ../setup-env
 
 number() {
     grep -E -o '[0-9]+'
 }
 
-if [ $(ls -1 queue | wc -l | number) -ne 0 ]
+# this test is not meant to be run from src/
+# so the configs are not in the previous folder
+if [ "$(ls -1  $(basename $MVE_CONFIGS)/$CONFIG/queue | wc -l | number)" -ne 0 ]
 then
     echo 'the queue was not empty after initial setup'
     exit 1
@@ -15,7 +17,7 @@ fi
 cd src
 exp=$(sed -E -n '/EMPTY_QUEUE/p' constants/error.py | number)
 
-python3 treater.py > /dev/null
+python3 treater.py $CONFIG > /dev/null
 status=$?
 
 if [ $exp -ne $status ]

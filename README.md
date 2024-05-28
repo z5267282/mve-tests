@@ -7,7 +7,7 @@
 | duration-ffmpeg-probe |       |
 | edit-integration      | Yes   |
 | editing               |       |
-| empty-queue           |       |
+| empty-queue           | Yes   |
 | error-integration     |       |
 | ffmpeg-integration    |       |
 | ffmpeg-unit           |       |
