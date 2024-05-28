@@ -19,7 +19,7 @@ cd src
 name="$1"
 error_msg="$2"
 
-python3 viewer.py > $out 2>$err
+python3 viewer.py $CONFIG > $out 2>$err
 
 ../../clr-remover $out
 if ! diff $out $exp_out > /dev/null

@@ -13,7 +13,7 @@ Must fix:
 | edit-integration      | Yes   |
 | editing               | Yes   |
 | empty-queue           | Yes   |
-| error-integration     |       |
+| error-integration     | Yes   |
 | ffmpeg-integration    |       |
 | ffmpeg-unit           |       |
 | misc                  |       |
