@@ -4,6 +4,7 @@ Must fix:
 
 1. `PATH` variable
 2. Test working
+3. Clean old structure
 
 | test                  | fixed |
 | --------------------- | ----- |
@@ -14,7 +15,7 @@ Must fix:
 | editing               | Yes   |
 | empty-queue           | Yes   |
 | error-integration     | Yes   |
-| ffmpeg-integration    |       |
+| ffmpeg-integration    | Yes   |
 | ffmpeg-unit           |       |
 | misc                  |       |
 | moment-good           |       |

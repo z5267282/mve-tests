@@ -1,8 +1,8 @@
 #!/bin/dash
 
-../setup-env
+. ../setup-env
 
-cat << EOF > configs/$CONFIG/config.json
+cat << EOF > "$(basename $MVE_CONFIGS)/$CONFIG/config.json"
 {
     "SOURCE": ["..", "..", "videos"],
     "RENAMES": [".."],
@@ -15,4 +15,4 @@ cat << EOF > configs/$CONFIG/config.json
 EOF
 
 # test-edit
-. ./other-commands
+other-commands
