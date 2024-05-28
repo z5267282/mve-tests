@@ -1,3 +1,29 @@
+# Fix New Config System
+
+| test                  | fixed |
+| --------------------- | ----- |
+| colour                |       |
+| decimal               |       |
+| duration-ffmpeg-probe |       |
+| edit-integration      | Yes   |
+| editing               |       |
+| empty-queue           |       |
+| error-integration     |       |
+| ffmpeg-integration    |       |
+| ffmpeg-unit           |       |
+| misc                  |       |
+| moment-good           |       |
+| moviepy-negative      |       |
+| name-existence        |       |
+| no-destination        |       |
+| no-queue              |       |
+| no-renames            |       |
+| prompt-align          |       |
+| sandbox               |       |
+| test-edit-exists      |       |
+| timestamp             |       |
+| videos                |       |
+
 # Overview
 
 A mix of unit and integration tests for `mve`.  
