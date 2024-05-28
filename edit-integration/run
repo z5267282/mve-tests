@@ -2,4 +2,4 @@
 
 . ../setup-env
 
-./test-edit
+test-edit

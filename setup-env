@@ -3,6 +3,9 @@
 export CONFIG=testing
 export MVE_CONFIGS='../configs'
 
+# let us run scripts in current folder
+export PATH="$PATH:."
+
 root="$(pwd)"
 
 [ -d configs ] && rm -r configs

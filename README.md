@@ -1,12 +1,17 @@
 # Fix New Config System
 
+Must fix:
+
+1. `PATH` variable
+2. Test working
+
 | test                  | fixed |
 | --------------------- | ----- |
-| colour                |       |
-| decimal               |       |
-| duration-ffmpeg-probe |       |
+| colour                | Start |
+| decimal               | Yes   |
+| duration-ffmpeg-probe | Start |
 | edit-integration      | Yes   |
-| editing               |       |
+| editing               | Yes   |
 | empty-queue           | Yes   |
 | error-integration     |       |
 | ffmpeg-integration    |       |
