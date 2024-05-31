@@ -10,7 +10,7 @@ trap 'rm -f $out' EXIT
 
 cd src
 # note that ffmpeg sends output to stdout
-python3 moment.py << EOF > $out 2>/dev/null
+python3 moment.py --testing << EOF > $out 2>/dev/null
 ../../videos
 ../edits
 m 1 2 fish
