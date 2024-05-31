@@ -6,7 +6,6 @@ err=$(mktemp)
 trap 'rm -f $input $out $err' EXIT
 
 touch already.mp4
-
 cd src
 
 cat << EOF > $input
@@ -14,7 +13,7 @@ r already
 q
 EOF
 
-python3 viewer.py < $input > $out 2>$err
+python3 viewer.py $CONFIG < $input > $out 2>$err
 
 if ! grep -E -q 'the file .*already\.mp4.* exists in the folder \[..*\]' $err
 then

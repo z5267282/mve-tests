@@ -18,9 +18,9 @@ Must fix:
 | ffmpeg-integration    | Yes   |
 | ffmpeg-unit           | Start |
 | misc                  | Yes   |
-| moment-good           |       |
-| moviepy-negative      |       |
-| name-existence        |       |
+| moment-good           | Yes   |
+| moviepy-negative      | Start |
+| name-existence        | Yes   |
 | no-destination        |       |
 | no-queue              |       |
 | no-renames            |       |
