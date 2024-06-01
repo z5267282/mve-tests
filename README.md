@@ -24,11 +24,10 @@ Must fix:
 | no-destination        | Yes   |
 | no-queue              | Yes   |
 | no-renames            | Yes   |
-| prompt-align          |       |
-| sandbox               |       |
-| test-edit-exists      |       |
-| timestamp             |       |
-| videos                |       |
+| prompt-align          | Start |
+| sandbox               | Start |
+| test-edit-exists      | Yes   |
+| timestamp             | Yes   |
 
 # Overview
 

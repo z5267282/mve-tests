@@ -1,6 +1,6 @@
 #!/bin/dash
 
-../setup-env
+. ../setup-env
 touch outputs/already.mp4
 
 err=$(mktemp)
@@ -14,7 +14,7 @@ e -1 already
 q
 EOF
 
-python3 viewer.py < $session >/dev/null 2>$err
+python3 viewer.py $CONFIG < $session >/dev/null 2>$err
 if ! grep -E -q -x ".*the file '.*already.mp4.*' exists in the folder .*" $err
 then
     ../../clr red failed

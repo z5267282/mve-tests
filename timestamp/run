@@ -1,8 +1,9 @@
 #!/bin/dash
 
-echo 'import subprocess, re' > timestamp.py
-sed -E -n '/def get_duration/,/^def/p' ../../mve/src/viewer.py | sed -E '$d' >> timestamp.py
-sed -E -n '/def round_float/,/^def/p' ../../mve/src/viewer.py | sed -E '$d' >> timestamp.py
-cat ../../mve/src/helpers/time_handlers.py >> timestamp.py
+cp -r ../../mve/src .
+
+export PYTHONPATH="src:$PYTHONPATH"
+
+# cat ../../mve/src/helpers/time_handlers.py >> timestamp.py
 
 pytest
