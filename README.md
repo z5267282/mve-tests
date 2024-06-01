@@ -21,9 +21,9 @@ Must fix:
 | moment-good           | Yes   |
 | moviepy-negative      | Start |
 | name-existence        | Yes   |
-| no-destination        |       |
-| no-queue              |       |
-| no-renames            |       |
+| no-destination        | Yes   |
+| no-queue              | Yes   |
+| no-renames            | Yes   |
 | prompt-align          |       |
 | sandbox               |       |
 | test-edit-exists      |       |

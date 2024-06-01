@@ -1,16 +1,17 @@
 #!/bin/dash
 
+original="$(pwd)"
 cd ..
 root_level="$(pwd)"
 fail() {
     "$root_level/clr" red failed && printf ': '
 }
 
-cd - > /dev/null
-../setup-env
+cd "$original"
+. ../setup-env
 
-rm -r queue
-if [ -d queue ]
+rm -r configs/$CONFIG/queue
+if [ -d configs/$CONFIG/queue ]
 then
     fail
     echo "queue wasn't properly deleted"
@@ -24,7 +25,7 @@ trap 'rm -f $out $err' EXIT
 
 do_test() {
     script=$1
-    python3 $script > $out 2>$err
+    python3 $script $CONFIG > $out 2>$err
     status=$?
     exp=$(sed -E -n '/NO_QUEUE/p' constants/error.py | grep -E -o [0-9]+)
     if [ $status -ne $exp ]

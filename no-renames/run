@@ -1,15 +1,26 @@
 #!/bin/dash
 
+original="$(pwd)"
 cd ..
 root_level="$(pwd)"
 fail() {
     "$root_level/clr" red failed && printf ': '
 }
 
-cd - > /dev/null
-../setup-env
-cd src
+cd "$original"
+. ../setup-env
+
 # adjust renames folder
+cat << EOF > configs/$CONFIG/config.json
+{
+    "SOURCE": ["..", "..", "videos"],
+    "RENAMES": ["..", "renames"],
+    "DESTINATION": ["..", "outputs"]
+}
+EOF
+
+cd src
+
 sed -E -i '' '/^RENAMES/s%\[.*\]%["..", "renames"]%' config.py
 
 out=$(mktemp)
@@ -18,7 +29,7 @@ trap 'rm -f $out $err' EXIT
 
 do_test() {
     script=$1
-    python3 $script > $out 2>$err
+    python3 $script $CONFIG > $out 2>$err
     status=$?
     exp=$(sed -E -n '/NO_RENAMES_FOLDER/p' constants/error.py | grep -E -o [0-9]+)
     if [ $status -ne $exp ]
@@ -50,7 +61,7 @@ do_test() {
 
 do_test viewer.py
 # add a throwaway file so the queue isn't empty
-touch ../queue/blank.txt
+touch ../configs/$CONFIG/queue/blank.txt
 do_test treater.py
 
 echo ''
