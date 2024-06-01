@@ -1,21 +1,15 @@
 #!/bin/dash
 
+original="$(pwd)"
 cd ..
 root_level="$(pwd)"
 fail() {
     "$root_level/clr" red failed && printf ': '
 }
 
-cd - > /dev/null
-../setup-env
+cd "$original"
+. ../setup-env
 
-rm -r outputs
-if [ -d outputs ]
-then
-    fail
-    echo "outputs wasn't properly deleted"
-    exit 1
-fi
 cd src
 
 out=$(mktemp)
@@ -24,7 +18,7 @@ trap 'rm -f $out $err' EXIT
 
 do_test() {
     script=$1
-    python3 $script > $out 2>$err
+    python3 $script $CONFIG > $out 2>$err
     status=$?
     exp=$(sed -E -n '/NO_DESTINATION_FOLDER/p' constants/error.py | grep -E -o [0-9]+)
     if [ $status -ne $exp ]
@@ -56,7 +50,7 @@ do_test() {
 
 do_test viewer.py
 # add a throwaway file so the queue isn't empty
-touch ../queue/blank.txt
+touch ../$CONFIG/queue/blank.txt
 do_test treater.py
 
 echo ''
