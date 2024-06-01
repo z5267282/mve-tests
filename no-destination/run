@@ -10,6 +10,14 @@ fail() {
 cd "$original"
 . ../setup-env
 
+rm -r outputs
+if [ -d outputs ]
+then
+    fail
+    echo "outputs wasn't properly deleted"
+    exit 1
+fi
+
 cd src
 
 out=$(mktemp)
@@ -50,7 +58,7 @@ do_test() {
 
 do_test viewer.py
 # add a throwaway file so the queue isn't empty
-touch ../$CONFIG/queue/blank.txt
+touch ../configs/$CONFIG/queue/blank.txt
 do_test treater.py
 
 echo ''
