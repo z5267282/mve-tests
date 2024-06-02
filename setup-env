@@ -1,20 +1,5 @@
 #!/bin/dash
 
-# add flags to support config changes
-# note that a default config is supplied and then the generator is run
-
-# flags:
-# --recent
-
-recent=false
-
-for arg in "$@"
-do
-    case "$arg" in
-        --recent) recent=true ;;
-    esac
-done
-
 export CONFIG=testing
 export MVE_CONFIGS='../configs'
 
@@ -44,7 +29,7 @@ cat << EOF > config.json
     "DESTINATION": ["..", "outputs"],
 
     "TESTING": true,
-    "RECENT": $recent 
+    "RECENT": ${RECENT+true}
 }
 EOF
 cd ../..

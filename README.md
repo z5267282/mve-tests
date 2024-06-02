@@ -36,6 +36,15 @@ A mix of unit and integration tests for `mve`.
 
 - ie. `../mve` should be the path to access `mve`.
 
+# Environment Configuration
+
+The script `setup-env` should be sourced all tests.  
+This includes the config generation.  
+The following config options can be set using `JSON` as environmnet variables.  
+All other options are set according to the default configuration.
+
+- `RECENT`
+
 # Config
 
 The default config `testing` is stored and exported as an environment variable `$CONFIG`.

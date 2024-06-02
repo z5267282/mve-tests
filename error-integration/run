@@ -1,6 +1,8 @@
 #!/bin/dash
 
-. ../setup-env --recent
+export RECENT=false
+
+. ../setup-env
 
 touch outputs/exists.mp4
 
