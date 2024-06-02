@@ -29,7 +29,7 @@ cat << EOF > config.json
     "DESTINATION": ["..", "outputs"],
 
     "TESTING": true,
-    "RECENT": ${RECENT+true}
+    "RECENT": ${RECENT:-false}
 }
 EOF
 cd ../..

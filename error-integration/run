@@ -1,6 +1,6 @@
 #!/bin/dash
 
-export RECENT=false
+export RECENT=true
 
 . ../setup-env
 
