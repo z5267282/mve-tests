@@ -34,7 +34,8 @@ cat << EOF > config.json
 EOF
 cd ../..
 
-cp -r ../../mve/src .
+ln -s ../../mve/src src
+
 cd src
 python3 generator.py $CONFIG > /dev/null
 cd "$root"
