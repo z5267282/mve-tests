@@ -1,5 +1,14 @@
 #!/bin/dash
 
+clean=no
+for arg in "$@"
+do
+    case "$arg" in
+        --clean) clean=yes ;;
+    esac
+done
+
+# provide access to working directory shell scripts
 PATH="$PATH:$(pwd)"
 
 alias nl='echo "" && echo ""'
@@ -32,3 +41,8 @@ done
 nl
 clr green 'passed'
 echo ' all tests!'
+
+if [ $clean = yes ]
+then
+    clean-tests
+fi
