@@ -1,7 +1,5 @@
 #!/bin/dash
 
-export RECENT=true
-
 . ../setup-env
 
 touch outputs/exists.mp4
