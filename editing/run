@@ -7,5 +7,5 @@ cp -r ../../mve/src .
 
 export PYTHONPATH="src:$PYTHONPATH"
 
-pytest
+pytest --disable-warnings
 
