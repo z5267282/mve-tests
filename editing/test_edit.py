@@ -1,5 +1,5 @@
 '''Note that neither `moviepy` nor `ffmpeg` can direclty check for errors.
-Hence only working timestamps are testedh'''
+Hence only working timestamps are tested'''
 
 import lib.edit as edit
 
