@@ -1,0 +1,51 @@
+# see if multiple processes really makes it quicker
+
+root="$(pwd)"
+
+run_benmark () {
+    . ../setup-env
+
+    [ -d videos ] && rm -r videos
+    mkdir videos
+    num_videos=0
+    for v in ../videos/*
+    do
+        base="$(basename "$v")"
+        cp "$v" "videos/$base"
+        cp "$v" "videos/${base}-2"
+        num_videos=$((num_videos + 2))
+    done
+
+    processes=$1
+
+    cd src
+
+    echo "=== processes=$processes ==="
+    cat << EOF > ../configs/$CONFIG/config.json
+{
+    "SOURCE": ["..", "videos"],
+    "RENAMES": [".."],
+    "DESTINATION": ["..", "outputs"],
+
+    "TESTING": true,
+    "RECENT": ${RECENT:-false},
+
+    "NUM_PROCESSES": $processes
+}
+EOF
+
+    # all videos are at least 1 minute long
+    seq $num_videos \
+        | sed -E -e 's/.*/m 1 60 video &/' -e '$a \
+q' \
+        | python3 viewer.py $CONFIG
+
+    # ffmpeg sends output to /dev/null
+    time python3 treater.py $CONFIG 2>/dev/null
+
+    cd "$root"
+}
+
+run_benmark 4
+run_benmark 8
+
