@@ -1,0 +1,19 @@
+#!/bin/dash
+
+. ../setup-env
+
+commands="$(mktemp)"
+trap 'rm -f "$commands"' EXIT 
+
+cat << EOF > "$commands"
+e -5 123
+y
+e -5 fixed
+q
+EOF
+
+cd src
+python3 viewer.py $CONFIG < "$commands" || exit 10
+python3 treater.py $CONFIG || exit 20
+
+[ -f ../outputs/fixed.mp4 ] || exit 30
