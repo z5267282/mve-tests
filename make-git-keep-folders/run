@@ -1,0 +1,24 @@
+#!/bin/dash
+
+# ensure that make correctly constructs the folder structure
+# this includes gitkeeps for the other config folders
+
+. ../setup-env
+
+cd src
+
+printf '../../videos
+../
+../../outputs' | python3 make.py fishing
+
+cd ..
+
+[ -d configs/fishing/history ] || exit 10
+[ -e configs/fishing/history/.gitkeep ] || exit 15
+
+[ -d configs/fishing/errors ] || exit 20
+[ -e configs/fishing/errors/.gitkeep ] || exit 25
+
+[ -d configs/fishing/queue ] || exit 30
+[ -e configs/fishing/queue/.gitkeep ] || exit 35
+
