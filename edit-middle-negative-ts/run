@@ -1,0 +1,15 @@
+#!/bin/dash
+
+# testing middle command with negative timestamps
+
+. ../setup-env
+
+cd src
+
+printf 'm -10 -5 negative
+q' | python3 viewer.py $CONFIG || exit 10
+
+python3 treater.py $CONFIG || exit 20
+
+[ -e ../outputs/negative.mp4 ] || exit 30
+
