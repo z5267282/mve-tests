@@ -1,0 +1,36 @@
+#!/bin/dash
+
+# run make using command line flags
+
+. ../setup-env
+
+cd src
+
+python3 make.py fishing \
+    --source ../../videos \
+    --renames ../ \
+    --edits ../../outputs
+
+cd ..
+
+# folders
+
+[ -d configs/fishing/history ] || exit 10
+[ -e configs/fishing/history/.gitkeep ] || exit 15
+
+[ -d configs/fishing/errors ] || exit 20
+[ -e configs/fishing/errors/.gitkeep ] || exit 25
+
+[ -d configs/fishing/queue ] || exit 30
+[ -e configs/fishing/queue/.gitkeep ] || exit 35
+
+# files
+
+[ -e configs/fishing/config.json ] || exit 40
+[ -e configs/fishing/remaining.json ] || exit 50
+
+# source folders
+# we check these with Python to avoid json parsing issues
+
+pytest
+
