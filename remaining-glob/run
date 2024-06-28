@@ -1,0 +1,27 @@
+#!/bin/dash
+
+. ../setup-env
+
+[ -d files ] && rm -r files
+mkdir files
+cd files
+touch bad
+touch .hidden
+touch good.mp4
+touch SHOUTING.MP4
+touch red-herring.txt
+touch apple.mov
+touch WINDOWS.MOV
+touch .hidden-movie.mp4
+touch .linux.mov
+cd ..
+
+cd src
+python3 make.py suffixes \
+    --source ../files \
+    --renames "$(pwd)" \
+    --edits "$(pwd)"
+python3 generator.py suffixes
+
+cd ..
+pytest
