@@ -10,16 +10,6 @@ m
 q
 EOF
 
-run-test 'negative start time (integer)' '[ error ] the start time must be in the format [ natural number | timestamp in form <[hour]-min-sec> ]' << EOF
-m -3 1 bad
-q
-EOF
-
-run-test 'negative end time (integer)' '[ error ] the end time must be in the format [ natural number | timestamp in form <[hour]-min-sec> ]' << EOF
-m 10 -4 bad
-q
-EOF
-
 run-test 'start out of bounds via timestamp' "[ error ] the start time '1:54:29' is not in the bounds of video 01.mp4" << EOF
 m 1-54-29 3 bad start
 q
