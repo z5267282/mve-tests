@@ -1,5 +1,5 @@
 import helpers.time_handlers as time_handlers
-import lib.view as view
+import helpers.video as video
 
 # timestamp_seconds()
 
@@ -19,7 +19,8 @@ def test_timestamp_seconds_hour():
 
 
 def test_duration():
-    assert view.get_duration('../videos/01.mp4') == 97
-    assert view.get_duration('../videos/02.mp4') == 97
-    assert view.get_duration('../videos/03.mp4') == 97
-    assert view.get_duration('../videos/04.mp4') == 97
+    assert video.get_duration('../videos/01.mp4') == 97
+    assert video.get_duration('../videos/02.mp4') == 97
+    assert video.get_duration('../videos/03.mp4') == 97
+    assert video.get_duration('../videos/04.mp4') == 97
+
