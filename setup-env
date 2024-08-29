@@ -28,6 +28,8 @@ cd $CONFIG
 for dir in errors history queue
 do
     mkdir $dir
+    # add a gitkeep to reflect mve
+    touch $dir/.gitkeep
 done
 echo '[]' > remaining.json
 cat << EOF > config.json
