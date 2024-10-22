@@ -1,26 +1,27 @@
 #!/bin/dash
 
 . ../setup-env
-cd src
 
-python3 focus.py ../../videos/02.mp4 --destination ../outputs << EOF
+run_test() {
+    cd src
+    python3 focus.py ../../videos/02.mp4 --destination ../outputs << EOF
 5 10
 q
-EOF 
+EOF
+    return $?
+}
 
-echo 'AFTER!'
+if ! run_test
+then
+    echo 'focus did not successfully exit'
+    exit 10
+fi
 
-# if [ $? -eq 0 ]
-# then
-#     echo 'focus did not successfully exit'
-#     exit 10
-# fi
+# this is wrong on purpose, change to 5 10
+if [ ! -e 'outputs/5 10.mp4' ]
+then
+    echo 'did not edit clip "5 10"'
+    exit 20
+fi
 
-# # this is wrong on purpose, change to 5 10
-# if [ ! -e '../dest/6 10.mp4' ]
-# then
-#     echo 'did not edit clip "5 10"'
-#     exit 20
-# fi
-
-# exit 0
+exit 0
