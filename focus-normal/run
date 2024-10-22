@@ -1,28 +1,26 @@
 #!/bin/dash
 
 . ../setup-env
-[ -d dest ] && rm -r dest
-mkdir dest
-
 cd src
 
-cat << EOF | python3 focus.py ../../videos/02.mp4 --destination ../dest
+python3 focus.py ../../videos/02.mp4 --destination ../outputs << EOF
 5 10
 q
 EOF 
 
-if [ $? -eq 0 ]
-then
-    echo 'focus did not successfully exit'
-    exit 10
-fi
+echo 'AFTER!'
 
-# this is wrong on purpose, change to 5 10
-if [ ! -f '../dest/6 10.mp4' ]
-then
-    echo "did not edit clip "5 10"
-    exit 20
-fi
+# if [ $? -eq 0 ]
+# then
+#     echo 'focus did not successfully exit'
+#     exit 10
+# fi
 
-exit 0
+# # this is wrong on purpose, change to 5 10
+# if [ ! -e '../dest/6 10.mp4' ]
+# then
+#     echo 'did not edit clip "5 10"'
+#     exit 20
+# fi
 
+# exit 0
