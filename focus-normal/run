@@ -18,7 +18,7 @@ then
 fi
 
 # this is wrong on purpose, change to 5 10
-if [ ! -e 'outputs/5 10.mp4' ]
+if [ ! -e '../outputs/5 10.mp4' ]
 then
     echo 'did not edit clip "5 10"'
     exit 20
