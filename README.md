@@ -1,34 +1,3 @@
-# Fix New Config System
-
-Must fix:
-
-1. `PATH` variable
-2. Test working
-3. Clean old structure
-
-| test                  | fixed |
-| --------------------- | ----- |
-| colour                | Start |
-| decimal               | Yes   |
-| duration-ffmpeg-probe | Start |
-| edit-integration      | Yes   |
-| editing               | Yes   |
-| empty-queue           | Yes   |
-| error-integration     | Yes   |
-| ffmpeg-integration    | Yes   |
-| ffmpeg-unit           | Start |
-| misc                  | Yes   |
-| moment-good           | Yes   |
-| moviepy-negative      | Start |
-| name-existence        | Yes   |
-| no-destination        | Yes   |
-| no-queue              | Yes   |
-| no-renames            | Yes   |
-| prompt-align          | Start |
-| sandbox               | Start |
-| test-edit-exists      | Yes   |
-| timestamp             | Yes   |
-
 # Overview
 
 A mix of unit and integration tests for `mve`.  
