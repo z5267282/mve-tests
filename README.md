@@ -5,7 +5,14 @@ A mix of unit and integration tests for `mve`.
 
 - ie. `../mve` should be the path to access `mve`.
 
-Run `run` from the project root to run all tests.
+Run these Shell commands to run all tests:
+
+```sh
+.venv/bin/activate # start the virtual environment
+run                # run all tests
+```
+
+.
 
 # Environment Configuration
 
