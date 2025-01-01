@@ -15,4 +15,3 @@ fi
 seq 4 | xargs -I % cp generated.mp4 ../videos/0%.mp4
 
 deactivate
-# no need to deactivate i think
