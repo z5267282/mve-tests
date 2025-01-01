@@ -1,0 +1,18 @@
+#!/usr/bin/env dash
+
+[ -d videos ] && rm -r videos
+mkdir videos
+
+. .venv/bin/activate
+cd generate-test-video
+if ! python3 generate.py
+then
+    echo 'failed to generate testing video'
+    exit 10
+fi
+
+# make videos/0[1-4].mp4
+seq 4 | xargs -I % cp generated.mp4 ../videos/0%.mp4
+
+deactivate
+# no need to deactivate i think
