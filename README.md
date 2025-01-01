@@ -5,6 +5,8 @@ A mix of unit and integration tests for `mve`.
 
 - ie. `../mve` should be the path to access `mve`.
 
+Run `run` from the project root to run all tests.
+
 # Environment Configuration
 
 The script `setup-env` should be sourced all tests.  
