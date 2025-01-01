@@ -12,6 +12,6 @@ then
 fi
 
 # make videos/0[1-4].mp4
-seq 4 | xargs -I % cp generated.mp4 ../videos/0%.mp4
+seq 4 | xargs -I % rsync --progress generated.mp4 ../videos/0%.mp4
 
 deactivate
