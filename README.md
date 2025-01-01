@@ -5,25 +5,6 @@ A mix of unit and integration tests for `mve`.
 
 - ie. `../mve` should be the path to access `mve`.
 
-First install the virtual environment
-
-```sh
-python3 -m venv .venv            # create virtual environment .venv
-.venv/bin/activate               # start the virtual environment
-pip3 install -r requirements.txt # install dependencies
-deactivate
-```
-
-,then run these Shell commands to run all tests:
-
-```sh
-.venv/bin/activate # start the virtual environment
-run                # run all tests
-deactivate
-```
-
-.
-
 # Environment Configuration
 
 The script `setup-env` should be sourced all tests.  
