@@ -5,6 +5,14 @@ A mix of unit and integration tests for `mve`.
 
 - ie. `../mve` should be the path to access `mve`.
 
+To run all tests, simply run this script:
+
+```sh
+./run
+```
+
+.
+
 # Environment Configuration
 
 The script `setup-env` should be sourced all tests.  

@@ -1,48 +1,10 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
-clean=no
-for arg in "$@"
-do
-    case "$arg" in
-        --clean) clean=yes ;;
-    esac
-done
+# This is a wrapper script to ensure that tests are run in the virtual
+# environment.
 
-# provide access to working directory shell scripts
-PATH="$PATH:$(pwd)"
+. .venv/bin/activate
 
-alias nl='echo "" && echo ""'
-for dir in *
-do
-    [ -d "$dir" ] || continue
-    [ -f "$dir/run" ] || continue
-    cd "$dir"
-    if echo "$dir" | grep -E -q "^swapper"
-    then
-        continue
-    fi
+test-all
 
-    if run
-    then
-        nl
-        ../clr cyan 'passed'
-        echo " tests in: $dir"
-        nl
-    else
-        nl
-        ../clr magenta 'failed'
-        echo " tests in: $dir"
-        nl
-        exit 1
-    fi
-    cd ..
-done
-
-nl
-clr green 'passed'
-echo ' all tests!'
-
-if [ $clean = yes ]
-then
-    clean-tests
-fi
+deactivate

@@ -1,0 +1,48 @@
+#!/bin/dash
+
+clean=no
+for arg in "$@"
+do
+    case "$arg" in
+        --clean) clean=yes ;;
+    esac
+done
+
+# provide access to working directory shell scripts
+PATH="$PATH:$(pwd)"
+
+alias nl='echo "" && echo ""'
+for dir in *
+do
+    [ -d "$dir" ] || continue
+    [ -f "$dir/run" ] || continue
+    cd "$dir"
+    if echo "$dir" | grep -E -q "^swapper"
+    then
+        continue
+    fi
+
+    if run
+    then
+        nl
+        ../clr cyan 'passed'
+        echo " tests in: $dir"
+        nl
+    else
+        nl
+        ../clr magenta 'failed'
+        echo " tests in: $dir"
+        nl
+        exit 1
+    fi
+    cd ..
+done
+
+nl
+clr green 'passed'
+echo ' all tests!'
+
+if [ $clean = yes ]
+then
+    clean-tests
+fi
