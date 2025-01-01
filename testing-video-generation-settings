@@ -1,0 +1,11 @@
+#!/usr/bin/env dash
+
+export HEIGHT=1080
+export WIDTH=1920
+
+export FPS=60
+
+# expected 1:37 video for testing
+export LEN=$((60 + 37))
+
+export OUTPUT='generated.mp4'

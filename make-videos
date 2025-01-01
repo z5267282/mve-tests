@@ -1,5 +1,8 @@
 #!/usr/bin/env dash
 
+# load generation settings
+. testing-video-generation-settings
+
 [ -d videos ] && rm -r videos
 mkdir videos
 
