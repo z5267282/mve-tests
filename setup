@@ -11,3 +11,4 @@ echo 'generating testing videos'
 ./make-videos
 
 echo 'sucessfully set up testing environment'
+
