@@ -6,22 +6,7 @@ then
     echo "the mve project folder must exist in the parent of mve-tests"
     exit 15
 fi
-
-# get fresh install of src
-[ -d src ] && rm -r src
 cp -r ../../mve/src .
-
-cd src
-for dir in log no-log
-do
-    for file in $dir/*py
-    do
-        base="$(basename "$file")"
-        [ "$base" = __init__.py ] && continue
-        ln -s "$file" "$base"
-    done
-done
-cd ..
 
 export CONFIG=testing
 export MVE_CONFIGS='../configs'
