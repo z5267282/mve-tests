@@ -4,9 +4,9 @@
 
 cat << EOF > "$(basename $MVE_CONFIGS)/$CONFIG/config.json"
 {
-    "SOURCE": ["..", "..", "videos"],
+    "SOURCE": ["..", "videos"],
     "RENAMES": [".."],
-    "DESTINATION": ["..", "outputs"],
+    "DESTINATION": ["outputs"],
 
     "TESTING": true,
     "RECENT": false,
