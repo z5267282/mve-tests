@@ -1,7 +1,5 @@
 #!/bin/dash
 
-cd src
-
 session="$(mktemp)"
 trap 'rm -f "$session"' EXIT
 
@@ -42,12 +40,12 @@ $cmd $file_name
 q
 EOF
 
-    python3 viewer.py $CONFIG < "$session" > /dev/null
-    check_in_folder "$file_name" ../queue || exit "$errno"
+    python3 -m mve log viewer $CONFIG < "$session" > /dev/null
+    check_in_folder "$file_name" "$MVE_CONFIGS/$CONFIG/queue" || exit "$errno"
 
-    python3 treater.py $CONFIG >/dev/null 2>&1 || exit "$errno"
-    check_in_folder "$file_name" ../history || exit "$errno"
-    if ! [ -e "../outputs/$file_name.mp4" ]
+    python3 -m mve log treater $CONFIG >/dev/null 2>&1 || exit "$errno"
+    check_in_folder "$file_name" $MVE_CONFIGS/$CONFIG/history || exit "$errno"
+    if ! [ -e "outputs/$file_name.mp4" ]
     then
         fail 
         echo ": $file_name wasn't edited" >&2

@@ -14,5 +14,5 @@ cat << EOF > "$(basename $MVE_CONFIGS)/$CONFIG/config.json"
 }
 EOF
 
-# test-edit
-other-commands
+test-edit
+# other-commands
