@@ -8,6 +8,8 @@ then
 fi
 [ -d mve ] && rm -rf mve
 cp -r ../../mve/mve .
+# get rid of .git as well
+rm -rf mve/.git
 
 export CONFIG=testing
 export MVE_CONFIGS='configs'
