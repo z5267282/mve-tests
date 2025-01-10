@@ -14,14 +14,12 @@ trap 'rm -f $cmds $out $err $exp_out $exp_err' EXIT
 
 echo '[ 4 ] - 01.mp4 : [ 4 ] - 01.mp4 : [ success ] viewer exited with 4 files remaining' > $exp_out
 
-cd src
-
 name="$1"
 error_msg="$2"
 
-python3 viewer.py $CONFIG > $out 2>$err
+python3 -m mve log viewer $CONFIG > $out 2>$err
 
-../../clr-remover $out
+../clr-remover $out
 if ! diff $out $exp_out > /dev/null
 then
     echo 'out:'
@@ -33,7 +31,7 @@ then
 fi
 
 echo "$error_msg" > $exp_err
-../../clr-remover $err
+../clr-remover $err
 if ! diff $err $exp_err > /dev/null
 then
     echo "$FAIL test $name: stderr incorrect"
