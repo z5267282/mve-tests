@@ -40,10 +40,10 @@ $cmd $file_name
 q
 EOF
 
-    python3 viewer.py $CONFIG < "$session" > /dev/null
+    python3 -m mve log viewer $CONFIG < "$session" > /dev/null
     check_in_folder "$file_name" configs/$CONFIG/queue || exit "$errno"
 
-    python3 treater.py $CONFIG >/dev/null 2>&1 || exit "$errno"
+    python3 -m mve log treater $CONFIG >/dev/null 2>&1 || exit "$errno"
     check_in_folder "$file_name" configs/$CONFIG/history || exit "$errno"
     if ! [ -e "outputs/$file_name.mp4" ]
     then
