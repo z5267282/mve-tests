@@ -3,8 +3,7 @@
 . ../setup-env
 
 run_test() {
-    cd src
-    python3 focus.py ../../videos/02.mp4 --destination ../outputs << EOF
+    python3 -m mve no-log focus ../videos/02.mp4 --destination outputs << EOF
 5 10
 q
 EOF
@@ -18,10 +17,10 @@ then
 fi
 
 # this is wrong on purpose, change to 5 10
-if [ ! -e '../outputs/5 10.mp4' ]
+if [ ! -e 'outputs/5 10.mp4' ]
 then
     echo 'did not edit clip "5 10"'
     exit 20
 fi
 
-exit 0
+true
