@@ -1,15 +1,16 @@
 #!/bin/dash
 
-if [ ! -d ../../mve/src ]
+if [ ! -d ../../mve/mve ]
 then
-    echo "$(basename $0) failed because ../../mve/src doesn't exist"
+    echo "$(basename $0) failed because ../../mve/mve doesn't exist"
     echo "the mve project folder must exist in the parent of mve-tests"
     exit 15
 fi
-cp -r ../../mve/src .
+[ -d mve ] && rm -rf mve
+cp -r ../../mve/mve .
 
 export CONFIG=testing
-export MVE_CONFIGS='../configs'
+export MVE_CONFIGS='configs'
 
 # let us run scripts in current folder
 export PATH="$PATH:."
@@ -34,9 +35,9 @@ done
 echo '[]' > remaining.json
 cat << EOF > config.json
 {
-    "SOURCE": ["..", "..", "videos"],
+    "SOURCE": ["..", "videos"],
     "RENAMES": [".."],
-    "DESTINATION": ["..", "outputs"],
+    "DESTINATION": ["outputs"],
 
     "TESTING": true,
     "RECENT": ${RECENT:-false}
@@ -44,6 +45,5 @@ cat << EOF > config.json
 EOF
 cd ../..
 
-cd src
-python3 generator.py $CONFIG > /dev/null
+python3 -m mve log generator $CONFIG > /dev/null
 cd "$root"
