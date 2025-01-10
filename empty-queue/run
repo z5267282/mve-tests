@@ -14,18 +14,17 @@ then
     exit 1
 fi
 
-cd src
-exp=$(sed -E -n '/EMPTY_QUEUE/p' constants/error.py | number)
+exp=$(sed -E -n '/EMPTY_QUEUE/p' mve/src/constants/error.py | number)
 
-python3 treater.py $CONFIG > /dev/null
+python3 -m mve log treater $CONFIG > /dev/null
 status=$?
 
 if [ $exp -ne $status ]
 then
-    ../../clr 'red' 'failed'
-    echo ": $treater.py did not exit with an exit status of $exp (EMPTY_QUEUE)"
+    ../clr 'red' 'failed'
+    echo ": treater did not exit with an exit status of $exp (EMPTY_QUEUE)"
     exit 1
 fi
 
-../../clr cyan passed
+../clr cyan passed
 echo " test empty-queue"
