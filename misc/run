@@ -2,10 +2,10 @@
 
 #!/bin/dash
 
+. ../setup-env
+
 [ -d outputs ] && rm -r outputs
 mkdir outputs
-
-cp -r ../../mve/src .
 
 export PYTHONPATH="src:$PYTHONPATH"
 

@@ -1,4 +1,4 @@
-import lib.view as view
+import mve.src.lib.view as view
 
 
 def test_padded_min_sec():
