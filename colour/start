@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 # note this should be run in a terminal not the vscode one
 # colours don't properly register

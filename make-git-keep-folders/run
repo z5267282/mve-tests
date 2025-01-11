@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 # ensure that make correctly constructs the folder structure
 # this includes gitkeeps for the other config folders

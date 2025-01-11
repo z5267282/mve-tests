@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 echo 'import subprocess' > run_test.py
 echo 'import time_handlers' >> run_test.py

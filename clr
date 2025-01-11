@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 colour="$1"
 msg="$2"

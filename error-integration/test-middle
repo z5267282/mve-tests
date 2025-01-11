@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 run-test 'too few args' '[ error ] usage: [m]iddle | [ start ] [ end ] [ name ]' << EOF
 m 1 2

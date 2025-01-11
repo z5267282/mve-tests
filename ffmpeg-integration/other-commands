@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 cmds=$(mktemp)
 trap 'rm -f $cmds' EXIT

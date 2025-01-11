@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 clean=no
 for arg in "$@"

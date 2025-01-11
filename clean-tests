@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 find . \( -name configs -or -name outputs -or -name mve \) -print0 \
 | xargs -0 rm -r

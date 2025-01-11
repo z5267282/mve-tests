@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 echo 'import subprocess, sys, re' > duration.py
 sed -E -n '/^def get_duration\(/,/^def/p' ../../mve/src/viewer.py | sed '$d' >> duration.py

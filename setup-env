@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 # this will get deactivated when the script that sources it ends
 . ../.venv/bin/activate

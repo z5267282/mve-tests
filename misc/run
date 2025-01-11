@@ -1,6 +1,6 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
-#!/bin/dash
+#!/usr/bin/env dash
 
 . ../setup-env
 

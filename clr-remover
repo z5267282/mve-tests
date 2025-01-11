@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 [ $# -eq 1 ] || exit 1
 file="$1"

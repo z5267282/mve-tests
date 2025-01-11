@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 
 # the sandbox is mainly for seeing what expected output should be  
 # commands fed to the viewer are placed in the file `cmds`  
