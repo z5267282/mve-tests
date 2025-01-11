@@ -4,25 +4,27 @@
 
 . ../setup-env
 
-python3 -m mve log make fishing \
+export CONFIG=fishing
+
+python3 -m mve log make $CONFIG \
     --source ../videos \
     --renames .. \
     --edits outputs
 
 # folders
-[ -d configs/fishing/history ] || exit 10
-[ -e configs/fishing/history/.gitkeep ] || exit 15
+[ -d $MVE_CONFIGS/$CONFIG/history ] || exit 10
+[ -e $MVE_CONFIGS/$CONFIG/history/.gitkeep ] || exit 15
 
-[ -d configs/fishing/errors ] || exit 20
-[ -e configs/fishing/errors/.gitkeep ] || exit 25
+[ -d $MVE_CONFIGS/$CONFIG/errors ] || exit 20
+[ -e $MVE_CONFIGS/$CONFIG/errors/.gitkeep ] || exit 25
 
-[ -d configs/fishing/queue ] || exit 30
-[ -e configs/fishing/queue/.gitkeep ] || exit 35
+[ -d $MVE_CONFIGS/$CONFIG/queue ] || exit 30
+[ -e $MVE_CONFIGS/$CONFIG/queue/.gitkeep ] || exit 35
 
 # files
 
-[ -e configs/fishing/config.json ] || exit 40
-[ -e configs/fishing/remaining.json ] || exit 50
+[ -e $MVE_CONFIGS/$CONFIG/config.json ] || exit 40
+[ -e $MVE_CONFIGS/$CONFIG/remaining.json ] || exit 50
 
 # source folders
 # we check these with Python to avoid json parsing issues

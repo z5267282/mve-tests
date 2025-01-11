@@ -6,8 +6,8 @@ fail() {
 
 . ../setup-env
 
-rm -r configs/$CONFIG/queue
-if [ -d configs/$CONFIG/queue ]
+rm -r $MVE_CONFIGS/$CONFIG/queue
+if [ -d $MVE_CONFIGS/$CONFIG/queue ]
 then
     fail
     echo "queue wasn't properly deleted"
