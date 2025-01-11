@@ -1,0 +1,40 @@
+#!/usr/bin/env dash
+
+set -e
+
+. ../setup-env
+
+out="$(mktemp)"
+trap 'rm -f "$out"' EXIT
+
+# run 2 treatments, so 2 remain
+seq 2 3 \
+    | sed -E -e 's/(.)/s \1 vid \1/' -e '$a \
+q'\
+    | python3 -m mve log viewer $CONFIG
+
+python3 -m mve log treater $CONFIG 2>/dev/null > "$out"
+../clr-remover "$out"
+if grep -F -q '[ reminder ] - there are no more remaining files to be viewed and the last treatment has been run, so deleter should be run' "$out"
+then
+    ../clr red 'fail: '
+    echo 'the reminder to run the deleter was shown when there were files remaining'
+    exit 10
+fi
+
+# # now the warning should show up
+seq 4 5 \
+    | sed -E -e 's/(.)/s \1 vid \1/' -e '$a \
+q'\
+    | python3 -m mve log viewer $CONFIG
+
+python3 -m mve log treater $CONFIG 2>/dev/null > "$out"
+../clr-remover "$out"
+if ! grep -F -q '[ reminder ] - there are no more remaining files to be viewed and the last treatment has been run, so deleter should be run' "$out"
+then
+    ../clr red 'fail: '
+    echo 'the reminder to run the deleter not shown when it should have been'
+    exit 20
+fi
+
+echo 'reminder was shown once treatments finished and no files remaining'
