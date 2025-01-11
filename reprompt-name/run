@@ -3,7 +3,8 @@
 . ../setup-env
 
 commands="$(mktemp)"
-trap 'rm -f "$commands"' EXIT 
+out="$(mktemp)"
+trap 'rm -f "$commands" "$out"' EXIT 
 
 cat << EOF > "$commands"
 e -5 123
@@ -12,8 +13,13 @@ e -5 fixed
 q
 EOF
 
-cd src
-python3 viewer.py $CONFIG < "$commands" || exit 10
-python3 treater.py $CONFIG || exit 20
+python3 -m mve log viewer $CONFIG < "$commands" > "$out" || exit 10
 
-[ -f ../outputs/fixed.mp4 ] || exit 30
+../clr-remover "$out"
+grep -F -q "[ warning ] the name '123' starts with a number are you sure you haven't misentered the[m]iddle command?" "$out" || exit 11
+grep -F -q "[ warning ] type 'y' if you want to re-enter this command" "$out" || exit 12
+
+# disable ffmpeg output
+python3 -m mve log treater $CONFIG 2>/dev/null || exit 20
+
+[ -f outputs/fixed.mp4 ] || exit 30
