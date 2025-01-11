@@ -1,13 +1,9 @@
 #!/bin/dash
 
-original="$(pwd)"
-cd ..
-root_level="$(pwd)"
 fail() {
-    "$root_level/clr" red failed && printf ': '
+    "$(realpath ..)/clr" red failed && printf ': '
 }
 
-cd "$original"
 . ../setup-env
 
 rm -r configs/$CONFIG/queue
@@ -17,7 +13,6 @@ then
     echo "queue wasn't properly deleted"
     exit 1
 fi
-cd src
 
 out=$(mktemp)
 err=$(mktemp)
@@ -25,9 +20,9 @@ trap 'rm -f $out $err' EXIT
 
 do_test() {
     script=$1
-    python3 $script $CONFIG > $out 2>$err
+    python3 -m mve log $script $CONFIG > $out 2>$err
     status=$?
-    exp=$(sed -E -n '/NO_QUEUE/p' constants/error.py | grep -E -o [0-9]+)
+    exp=$(sed -E -n '/NO_QUEUE/p' mve/src/constants/error.py | grep -E -o [0-9]+)
     if [ $status -ne $exp ]
     then
         fail
@@ -50,13 +45,13 @@ do_test() {
         exit 4
     fi
 
-    ../../clr blue 'passed'
+    ../clr blue 'passed'
     echo ": $script"
 }
 
-do_test viewer.py
-do_test treater.py
+do_test viewer
+do_test treater
 
 echo ''
-../../clr cyan 'passed'
+../clr cyan 'passed'
 echo ': no-queue'
