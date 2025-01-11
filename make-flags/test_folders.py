@@ -1,5 +1,4 @@
 import json
-import pytest
 
 import mve.src.constants.options as options
 
