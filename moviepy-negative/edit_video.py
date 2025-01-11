@@ -1,24 +1,13 @@
 #!/usr/bin/env python3
 
-import moviepy.editor as mvp
+from mve.src.lib.edit import edit_moviepy
 
-import config as cfg
-import video_editing as vde
+from mve.src.constants.defaults import MOVIEPY_THREADS
 
-def edit():
-    with mvp.VideoFileClip('../videos/01.mp4') as file:
-        clip = file.subclip(t_end=-18)
-        clip.write_videofile(
-            'fish.mp4',
-            threads=cfg.NUM_THREADS,
-            fps=vde.FRAMES,
-            codec=vde.VCODEC,
-            preset=vde.COMPRESSION,
-            audio_codec=vde.ACODEC
-        )
 
 def main():
-    edit()
+    edit_moviepy('../videos/01.mp4', 'fish.mp4', '0', '18', MOVIEPY_THREADS)
+
 
 if __name__ == "__main__":
     main()

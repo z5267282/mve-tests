@@ -1,6 +1,5 @@
 #!/usr/bin/env dash
 
-cp ../../mve/src/config.py .
-cp ../../mve/src/constants/video_editing.py .
+. ../setup-env
 
 python3 edit_video.py
