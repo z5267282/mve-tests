@@ -1,17 +1,16 @@
 #!/bin/dash
 
-../setup-env
+. ../setup-env
 
-[ -d inputs ] && rm -r inputs
-mkdir inputs
+[ -d benchmark-videos ] && rm -r benchmark-videos
+mkdir benchmark-videos
 
-cd inputs
-seq 200 | xargs touch
+cd benchmark-videos
+seq 200 | xargs -I % touch %.mp4
 cd ..
 
-cd src
-echo '[]' > remaining.json
-sed -E -i '' '/^SOURCE/s%\[.*\]%["..", "inputs"]%' config.py
-python3 generator.py
-yes d | python3 viewer.py > output.txt
-cat output.txt
+
+echo '[]' > $MVE_CONFIGS/$CONFIG/remaining.json
+sed -E -i '' '/SOURCE/s%\[.*\]%["benchmark-videos"]%' $MVE_CONFIGS/$CONFIG/config.json
+python3 -m mve log generator $CONFIG
+yes d | python3 -m mve log viewer $CONFIG
