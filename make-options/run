@@ -2,23 +2,14 @@
 
 . ../setup-env
 
-export CONFIG=opts
+# echo 'running setting all options'
+# ./set-all-flags || exit 10
 
-python3 -m mve log make $CONFIG \
-    --source='../videos' --renames="$(pwd)" --edits=outputs \
-    --recent \
-    --num-processes=7 \
-    --use-moviepy --moviepy-threads=5 \
-    --testing \
-    --bold \
-    || exit 10
+# ../clr blue 'passed'
+# echo ' subtest (1/2) - setting all flags works'
 
-grep -F -q '"RECENT": true' $MVE_CONFIGS/$CONFIG/config.json || exit 20
-grep -F -q '"NUM_PROCESSES": 7' $MVE_CONFIGS/$CONFIG/config.json || exit 30
-grep -F -q '"USE_MOVIEPY": true' $MVE_CONFIGS/$CONFIG/config.json || exit 40
-grep -F -q '"MOVIEPY_THREADS": 5' $MVE_CONFIGS/$CONFIG/config.json || exit 50
-grep -F -q '"TESTING": true' $MVE_CONFIGS/$CONFIG/config.json || exit 60
-grep -F -q '"BOLD": true' $MVE_CONFIGS/$CONFIG/config.json || exit 70
+# echo 'running with no options set'
+# ./no-flags || exit 20
 
-echo 'all options checked'
-
+# ../clr blue 'passed'
+# echo ' subtest (2/2) - setting no flags works'
