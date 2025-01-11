@@ -3,6 +3,8 @@
 # see if multiple processes really makes it quicker
 
 root="$(pwd)"
+time="$(mktemp)"
+trap 'rm -f "$time"' EXIT 
 
 run_benmark () {
     . ../setup-env
@@ -40,10 +42,10 @@ EOF
 q' \
         | python3 -m mve log viewer $CONFIG
 
-    # ffmpeg sends output to err /dev/null
-    # time python3 -m mve log treater $CONFIG 2>/dev/null
-    time python3 -m mve log treater $CONFIG
-
+    # ffmpeg and timesends output to err
+    # last line in err will be the time
+    time python3 -m mve log treater $CONFIG 2> "$time"
+    sed -n '$p' "$time"
     cd "$root"
 }
 

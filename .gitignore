@@ -24,3 +24,6 @@ vid*s
 
 # testing venv
 .venv
+
+# benchmarks
+benchmark-videos
