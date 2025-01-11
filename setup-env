@@ -38,7 +38,7 @@ echo '[]' > remaining.json
 cat << EOF > config.json
 {
     "SOURCE": ["..", "videos"],
-    "RENAMES": [".."],
+    "RENAMES": ["."],
     "DESTINATION": ["outputs"],
 
     "TESTING": true,
