@@ -1,5 +1,7 @@
 #!/usr/bin/env dash
 
+# usage: ./setup --no-videos
+
 echo 'creating virtual environment'
 [ -d .venv ] && rm -r .venv
 python3 -m venv .venv
@@ -10,7 +12,12 @@ deactivate
 
 [ $good_install = yes ] || exit 10
 
-echo 'generating testing videos'
-./make-videos
+if [ $# -ge 1 -a "$1" = --no-videos ]
+then 
+    :
+else
+    echo 'generating testing videos'
+    ./make-videos
+fi
 
 echo 'sucessfully set up testing environment'
