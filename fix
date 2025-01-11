@@ -3,5 +3,4 @@
 sed -I '' -E \
     -e 's/python3 (deleter|generator|integrity|make|treater|viewer)\.py/python3 -m mve log \1/g' \
     -e 's/python3 (combine|focus|moment)\.py/python3 -m mve no-log \1/g' \
-    -e 's_\.{2}/\.{2}_../_g' \
     "$1"
