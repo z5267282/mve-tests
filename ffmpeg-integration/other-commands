@@ -1,7 +1,5 @@
 #!/bin/dash
 
-cd src
-
 cmds=$(mktemp)
 trap 'rm -f $cmds' EXIT
 
@@ -13,5 +11,5 @@ m 1 2 middle command
 q
 EOF
 
-python3 viewer.py $CONFIG < $cmds > /dev/null
-python3 treater.py $CONFIG
+python3 -m mve log viewer $CONFIG < $cmds > /dev/null
+python3 -m mve log treater $CONFIG

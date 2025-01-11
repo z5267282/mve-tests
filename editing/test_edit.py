@@ -1,7 +1,7 @@
 '''Note that neither `moviepy` nor `ffmpeg` can direclty check for errors.
 Hence only working timestamps are tested'''
 
-import lib.edit as edit
+import mve.src.lib.edit as edit
 
 
 OUT = 'outputs'

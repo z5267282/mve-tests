@@ -16,12 +16,10 @@ touch .hidden-movie.mp4
 touch .linux.mov
 cd ..
 
-cd src
-python3 make.py suffixes \
-    --source ../files \
+python3 -m mve log make suffixes \
+    --source files \
     --renames "$(pwd)" \
     --edits "$(pwd)"
-python3 generator.py suffixes
+python3 -m mve log generator suffixes
 
-cd ..
 pytest

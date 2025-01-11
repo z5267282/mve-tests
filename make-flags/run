@@ -4,17 +4,12 @@
 
 . ../setup-env
 
-cd src
-
-python3 make.py fishing \
-    --source ../../videos \
-    --renames ../ \
-    --edits ../../outputs
-
-cd ..
+python3 -m mve log make fishing \
+    --source ../videos \
+    --renames .. \
+    --edits outputs
 
 # folders
-
 [ -d configs/fishing/history ] || exit 10
 [ -e configs/fishing/history/.gitkeep ] || exit 15
 
@@ -31,6 +26,4 @@ cd ..
 
 # source folders
 # we check these with Python to avoid json parsing issues
-
 pytest
-

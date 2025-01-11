@@ -8,22 +8,20 @@ mkdir edits
 out="$(mktemp)"
 trap 'rm -f $out' EXIT
 
-cd src
 # note that ffmpeg sends output to stdout
-python3 moment.py --testing << EOF > $out 2>/dev/null
-../../videos
-../edits
+python3 -m mve no-log moment --testing << EOF > $out 2>/dev/null
+../videos
+edits
 m 1 2 fish
 m 3 4 dog
 m 5 6 cat
 m 7 8 mouse
 EOF
 
-cd ..
 ../clr-remover $out
 cat $out
 
 grep -F -q 'exited with 0 files remaining' $out || exit 10
 grep -F -q '[ success ] moment successfully treated all files' $out || exit 20
 
-exit 0
+true

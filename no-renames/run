@@ -1,27 +1,21 @@
 #!/bin/dash
 
-original="$(pwd)"
-cd ..
-root_level="$(pwd)"
 fail() {
-    "$root_level/clr" red failed && printf ': '
+    "$(realpath ..)/clr" red failed && printf ': '
 }
 
-cd "$original"
 . ../setup-env
 
 # adjust renames folder
 cat << EOF > configs/$CONFIG/config.json
 {
-    "SOURCE": ["..", "..", "videos"],
-    "RENAMES": ["..", "renames"],
-    "DESTINATION": ["..", "outputs"]
+    "SOURCE": ["..", "videos"],
+    "RENAMES": ["renames"],
+    "DESTINATION": ["outputs"]
 }
 EOF
 
-cd src
-
-sed -E -i '' '/^RENAMES/s%\[.*\]%["..", "renames"]%' config.py
+# sed -E -i '' '/^RENAMES/s%\[.*\]%["..", "renames"]%' config.py
 
 out=$(mktemp)
 err=$(mktemp)
@@ -29,9 +23,9 @@ trap 'rm -f $out $err' EXIT
 
 do_test() {
     script=$1
-    python3 $script $CONFIG > $out 2>$err
+    python3 -m mve log $script $CONFIG > $out 2>$err
     status=$?
-    exp=$(sed -E -n '/NO_RENAMES_FOLDER/p' constants/error.py | grep -E -o [0-9]+)
+    exp=$(sed -E -n '/NO_RENAMES_FOLDER/p' mve/src/constants/error.py | grep -E -o [0-9]+)
     if [ $status -ne $exp ]
     then
         fail
@@ -55,15 +49,15 @@ do_test() {
         exit 4
     fi
 
-    ../../clr blue 'passed'
+    ../clr blue 'passed'
     echo ": $script"
 }
 
-do_test viewer.py
+do_test viewer
 # add a throwaway file so the queue isn't empty
-touch ../configs/$CONFIG/queue/blank.txt
-do_test treater.py
+touch configs/$CONFIG/queue/blank.json
+do_test treater
 
 echo ''
-../../clr cyan 'passed'
+../clr cyan 'passed'
 echo ': no-destination'

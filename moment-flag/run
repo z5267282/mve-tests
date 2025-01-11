@@ -2,14 +2,11 @@
 
 . ../setup-env
 
-cd src
-
 printf 'e -5 dummy
-q' | python3 moment.py \
-    --source ../../videos \
-    --dest ../outputs \
+q' | python3 -m mve no-log moment \
+    --source ../videos \
+    --dest outputs \
     --testing \
     || exit 10
 
-[ -e ../outputs/dummy.mp4 ] || exit 20
-
+[ -e outputs/dummy.mp4 ] || exit 20

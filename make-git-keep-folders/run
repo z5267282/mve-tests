@@ -5,13 +5,9 @@
 
 . ../setup-env
 
-cd src
-
-printf '../../videos
+printf '../videos
 ../
-../../outputs' | python3 make.py fishing
-
-cd ..
+../outputs' | python3 -m mve log make fishing
 
 [ -d configs/fishing/history ] || exit 10
 [ -e configs/fishing/history/.gitkeep ] || exit 15
@@ -21,4 +17,3 @@ cd ..
 
 [ -d configs/fishing/queue ] || exit 30
 [ -e configs/fishing/queue/.gitkeep ] || exit 35
-

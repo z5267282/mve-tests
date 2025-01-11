@@ -3,10 +3,8 @@
 . ../setup-env
 
 folder="$(pwd)"
-cd src
 seq 3 \
     | sed -E "s@.*@$folder@" \
-    | python3 make.py dummy > /dev/null || exit 10
+    | python3 -m mve log make dummy > /dev/null || exit 10
 
-python3 integrity.py
-
+python3 -m mve log integrity

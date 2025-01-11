@@ -50,7 +50,7 @@ m 4 4 bad
 q
 EOF
 
-run-test 'file exists' "[ error ] the file 'exists.mp4' exists in the folder ['..', 'outputs']" << EOF
+run-test 'file exists' "[ error ] the file 'exists.mp4' exists in the folder ['outputs']" << EOF
 m 1 4 exists
 q
 EOF

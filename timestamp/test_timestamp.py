@@ -1,7 +1,5 @@
-import helpers.time_handlers as time_handlers
-import helpers.video as video
-
-# timestamp_seconds()
+import mve.src.helpers.time_handlers as time_handlers
+import mve.src.helpers.video as video
 
 
 def test_timestamp_seconds_sec():
@@ -15,12 +13,9 @@ def test_timestamp_seconds_min():
 def test_timestamp_seconds_hour():
     assert time_handlers.get_timestamp_seconds('01:10:32') == 4232
 
-# get_duration()
-
 
 def test_duration():
     assert video.get_duration('../videos/01.mp4') == 97
     assert video.get_duration('../videos/02.mp4') == 97
     assert video.get_duration('../videos/03.mp4') == 97
     assert video.get_duration('../videos/04.mp4') == 97
-

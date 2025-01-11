@@ -1,6 +1,8 @@
 # mve
 moviepy==1.0.3
 requests
+# pytest
+pytest==7.4.3
 # video generation
 numpy==2.2.1
 opencv-python==4.10.0.84

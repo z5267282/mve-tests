@@ -16,7 +16,7 @@ vid*s
 */history
 */queue
 */errors
-*/src
+*/mve
 */configs
 
 # commands
@@ -24,3 +24,6 @@ vid*s
 
 # testing venv
 .venv
+
+# benchmarks
+benchmark-videos
