@@ -1,0 +1,24 @@
+#!/usr/bin/env dash
+
+. ../setup-env
+
+export CONFIG=opts
+
+python3 -m mve log make $CONFIG \
+    --source='../videos' --renames="$(pwd)" --edits=outputs \
+    --recent \
+    --num-processes=7 \
+    --use-moviepy --moviepy-threads=5 \
+    --testing \
+    --bold \
+    || exit 10
+
+grep -F -q '"RECENT": true' $MVE_CONFIGS/$CONFIG/config.json || exit 20
+grep -F -q '"NUM_PROCESSES": 7' $MVE_CONFIGS/$CONFIG/config.json || exit 30
+grep -F -q '"USE_MOVIEPY": true' $MVE_CONFIGS/$CONFIG/config.json || exit 40
+grep -F -q '"MOVIEPY_THREADS": 5' $MVE_CONFIGS/$CONFIG/config.json || exit 50
+grep -F -q '"TESTING": true' $MVE_CONFIGS/$CONFIG/config.json || exit 60
+grep -F -q '"BOLD": true' $MVE_CONFIGS/$CONFIG/config.json || exit 70
+
+echo 'all options checked'
+
