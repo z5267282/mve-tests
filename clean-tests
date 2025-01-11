@@ -1,4 +1,4 @@
 #!/bin/dash
 
-find . \( -name configs -or -name outputs -or -name src \) -print0 \
+find . \( -name configs -or -name outputs -or -name mve \) -print0 \
 | xargs -0 rm -r
