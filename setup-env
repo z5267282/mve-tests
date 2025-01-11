@@ -1,5 +1,8 @@
 #!/bin/dash
 
+# this will get deactivated when the script that sources it ends
+. ../.venv/bin/activate
+
 if [ ! -d ../../mve/mve ]
 then
     echo "$(basename $0) failed because ../../mve/mve doesn't exist"
