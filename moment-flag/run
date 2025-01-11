@@ -6,7 +6,7 @@ printf 'e -5 dummy
 q' | python3 -m mve no-log moment \
     --source ../videos \
     --dest outputs \
-    --testing \
+    --testing 2>/dev/null \
     || exit 10
 
 [ -e outputs/dummy.mp4 ] || exit 20

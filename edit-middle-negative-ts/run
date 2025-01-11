@@ -7,6 +7,6 @@
 printf 'm -10 -5 negative
 q' | python3 -m mve log viewer $CONFIG || exit 10
 
-python3 -m mve log treater $CONFIG || exit 20
+python3 -m mve log treater $CONFIG 2>/dev/null || exit 20
 
 [ -e outputs/negative.mp4 ] || exit 30

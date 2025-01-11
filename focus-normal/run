@@ -3,7 +3,7 @@
 . ../setup-env
 
 run_test() {
-    python3 -m mve no-log focus ../videos/02.mp4 --destination outputs << EOF
+    python3 -m mve no-log focus ../videos/02.mp4 --destination outputs 2>/dev/null << EOF
 5 10
 q
 EOF
