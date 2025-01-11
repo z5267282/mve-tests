@@ -15,8 +15,6 @@ cat << EOF > configs/$CONFIG/config.json
 }
 EOF
 
-# sed -E -i '' '/^RENAMES/s%\[.*\]%["..", "renames"]%' config.py
-
 out=$(mktemp)
 err=$(mktemp)
 trap 'rm -f $out $err' EXIT
