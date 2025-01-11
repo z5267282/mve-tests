@@ -1,9 +1,8 @@
 #!/usr/bin/env dash
 
-# note this should be run in a terminal not the vscode one
-# colours don't properly register
+# check visually to see if the colours render properly in the terminal
+# the colours are slightly different between VSCode and Terminal
 
-cp ../../mve/src/config.py .
-cp ../../mve/src/constants/colour.py .
+. ../setup-env
 
 python3 run-tests.py
