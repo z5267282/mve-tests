@@ -2,7 +2,7 @@
 
 . ../setup-env
 
-python3 run_test.py || exit 10
+python3 run_test.py 2>/dev/null || exit 10
 
 echo 'edit_ffmpeg unit call edited video'
 
