@@ -16,7 +16,7 @@ fi
 
 exp=$(sed -E -n '/EMPTY_QUEUE/p' mve/src/constants/error.py | number)
 
-python3 -m mve log treater $CONFIG > /dev/null
+python3 -m mve log treater $CONFIG > /dev/null 2>&1
 status=$?
 
 if [ $exp -ne $status ]
