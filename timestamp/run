@@ -1,9 +1,7 @@
 #!/bin/dash
 
-cp -r ../../mve/src .
+. ../setup-env
 
 export PYTHONPATH="src:$PYTHONPATH"
-
-# cat ../../mve/src/helpers/time_handlers.py >> timestamp.py
 
 pytest
