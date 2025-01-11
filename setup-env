@@ -54,3 +54,4 @@ python3 -m mve log generator $CONFIG > /dev/null || exit 10
 cd "$root"
 
 echo "set up test $(basename $(pwd))"
+echo ''
