@@ -28,8 +28,7 @@ load_from_default () {
 
 grep -F -q "\"RECENT\": $(load_from_default RECENT y)" $MVE_CONFIGS/$CONFIG/config.json || exit 20
 grep -F -q "\"NUM_PROCESSES\": $(load_from_default NUM_PROCESSES n)" $MVE_CONFIGS/$CONFIG/config.json || exit 30
-# grep -F -q '"": 7' $MVE_CONFIGS/$CONFIG/config.json || exit 30
-# grep -F -q '"USE_MOVIEPY": true' $MVE_CONFIGS/$CONFIG/config.json || exit 40
-# grep -F -q '"MOVIEPY_THREADS": 5' $MVE_CONFIGS/$CONFIG/config.json || exit 50
-# grep -F -q '"TESTING": true' $MVE_CONFIGS/$CONFIG/config.json || exit 60
-# grep -F -q '"BOLD": true' $MVE_CONFIGS/$CONFIG/config.json || exit 70
+grep -F -q "\"USE_MOVIEPY\": $(load_from_default USE_MOVIEPY y)" $MVE_CONFIGS/$CONFIG/config.json || exit 40
+grep -F -q "\"MOVIEPY_THREADS\": $(load_from_default MOVIEPY_THREADS n)" $MVE_CONFIGS/$CONFIG/config.json || exit 50
+grep -F -q "\"TESTING\": $(load_from_default TESTING y)" $MVE_CONFIGS/$CONFIG/config.json || exit 60
+grep -F -q "\"BOLD\": $(load_from_default BOLD y)" $MVE_CONFIGS/$CONFIG/config.json || exit 70
