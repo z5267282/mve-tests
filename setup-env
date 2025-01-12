@@ -18,6 +18,7 @@ export CONFIG=testing
 export MVE_CONFIGS=configs
 
 export EDITS=outputs
+export RENAMES=renames
 
 # let us run scripts in current folder
 export PATH="$PATH:."
@@ -25,12 +26,16 @@ export PATH="$PATH:."
 [ -d $MVE_CONFIGS ] && rm -r $MVE_CONFIGS
 mkdir $MVE_CONFIGS
 
-[ -d $EDITS ] && rm -r $EDITS
-mkdir $EDITS
+for dir in $EDITS $RENAMES
+do
+    [ -d $dir ] && rm -r $dir 
+    mkdir $dir 
+done
+
 
 python3 -m mve log make \
     $CONFIG \
-    --source '../videos' --renames "$(pwd)" --edits $EDITS \
+    --source '../videos' --renames $RENAMES --edits $EDITS \
     --testing \
     || exit 10
 
