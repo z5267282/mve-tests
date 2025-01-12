@@ -15,43 +15,26 @@ cp -r ../../mve/mve .
 rm -rf mve/.git
 
 export CONFIG=testing
-export MVE_CONFIGS='configs'
+export MVE_CONFIGS=configs
+
+export EDITS=outputs
 
 # let us run scripts in current folder
 export PATH="$PATH:."
 
-root="$(pwd)"
-
-[ -d $MVE_CONFIGS ] && rm -r configs
+[ -d $MVE_CONFIGS ] && rm -r $MVE_CONFIGS
 mkdir $MVE_CONFIGS
 
-[ -d outputs ] && rm -r outputs
-mkdir outputs
+[ -d $EDITS ] && rm -r $EDITS
+mkdir $EDITS
 
-cd configs
-mkdir $CONFIG
-cd $CONFIG
-for dir in errors history queue
-do
-    mkdir $dir
-    # add a gitkeep to reflect mve
-    touch $dir/.gitkeep
-done
-echo '[]' > remaining.json
-cat << EOF > config.json
-{
-    "SOURCE": ["..", "videos"],
-    "RENAMES": ["."],
-    "DESTINATION": ["outputs"],
-
-    "TESTING": true,
-    "RECENT": ${RECENT:-false}
-}
-EOF
-cd ../..
+python3 -m mve log make \
+    $CONFIG \
+    --source '../videos' --renames "$(pwd)" --edits $EDITS \
+    --testing --recent \
+    || exit 10
 
 python3 -m mve log generator $CONFIG > /dev/null || exit 10
-cd "$root"
 
 echo "set up test $(basename $(pwd))"
 echo ''
