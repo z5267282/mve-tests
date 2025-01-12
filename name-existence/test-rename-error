@@ -5,7 +5,7 @@ out=$(mktemp)
 err=$(mktemp)
 trap 'rm -f $input $out $err' EXIT
 
-touch already.mp4
+touch $RENAMES/already.mp4
 
 cat << EOF > $input
 r already
@@ -16,7 +16,7 @@ python3 -m mve log viewer $CONFIG < $input > $out 2>$err
 
 ../clr-remover "$err"
 
-if ! grep -F -q "the file 'already.mp4' exists in the folder ['.']" $err
+if ! grep -F -q "the file 'already.mp4' exists in the folder ['$RENAMES']" $err
 then
     echo "existence error message was not printed to stderr"
     exit 1

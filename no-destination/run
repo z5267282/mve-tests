@@ -6,8 +6,8 @@ fail() {
 
 . ../setup-env
 
-rm -r outputs
-if [ -d outputs ]
+rm -r $EDITS
+if [ -d $EDITS ]
 then
     fail
     echo "outputs wasn't properly deleted"
@@ -18,6 +18,8 @@ out=$(mktemp)
 err=$(mktemp)
 trap 'rm -f $out $err' EXIT
 
+# note that these should not work (ie. to the point where prompt is shown)
+# in the absence of the renames folder
 do_test() {
     script=$1
     python3 -m mve log $script $CONFIG > $out 2>$err

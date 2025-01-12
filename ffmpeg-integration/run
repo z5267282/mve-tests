@@ -2,17 +2,5 @@
 
 . ../setup-env
 
-cat << EOF > "$(basename $MVE_CONFIGS)/$CONFIG/config.json"
-{
-    "SOURCE": ["..", "videos"],
-    "RENAMES": [".."],
-    "DESTINATION": ["outputs"],
-
-    "TESTING": true,
-    "RECENT": false,
-    "USE_MOVIEPY": false
-}
-EOF
-
 test-edit
 # other-commands

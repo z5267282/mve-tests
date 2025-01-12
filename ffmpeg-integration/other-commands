@@ -3,13 +3,19 @@
 cmds=$(mktemp)
 trap 'rm -f $cmds' EXIT
 
-# s 0-58 start command
-# w whole command
+export CONFIG=other
+
+python3 -m mve log make $CONFIG \
+    --source='../videos' --renames=$RENAMES --edits=$EDITS \
+    --testing --use-moviepy
+
+python3 -m mve log generator $CONFIG
 
 cat << EOF > $cmds
-m 1 2 middle command
+s 58 start command
+w whole command
 q
 EOF
 
-python3 -m mve log viewer $CONFIG < $cmds > /dev/null
-python3 -m mve log treater $CONFIG 2>/dev/null
+python3 -m mve log viewer $CONFIG < $cmds > /dev/null || exit 10
+python3 -m mve log treater $CONFIG 2>/dev/null || exit 20
