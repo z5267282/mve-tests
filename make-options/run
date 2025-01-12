@@ -8,8 +8,8 @@
 # ../clr blue 'passed'
 # echo ' subtest (1/2) - setting all flags works'
 
-# echo 'running with no options set'
-# ./no-flags || exit 20
+echo 'running with no options set'
+./no-flags || exit 20
 
-# ../clr blue 'passed'
-# echo ' subtest (2/2) - setting no flags works'
+../clr blue 'passed'
+echo ' subtest (2/2) - setting no flags works'

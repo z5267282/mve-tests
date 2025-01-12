@@ -27,7 +27,6 @@ load_from_default () {
 }
 
 grep -F -q "\"RECENT\": $(load_from_default RECENT y)" $MVE_CONFIGS/$CONFIG/config.json || exit 20
-set -x
 grep -F -q "\"NUM_PROCESSES\": $(load_from_default NUM_PROCESSES n)" $MVE_CONFIGS/$CONFIG/config.json || exit 30
 # grep -F -q '"": 7' $MVE_CONFIGS/$CONFIG/config.json || exit 30
 # grep -F -q '"USE_MOVIEPY": true' $MVE_CONFIGS/$CONFIG/config.json || exit 40
