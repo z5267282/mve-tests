@@ -17,5 +17,5 @@ w whole command
 q
 EOF
 
-# python3 -m mve log viewer $CONFIG < $cmds > /dev/null || exit 10
-# python3 -m mve log treater $CONFIG 2>/dev/null || exit 20
+python3 -m mve log viewer $CONFIG < $cmds > /dev/null || exit 10
+python3 -m mve log treater $CONFIG 2>/dev/null || exit 20
