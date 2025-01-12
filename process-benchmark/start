@@ -22,19 +22,15 @@ run_benmark () {
 
     processes=$1
 
+    export CONFIG="num-processes-${processes}"
+
     echo "=== processes=$processes ==="
-    cat << EOF > configs/$CONFIG/config.json
-{
-    "SOURCE": ["benchmark-videos"],
-    "RENAMES": ["."],
-    "DESTINATION": ["outputs"],
 
-    "TESTING": true,
-    "RECENT": ${RECENT:-false},
-
-    "NUM_PROCESSES": $processes
-}
-EOF
+    python3 -m mve log make $CONFIG \
+        --source='benchmark-videos' --renames=$RENAMES --edits=outputs \
+        --testing --num-processes=$processes
+    
+    python3 -m mve log generator $CONFIG
 
     # all videos are at least 1 minute long
     seq $num_videos \
