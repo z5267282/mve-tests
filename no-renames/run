@@ -6,19 +6,14 @@ fail() {
 
 . ../setup-env
 
-# adjust renames folder
-cat << EOF > configs/$CONFIG/config.json
-{
-    "SOURCE": ["..", "videos"],
-    "RENAMES": ["renames"],
-    "DESTINATION": ["outputs"]
-}
-EOF
-
 out=$(mktemp)
 err=$(mktemp)
 trap 'rm -f $out $err' EXIT
 
+rm -r $RENAMES
+
+# note that these should not work (ie. to the point where prompt is shown)
+# in the absence of the renames folder
 do_test() {
     script=$1
     python3 -m mve log $script $CONFIG > $out 2>$err
@@ -58,4 +53,4 @@ do_test treater
 
 echo ''
 ../clr cyan 'passed'
-echo ': no-destination'
+echo ': no-renames'
