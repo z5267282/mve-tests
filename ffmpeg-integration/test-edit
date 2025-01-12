@@ -1,5 +1,13 @@
 #!/usr/bin/env dash
 
+export CONFIG=ffmpeg
+
+python3 -m mve log make $CONFIG \
+    --source='../videos' --renames=$RENAMES --edits=$EDITS \
+    --testing --use-moviepy
+
+python3 -m mve log generator $CONFIG
+
 session="$(mktemp)"
 trap 'rm -f "$session"' EXIT
 
