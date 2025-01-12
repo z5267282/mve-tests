@@ -39,7 +39,7 @@ do
 done
 
 nl
-clr green 'passed'
+clr bright_green 'passed'
 echo ' all tests!'
 
 if [ $clean = yes ]

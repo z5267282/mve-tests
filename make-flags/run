@@ -29,3 +29,4 @@ python3 -m mve log make $CONFIG \
 # source folders
 # we check these with Python to avoid json parsing issues
 pytest
+

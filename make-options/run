@@ -1,0 +1,19 @@
+#!/usr/bin/env dash
+
+. ../setup-env
+
+echo 'running setting all options'
+echo ''
+./set-all-flags || exit 10
+
+../clr blue 'passed'
+echo ' subtest (1/2) - setting all flags works'
+
+echo 'running with no options set'
+./no-flags || exit 20
+
+../clr blue 'passed'
+echo ' subtest (2/2) - setting no flags works'
+
+echo ''
+echo 'flags all load correctly'

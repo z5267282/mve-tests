@@ -1,0 +1,34 @@
+#!/usr/bin/env dash
+
+export CONFIG=no-flags
+
+python3 -m mve log make $CONFIG \
+    --source='../videos' --renames="$(pwd)" --edits=outputs > /dev/null \
+    || exit 10
+
+# these have to be loaded from defaults
+
+load_from_default () {
+    name=$1
+    # only booleans or numbers [yn]
+    is_boolean=$2
+
+    raw="$(grep -F $name mve/src/constants/defaults.py \
+    | sed -E 's/ = /=/g' \
+    | cut -d '=' -f2)"
+
+    if [ $is_boolean = y ]
+    then
+        # Python booleans begin with capital letter, whereas JSON is snake_case
+        printf '%s' "$raw" | tr 'A-Z' 'a-z'
+    else
+        printf '%s' "$raw"
+    fi
+}
+
+grep -F -q "\"RECENT\": $(load_from_default RECENT y)" $MVE_CONFIGS/$CONFIG/config.json || exit 20
+grep -F -q "\"NUM_PROCESSES\": $(load_from_default NUM_PROCESSES n)" $MVE_CONFIGS/$CONFIG/config.json || exit 30
+grep -F -q "\"USE_MOVIEPY\": $(load_from_default USE_MOVIEPY y)" $MVE_CONFIGS/$CONFIG/config.json || exit 40
+grep -F -q "\"MOVIEPY_THREADS\": $(load_from_default MOVIEPY_THREADS n)" $MVE_CONFIGS/$CONFIG/config.json || exit 50
+grep -F -q "\"TESTING\": $(load_from_default TESTING y)" $MVE_CONFIGS/$CONFIG/config.json || exit 60
+grep -F -q "\"BOLD\": $(load_from_default BOLD y)" $MVE_CONFIGS/$CONFIG/config.json || exit 70
