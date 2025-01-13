@@ -15,3 +15,7 @@ echo '        bad num_processes - passed'
 echo '[ 3/n ] testing bad int for USE_MOVIEPY:'
 ./bad-use-moviepy > /dev/null
 echo '        bad use_moviepy - passed'
+
+echo '[ 4/n ] testing bad int for MOVIEPY_THREADS:'
+./bad-moviepy-threads > /dev/null
+echo '        bad moviepy_threads - passed'
