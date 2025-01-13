@@ -1,0 +1,26 @@
+#!/usr/bin/env dash
+
+. ../setup-env
+
+# delete first colon on each line
+
+export CONFIG=bad-json
+
+python3 -m mve log make $CONFIG \
+    --source '../videos' --renames $RENAMES --edits $EDITS \
+    --testing || exit 10
+
+sed -I '' 's/://' $MVE_CONFIGS/$CONFIG/config.json
+
+err="$(mktemp)"
+trap 'rm -f "$err"' EXIT
+
+exp_status="$(grep -F 'BAD_JSON_FILE' mve/src/constants/error.py | grep -E -o '[0-9]+')"
+
+python3 -m mve log generator $CONFIG 2> "$err"
+
+[ $? -eq $exp_status ] || exit 20
+grep -F -q 'syntax error in the json file' "$err" || exit 30
+
+echo 'poorly formatted json syntax file detected'
+
