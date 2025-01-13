@@ -4,10 +4,14 @@
 
 export BAD_TYPE=$(grep -F BAD_TYPE mve/src/constants/error.py | grep -E -o '[0-9]+')
 
-echo 'testing bad boolean for RECENT:'
-./bad-recent
-echo '  bad boolean - passed'
+echo '[ 1/n ] testing bad boolean for RECENT:'
+./bad-recent > /dev/null
+echo '        bad boolean - passed'
 
-echo 'testing bad int for NUM_PROCESSES:'
-./bad-num-processes
-echo '  bad num_processes - passed'
+echo '[ 2/n ] testing bad int for NUM_PROCESSES:'
+./bad-num-processes > /dev/null
+echo '        bad num_processes - passed'
+
+echo '[ 3/n ] testing bad int for USE_MOVIEPY:'
+./bad-use-moviepy > /dev/null
+echo '        bad use_moviepy - passed'
