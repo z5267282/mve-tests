@@ -1,0 +1,25 @@
+#!/usr/bin/env dash
+
+export CONFIG=bad-num-proceses
+
+python3 -m mve log make $CONFIG \
+    --source ../videos --renames $RENAMES --edits $EDITS \
+    --testing --num-processes 5 \
+    || exit 10
+
+err="$(mktemp)"
+trap 'rm -f "$err"' EXIT
+
+# change number to bool
+
+sed -I '' '/NUM_PROCESSES/ s/5/true/' $MVE_CONFIGS/$CONFIG/config.json
+
+python3 -m mve log generator $CONFIG 2> "$err"
+[ $? -eq $BAD_TYPE ] || exit 20
+
+../clr-remover "$err"
+
+grep -F -q 'incorrect type for Config option' $err || exit 21
+grep -F -q "[ error ] option 'num_processes':" $err || exit 22
+grep -F -q '[ error ]   exp : int' $err || exit 23
+grep -F -q '[ error ]   got : bool' $err || exit 24

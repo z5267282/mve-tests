@@ -1,0 +1,25 @@
+#!/usr/bin/env dash
+
+export CONFIG=bad-use-moviepy
+
+python3 -m mve log make $CONFIG \
+    --source ../videos --renames $RENAMES --edits $EDITS \
+    --testing --use-moviepy \
+    || exit 10
+
+err="$(mktemp)"
+trap 'rm -f "$err"' EXIT
+
+# change bool to a number
+
+sed -I '' '/USE_MOVIEPY/ s/true/57/' $MVE_CONFIGS/$CONFIG/config.json
+
+python3 -m mve log generator $CONFIG 2> "$err"
+[ $? -eq $BAD_TYPE ] || exit 20
+
+../clr-remover "$err"
+
+grep -F -q 'incorrect type for Config option' $err || exit 21
+grep -F -q "[ error ] option 'use_moviepy':" $err || exit 22
+grep -F -q '[ error ]   exp : bool' $err || exit 23
+grep -F -q '[ error ]   got : int' $err || exit 24
