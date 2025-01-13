@@ -12,7 +12,7 @@ echo '[ 2/n ] testing bad int for NUM_PROCESSES:'
 ./bad-num-processes > /dev/null || exit 102
 echo '        bad num_processes - passed'
 
-echo '[ 3/n ] testing bad int for USE_MOVIEPY:'
+echo '[ 3/n ] testing bad boolean for USE_MOVIEPY:'
 ./bad-use-moviepy > /dev/null || exit 103
 echo '        bad use_moviepy - passed'
 
@@ -20,14 +20,14 @@ echo '[ 4/n ] testing bad int for MOVIEPY_THREADS:'
 ./bad-moviepy-threads > /dev/null || exit 104
 echo '        bad moviepy_threads - passed'
 
-echo '[ 5/n ] testing bad int for MOVIEPY_THREADS:'
+echo '[ 5/n ] testing bad boolean for TESTING:'
 ./bad-testing > /dev/null || exit 105
 echo '        bad testing - passed'
 
-echo '[ 6/n ] testing bad int for BOLD:'
+echo '[ 6/n ] testing bad boolean for BOLD:'
 ./bad-bold > /dev/null || exit 106
 echo '        bad bold - passed'
 
-echo '[ 7/n ] testing bad int for BOLD:'
+echo '[ 7/n ] testing bad boolean for VERIFY_NAME:'
 ./bad-verify-name > /dev/null || exit 107
 echo '        bad bold - passed'
