@@ -25,5 +25,9 @@ echo '[ 5/n ] testing bad int for MOVIEPY_THREADS:'
 echo '        bad testing - passed'
 
 echo '[ 6/n ] testing bad int for BOLD:'
-./bad-bold > /dev/null || exit 105
+./bad-bold > /dev/null || exit 106
+echo '        bad bold - passed'
+
+echo '[ 7/n ] testing bad int for BOLD:'
+./bad-verify-name > /dev/null || exit 107
 echo '        bad bold - passed'
