@@ -1,0 +1,21 @@
+#!/usr/bin/env dash
+
+. ../setup-env
+
+# change RECENT to another option
+sed -E -i '' '/RECENT/ s/RECENT/fishing_in_the_river/' $MVE_CONFIGS/$CONFIG/config.json
+
+exp_status=$(grep -F BAD_CONFIG_OPTION mve/src/constants/error.py | grep -E -o '[0-9]+')
+
+err="$(mktemp)"
+trap 'rm -f "$err"' EXIT
+
+# this should fail
+python3 -m mve log generator $CONFIG 2> "$err" && exit 10
+
+[ $? -eq $exp_status ] || exit 20
+
+../clr-remover "$err"
+grep -F -q 'unknown Config option: fishing_in_the_river' "$err" || exit 30
+
+echo 'recognised bad option in config file'
