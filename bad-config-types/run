@@ -5,17 +5,17 @@
 export BAD_TYPE=$(grep -F BAD_TYPE mve/src/constants/error.py | grep -E -o '[0-9]+')
 
 echo '[ 1/n ] testing bad boolean for RECENT:'
-./bad-recent > /dev/null
+./bad-recent > /dev/null || exit 101
 echo '        bad boolean - passed'
 
 echo '[ 2/n ] testing bad int for NUM_PROCESSES:'
-./bad-num-processes > /dev/null
+./bad-num-processes > /dev/null || exit 102
 echo '        bad num_processes - passed'
 
 echo '[ 3/n ] testing bad int for USE_MOVIEPY:'
-./bad-use-moviepy > /dev/null
+./bad-use-moviepy > /dev/null || exit 103
 echo '        bad use_moviepy - passed'
 
 echo '[ 4/n ] testing bad int for MOVIEPY_THREADS:'
-./bad-moviepy-threads > /dev/null
+./bad-moviepy-threads > /dev/null || exit 104
 echo '        bad moviepy_threads - passed'
