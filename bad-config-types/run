@@ -23,3 +23,7 @@ echo '        bad moviepy_threads - passed'
 echo '[ 5/n ] testing bad int for MOVIEPY_THREADS:'
 ./bad-testing > /dev/null || exit 105
 echo '        bad testing - passed'
+
+echo '[ 6/n ] testing bad int for BOLD:'
+./bad-bold > /dev/null || exit 105
+echo '        bad bold - passed'

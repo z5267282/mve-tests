@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-export CONFIG=bad-use-moviepy
+export CONFIG=bad-testing
 
 python3 -m mve log make $CONFIG \
     --source ../videos --renames $RENAMES --edits $EDITS \
