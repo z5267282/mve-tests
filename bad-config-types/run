@@ -4,30 +4,25 @@
 
 export BAD_TYPE=$(grep -F BAD_TYPE mve/src/constants/error.py | grep -E -o '[0-9]+')
 
-echo '[ 1/n ] testing bad boolean for RECENT:'
-./bad-recent > /dev/null || exit 101
-echo '        bad boolean - passed'
+run_test() {
+    num=$1
+    type=$2
+    option=$3
+    script=$4
+    name=$5
 
-echo '[ 2/n ] testing bad int for NUM_PROCESSES:'
-./bad-num-processes > /dev/null || exit 102
-echo '        bad num_processes - passed'
+    printf "test [ %s/7 ] testing bad %s for %s:\n" "$(../clr bright_blue $num)" $type "$(../clr bright_magenta $option)"
+    ./$script > /dev/null || exit 10${num}
+    printf "    bad %s - %s\n" $name "$(../clr bright_green passed)"
+}
 
-echo '[ 3/n ] testing bad boolean for USE_MOVIEPY:'
-./bad-use-moviepy > /dev/null || exit 103
-echo '        bad use_moviepy - passed'
+run_test 1 boolean RECENT bad-recent recent
+run_test 2 int NUM_PROCESSES bad-num-processes num_processes
+run_test 3 boolean USE_MOVIEPY bad-use-moviepy use_moviepy
+run_test 4 int MOVIEPY_THREADS bad-moviepy-threads moviepy_threads
+run_test 5 boolean TESTING bad-testing testing
+run_test 6 boolean BOLD bad-bold bold
+run_test 7 boolean VERIFY_NAME bad-verify-name verify_name
 
-echo '[ 4/n ] testing bad int for MOVIEPY_THREADS:'
-./bad-moviepy-threads > /dev/null || exit 104
-echo '        bad moviepy_threads - passed'
-
-echo '[ 5/n ] testing bad boolean for TESTING:'
-./bad-testing > /dev/null || exit 105
-echo '        bad testing - passed'
-
-echo '[ 6/n ] testing bad boolean for BOLD:'
-./bad-bold > /dev/null || exit 106
-echo '        bad bold - passed'
-
-echo '[ 7/n ] testing bad boolean for VERIFY_NAME:'
-./bad-verify-name > /dev/null || exit 107
-echo '        bad bold - passed'
+echo ''
+echo 'successfully tested all options'
