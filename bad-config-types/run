@@ -4,6 +4,10 @@
 
 export BAD_TYPE=$(grep -F BAD_TYPE mve/src/constants/error.py | grep -E -o '[0-9]+')
 
-echo 'testing bad boolean for RECENT'
+echo 'testing bad boolean for RECENT:'
 ./bad-recent
+echo '  bad boolean - passed'
 
+echo 'testing bad int for NUM_PROCESSES:'
+./bad-num-processes
+echo '  bad num_processes - passed'
