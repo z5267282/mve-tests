@@ -19,3 +19,7 @@ echo '        bad use_moviepy - passed'
 echo '[ 4/n ] testing bad int for MOVIEPY_THREADS:'
 ./bad-moviepy-threads > /dev/null || exit 104
 echo '        bad moviepy_threads - passed'
+
+echo '[ 5/n ] testing bad int for MOVIEPY_THREADS:'
+./bad-testing > /dev/null || exit 105
+echo '        bad testing - passed'
