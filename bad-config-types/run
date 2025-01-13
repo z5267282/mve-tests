@@ -1,0 +1,9 @@
+#!/usr/bin/env dash
+
+../setup-env
+
+export BAD_TYPE=$(grep -F BAD_TYPE mve/src/constants/error.py | grep -E -o '[0-9]+')
+
+echo 'testing bad boolean for RECENT'
+./bad-recent
+

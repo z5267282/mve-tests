@@ -1,0 +1,21 @@
+#!/usr/bin/env dash
+
+export CONFIG=bad-recent
+
+python3 -m mve log make $CONFIG \
+    --source ../videos --renames $RENAMES --edits $EDITS \
+    --testing --recent \
+    || exit 10
+
+# change true to a number
+sed -I '' '/RECENT/ s/true/42/' $MVE_CONFIGS/$CONFIG/config.json
+
+python3 -m mve log generator $CONFIG
+[ $? -eq $BAD_TYPE ] || exit 20
+
+# change number to null
+sed -I '' '/RECENT/ s/42/null/' $MVE_CONFIGS/$CONFIG/config.json
+
+python3 -m mve log generator $CONFIG
+[ $? -eq $BAD_TYPE ] || exit 30
+
