@@ -12,7 +12,7 @@ trap 'rm -f "$err"' EXIT
 
 # change number to bool
 
-sed -I '' '/RECENT/ s/5/true/' $MVE_CONFIGS/$CONFIG/config.json
+sed -I '' '/NUM_PROCESSES/ s/5/true/' $MVE_CONFIGS/$CONFIG/config.json
 
 python3 -m mve log generator $CONFIG 2> "$err"
 [ $? -eq $BAD_TYPE ] || exit 20
