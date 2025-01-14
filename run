@@ -5,6 +5,59 @@
 
 . .venv/bin/activate
 
-test-all
+clean=no
+for arg in "$@"
+do
+    case "$arg" in
+        --clean) clean=yes ;;
+    esac
+done
+
+find_tests() {
+    # find any folder that has a run file and run a script on all such folders
+    script="$1"
+    find . -mindepth 2 -maxdepth 2 -name 'run' -exec "$script" {} +
+}
+
+find_tests test-all
+
+# provide access to working directory shell scripts
+# PATH="$PATH:$(pwd)"
+
+# alias nl='echo "" && echo ""'
+# for dir in *
+# do
+#     [ -d "$dir" ] || continue
+#     [ -f "$dir/run" ] || continue
+#     cd "$dir"
+#     if echo "$dir" | grep -E -q "^swapper"
+#     then
+#         continue
+#     fi
+
+#     if run
+#     then
+#         nl
+#         ../clr cyan 'passed'
+#         echo " tests in: $dir"
+#         nl
+#     else
+#         nl
+#         ../clr magenta 'failed'
+#         echo " tests in: $dir"
+#         nl
+#         exit 1
+#     fi
+#     cd ..
+# done
+
+# nl
+# clr bright_green 'passed'
+# echo ' all tests!'
+
+# if [ $clean = yes ]
+# then
+#     clean-tests
+# fi
 
 deactivate
