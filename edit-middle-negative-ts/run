@@ -2,7 +2,7 @@
 
 # testing middle command with negative timestamps
 
-. setup-env
+. ../setup-env
 
 printf 'm -10 -5 negative
 q' | python3 -m mve log viewer $CONFIG || exit 10

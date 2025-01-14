@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-. setup-env
+. ../setup-env
 
 [ -d benchmark-videos ] && rm -r benchmark-videos
 mkdir benchmark-videos

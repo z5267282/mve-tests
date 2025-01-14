@@ -3,6 +3,6 @@
 # check visually to see if the colours render properly in the terminal
 # the colours are slightly different between VSCode and Terminal
 
-. setup-env
+. ../setup-env
 
 python3 run-tests.py

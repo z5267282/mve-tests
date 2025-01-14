@@ -7,4 +7,4 @@
 # set to a non-empty string value to turn on
 VIEW=''
 
-. setup-env
+. ../setup-env

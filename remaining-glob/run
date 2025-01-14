@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-. setup-env
+. ../setup-env
 
 [ -d files ] && rm -r files
 mkdir files

@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-. setup-env
+. ../setup-env
 
 number() {
     grep -E -o '[0-9]+'

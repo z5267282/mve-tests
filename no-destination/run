@@ -4,7 +4,7 @@ fail() {
     clr red failed && printf ': '
 }
 
-. setup-env
+. ../setup-env
 
 rm -r $EDITS
 if [ -d $EDITS ]

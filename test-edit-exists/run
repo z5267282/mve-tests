@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-. setup-env
+. ../setup-env
 touch outputs/already.mp4
 
 err=$(mktemp)
