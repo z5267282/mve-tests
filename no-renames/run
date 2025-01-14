@@ -1,7 +1,7 @@
 #!/usr/bin/env dash
 
 fail() {
-    "$(realpath ..)/clr" red failed && printf ': '
+    clr red failed && printf ': '
 }
 
 . ../setup-env
