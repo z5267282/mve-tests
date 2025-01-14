@@ -1,10 +1,14 @@
 #!/usr/bin/env dash
 
-# usage: run [--clean] [--no-output] [--help]
+# usage: run [--clean] [--no-output] [--name] <name1,name2...> [--help]
 
 # This is a wrapper script to ensure that tests are run in the virtual
 # environment.
 # Testing files are left for inspection by default.
+# To run only tests which contain certain words you can use the --name flag
+# and provide a string of comma-separated words:
+# eg to run only tests that contain either hello or bye
+# run --name hello,bye
 
 . .venv/bin/activate
 
@@ -13,14 +17,19 @@ PATH="$PATH:$(pwd)"
 
 clean=no
 output=yes
+name_terms=''
 for arg in "$@"
 do
     case "$arg" in
         --clean) clean=yes ;;
         --no-output) output=yes ;;
+        --name) name_terms="$(name_terms)" ;;
         --help) echo 'usage: run [--clean] [--no-output] [--help]'; exit 0 ;;
     esac
 done
+
+export NAME_TERMS="$(name_terms)"
+export SHOW_OUTPUT=$output
 
 find_tests() {
     # find any folder that has a run file and run a script on all such folders
@@ -29,7 +38,6 @@ find_tests() {
 }
 
 export TOTAL_TESTS=$(find_tests count-tests)
-export SHOW_OUTPUT=$output
 
 find_tests test-all || exit 10
 
