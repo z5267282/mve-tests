@@ -32,7 +32,6 @@ do
     mkdir $dir 
 done
 
-
 python3 -m mve log make \
     $CONFIG \
     --source '../videos' --renames $RENAMES --edits $EDITS \
