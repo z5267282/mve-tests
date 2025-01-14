@@ -3,12 +3,6 @@
 session="$(mktemp)"
 trap 'rm -f "$session"' EXIT
 
-clr () {
-    colour="$1"
-    msg="$2"
-    perl -MTerm::ANSIColor -e 'print color($ARGV[0]) . $ARGV[1] . color("reset")' "$colour" "$msg"
-}
-
 pass () {
     clr 'green' 'passed test'
 }
