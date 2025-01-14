@@ -1,10 +1,65 @@
 #!/usr/bin/env dash
 
-# This is a wrapper script to ensure that tests are run in the virtual
-# environment.
+# usage: run [--clean] [--no-output] [--name] <name1,name2...> [--help]
+
+# Run all tests.
+# Testing files are left for inspection by default.
+# To run only tests which contain certain words you can use the --name flag
+# and provide a string of comma-separated words:
+# eg to run only tests that contain either hello or bye
+# run --name hello,bye
 
 . .venv/bin/activate
 
-test-all
+# provide access to working directory shell scripts
+PATH="$PATH:$(pwd)"
+
+clean=no
+output=yes
+name_terms=''
+
+while [ $# -gt 0 ]
+do
+    arg="$1"
+    shift
+    case "$arg" in
+        --clean)
+            clean=yes
+            ;;
+        --no-output)
+            output=no
+            ;;
+        --name)
+            name_terms="$1"
+            shift
+            ;;
+        --help)
+            echo '# usage: run [--clean] [--no-output] [--name] <name1,name2...> [--help]'
+            exit 0
+            ;;
+    esac
+done
+
+export NAME_TERMS="$name_terms"
+export SHOW_OUTPUT=$output
+
+find_tests() {
+    # find any folder that has a run file and run a script on all such folders
+    script="$1"
+    find -s . -mindepth 2 -maxdepth 2 -name 'run' -exec "$script" {} +
+}
+
+export TOTAL_TESTS=$(find_tests count-tests)
+
+find_tests test-all || exit 10
+
+echo ''
+clr bright_green 'passed'
+echo ' all tests!'
+
+if [ $clean = yes ]
+then
+    clean-tests
+fi
 
 deactivate

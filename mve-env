@@ -1,0 +1,9 @@
+#!/usr/bin/env dash
+
+# load environment variables needed to run MVE
+
+export CONFIG=testing
+export MVE_CONFIGS=configs
+
+export EDITS=outputs
+export RENAMES=renames

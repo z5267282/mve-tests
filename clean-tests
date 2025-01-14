@@ -1,4 +1,6 @@
 #!/usr/bin/env dash
 
-find . \( -name configs -or -name outputs -or -name mve \) -print0 \
+. mve-env
+
+find . \( -name $MVE_CONFIGS -or -name $EDITS -or -name $RENAMES -or -name mve -or -name __pycache__ \) -print0 \
 | xargs -0 rm -r

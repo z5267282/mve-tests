@@ -1,48 +1,44 @@
 #!/usr/bin/env dash
 
-clean=no
-for arg in "$@"
-do
-    case "$arg" in
-        --clean) clean=yes ;;
-    esac
-done
+# run all tests given as command line argument where each is a file structured:
+# ./[test]/run
 
-# provide access to working directory shell scripts
-PATH="$PATH:$(pwd)"
+run_and_maybe_show_output() {
+    dir="$1"
 
-alias nl='echo "" && echo ""'
-for dir in *
-do
-    [ -d "$dir" ] || continue
-    [ -f "$dir/run" ] || continue
-    cd "$dir"
-    if echo "$dir" | grep -E -q "^swapper"
+    if [ $SHOW_OUTPUT = yes ]
     then
-        continue
+        run
+    else
+        run > /dev/null 2>&1
     fi
 
-    if run
+    return $?
+}
+
+i=1
+for raw in "$@"
+do
+    dir="$(dirname "$raw")"
+    ./verify-name-in-terms "$NAME_TERMS" "$dir" || continue
+
+    printf 'test [ %s of %d ]\n' $(./clr bright_yellow $i) $TOTAL_TESTS
+
+    cd "$dir"
+    if run_and_maybe_show_output "$dir"
     then
-        nl
-        ../clr cyan 'passed'
+        echo ''
+        clr cyan 'passed'
         echo " tests in: $dir"
-        nl
+        echo ''
     else
-        nl
-        ../clr magenta 'failed'
+        echo ''
+        clr magenta 'failed'
         echo " tests in: $dir"
-        nl
+        echo ''
         exit 1
     fi
     cd ..
+
+    i=$((i + 1))
 done
-
-nl
-clr bright_green 'passed'
-echo ' all tests!'
-
-if [ $clean = yes ]
-then
-    clean-tests
-fi
