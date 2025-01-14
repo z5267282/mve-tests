@@ -1,5 +1,7 @@
 #!/usr/bin/env dash
 
+# see if sed can be used to remove colours
+
 main () {
     full
     bracket_semicolon
