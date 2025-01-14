@@ -40,6 +40,10 @@ do
             echo 'usage: run [--clean] [--debug] [--name] <name1,name2,...> [--help]'
             exit 0
             ;;
+        *)
+            echo "unknown arg: '$arg'"
+            exit 1
+            ;;
     esac
 done
 
