@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-# this will get deactivated when the script that sources it ends
+. mve-env
 
 if [ ! -d ../../mve/mve ]
 then
@@ -12,12 +12,6 @@ fi
 cp -r ../../mve/mve .
 # get rid of .git as well
 rm -rf mve/.git
-
-export CONFIG=testing
-export MVE_CONFIGS=configs
-
-export EDITS=outputs
-export RENAMES=renames
 
 [ -d $MVE_CONFIGS ] && rm -r $MVE_CONFIGS
 mkdir $MVE_CONFIGS

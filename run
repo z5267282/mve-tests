@@ -2,8 +2,7 @@
 
 # usage: run [--clean] [--no-output] [--name] <name1,name2...> [--help]
 
-# This is a wrapper script to ensure that tests are run in the virtual
-# environment.
+# Run all tests.
 # Testing files are left for inspection by default.
 # To run only tests which contain certain words you can use the --name flag
 # and provide a string of comma-separated words:
