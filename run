@@ -11,6 +11,9 @@
 
 . .venv/bin/activate
 
+# for standalone tests to know whether the root-level run was executed
+export RUN_FROM_ROOT=yes
+
 # provide access to all helper scripts
 export PATH="$(realpath helpers):$PATH"
 
