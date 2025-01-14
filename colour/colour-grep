@@ -2,24 +2,35 @@
 
 main () {
     full
+    bracket_semicolon
+    working
 }
 
+out="$(mktemp)"
+trap 'rm -f "$out"' EXIT
+
 working () {
-    echo '\033[1;34mfish\033[1;0ming in the river' > clr
-    sed -E -i '' -e 's///g' clr
-    grep -F -q '[1;34mfish[1;0ming in the river' clr
+    echo working
+    echo '\033[1;34mfish\033[1;0ming in the river' > "$out"
+    sed -E -i '' -e 's///g' "$out"
+    grep -F -q '[1;34mfish[1;0ming in the river' "$out"
+    echo ''
 }
 
 bracket_semicolon () {
-    echo '\033[1;34mfish\033[1;0ming in the river' > clr
-    sed -E -i '' -e 's///g' -e 's/\[.;//g' clr
-    grep -F '34mfish0ming in the river' clr
+    echo bracket_semicolon
+    echo '\033[1;34mfish\033[1;0ming in the river' > "$out"
+    sed -E -i '' -e 's///g' -e 's/\[.;//g' "$out"
+    grep -F '34mfish0ming in the river' "$out"
+    echo ''
 }
 
 full () {
-    echo '\033[1;34mfish\033[1;0ming in the river' > clr
-    sed -E -i '' -e 's///g' -e 's/\[.;(0|3[0-7])m//g' clr
-    grep -F 'fishing in the river' clr
+    echo full
+    echo '\033[1;34mfish\033[1;0ming in the river' > "$out"
+    sed -E -i '' -e 's///g' -e 's/\[.;(0|3[0-7])m//g' "$out"
+    grep -F 'fishing in the river' "$out"
+    echo ''
 }
 
 main
