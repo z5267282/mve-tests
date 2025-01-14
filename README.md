@@ -1,11 +1,9 @@
 # Overview
 
 A mix of unit and integration tests for `mve`.  
-`mve` must exist in the parent level folder:
+The `mve` source folder must be located in the parent: `../mve`.
 
-- ie. `../mve` should be the path to access `mve`.
-
-To run all tests, simply run this script:
+To run all tests, simply run:
 
 ```sh
 ./run
@@ -13,26 +11,30 @@ To run all tests, simply run this script:
 
 .
 
-# Environment Configuration
+## Options
 
-The script `setup-env` should be sourced all tests.  
-This includes the config generation.  
-The following config options can be set using `JSON` as environmnet variables.  
-All other options are set according to the default configuration:
+Usage:
 
-- `RECENT`.
+```
+run [--clean] [--debug] [--name] <name1,name2,...> [--help]
+```
 
-# Config
+.
 
-The default config `testing` is stored and exported as an environment variable `$CONFIG`.
+| Flag                       | Description                                                      |
+| -------------------------- | ---------------------------------------------------------------- |
+| `--clean`                  | Delete all folders generated after testing is complete.          |
+| `--debug`                  | Show all output during testing.                                  |
+| `--name` <name1,name2,...> | Only run tests that contain either `name1` or `name2` or `...` . |
 
 # Test Structure
 
-Each folder is a test
+Each folder except `helpers` is a test.
 
-- automated tests have a root-level file called `run`
-- manual tests have a root-level file called `start`
+- Automated tests have a root-level file called `run`.
+- Manual tests have a root-level file called `start`.
 
-# Intellisense
+# Environment
 
-Intellisense path alterations have been done stored in `.vscode`.
+The script `setup-env` must be sourced by all test scripts, in order to load
+necessary environment variables,

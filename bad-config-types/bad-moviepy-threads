@@ -17,7 +17,7 @@ sed -I '' '/MOVIEPY_THREADS/ s/9/true/' $MVE_CONFIGS/$CONFIG/config.json
 python3 -m mve log generator $CONFIG 2> "$err"
 [ $? -eq $BAD_TYPE ] || exit 20
 
-../clr-remover "$err"
+clr-remover "$err"
 
 cat $err
 

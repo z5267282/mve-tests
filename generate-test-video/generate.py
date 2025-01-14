@@ -1,6 +1,6 @@
 '''Generate all necessary videos for testing. A folder videos is created in
 the root, with four copies of a generated video, 01..04.mp4 .
-This script is meant to be run inside of ../make-videos, as it relies on
+This script is meant to be run inside of make-videos, as it relies on
 environment variables that need to be sourced.'''
 
 import json

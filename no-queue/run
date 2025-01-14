@@ -1,7 +1,7 @@
 #!/usr/bin/env dash
 
 fail() {
-    "$(realpath ..)/clr" red failed && printf ': '
+    clr red failed && printf ': '
 }
 
 . ../setup-env
@@ -47,7 +47,7 @@ do_test() {
         exit 4
     fi
 
-    ../clr blue 'passed'
+    clr blue 'passed'
     echo ": $script"
 }
 
@@ -55,5 +55,5 @@ do_test viewer
 do_test treater
 
 echo ''
-../clr cyan 'passed'
+clr cyan 'passed'
 echo ': no-queue'

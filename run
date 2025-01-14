@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-# usage: run [--clean] [--no-output] [--name] <name1,name2...> [--help]
+# usage: run [--clean] [--debug] [--name] <name1,name2,...> [--help]
 
 # Run all tests.
 # Testing files are left for inspection by default.
@@ -11,11 +11,14 @@
 
 . .venv/bin/activate
 
-# provide access to working directory shell scripts
-PATH="$PATH:$(pwd)"
+# for standalone tests to know whether the root-level run was executed
+export RUN_FROM_ROOT=yes
+
+# provide access to all helper scripts
+export PATH="$(realpath helpers):$PATH"
 
 clean=no
-output=yes
+output=no
 name_terms=''
 
 while [ $# -gt 0 ]
@@ -26,16 +29,20 @@ do
         --clean)
             clean=yes
             ;;
-        --no-output)
-            output=no
+        --debug)
+            output=yes
             ;;
         --name)
             name_terms="$1"
             shift
             ;;
         --help)
-            echo '# usage: run [--clean] [--no-output] [--name] <name1,name2...> [--help]'
+            echo 'usage: run [--clean] [--debug] [--name] <name1,name2,...> [--help]'
             exit 0
+            ;;
+        *)
+            echo "unknown arg: '$arg'"
+            exit 1
             ;;
     esac
 done

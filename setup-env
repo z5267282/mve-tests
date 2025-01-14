@@ -1,5 +1,15 @@
 #!/usr/bin/env dash
 
+# if this is run from a stand-alone test, then helpers would not be in PATH
+# only add this if it was not the case that the script was run from root
+
+if ! [ "$RUN_FROM_ROOT" = yes ]
+then
+    export PATH="$(realpath ../helpers):$PATH"
+    # deactivation occurs once the standalone test ends
+    . ../.venv/bin/activate
+fi
+
 . mve-env
 
 if [ ! -d ../../mve/mve ]

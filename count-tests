@@ -1,8 +1,0 @@
-#!/usr/bin/env dash
-
-total=0
-for dir in "$@"
-do
-    ./verify-name-in-terms "$NAME_TERMS" "$dir" && total=$((total + 1))
-done
-echo $total

@@ -6,23 +6,29 @@
 run_and_maybe_show_output() {
     dir="$1"
 
+    status=0
+
     if [ $SHOW_OUTPUT = yes ]
     then
-        run
+        {
+            run
+            status=$?
+        } | sed -E 's/^/    /'
     else
         run > /dev/null 2>&1
+        status=$?
     fi
 
-    return $?
+    return $status
 }
 
 i=1
 for raw in "$@"
 do
     dir="$(dirname "$raw")"
-    ./verify-name-in-terms "$NAME_TERMS" "$dir" || continue
+    verify-name-in-terms "$NAME_TERMS" "$dir" || continue
 
-    printf 'test [ %s of %d ]\n' $(./clr bright_yellow $i) $TOTAL_TESTS
+    printf 'test [ %s of %d ]\n' $(clr bright_yellow $i) $TOTAL_TESTS
 
     cd "$dir"
     if run_and_maybe_show_output "$dir"

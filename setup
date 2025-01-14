@@ -2,22 +2,29 @@
 
 # usage: ./setup --no-videos
 
+gen_videos=yes
+for opt in "$@"
+do
+    case "$opt" in
+        --no-videos) gen_videos=no ;;
+    esac
+done
+
 echo 'creating virtual environment'
 [ -d .venv ] && rm -r .venv
 python3 -m venv .venv
 . .venv/bin/activate
 good_install=yes
+# sometimes storing $? results in problems, so this is an alternative
 pip3 install -r requirements.txt || good_install=no
 deactivate
 
 [ $good_install = yes ] || exit 10
 
-if [ $# -ge 1 -a "$1" = --no-videos ]
-then 
-    :
-else
+if [ $gen_videos = yes ]
+then
     echo 'generating testing videos'
-    ./make-videos
+    make-videos
 fi
 
 echo 'sucessfully set up testing environment'

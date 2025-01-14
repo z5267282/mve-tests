@@ -1,18 +1,18 @@
 import sys
 
-import mve.src.constants.colours as clr
+import mve.src.constants.colours as colours
 
 import mve.src.helpers.colouring as colouring
 
 colours = [
-    clr.BLACK,
-    clr.RED,
-    clr.GREEN,
-    clr.YELLOW,
-    clr.BLUE,
-    clr.PURPLE,
-    clr.CYAN,
-    clr.WHITE,
+    colours.BLACK,
+    colours.RED,
+    colours.GREEN,
+    colours.YELLOW,
+    colours.BLUE,
+    colours.PURPLE,
+    colours.CYAN,
+    colours.WHITE,
 ]
 
 colour_names = 'black red green yellow blue purple cyan white'

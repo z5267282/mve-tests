@@ -14,7 +14,7 @@ EOF
 
 python3 -m mve log viewer $CONFIG < $input > $out 2>$err
 
-../clr-remover "$err"
+clr-remover "$err"
 
 if ! grep -F -q "the file 'already.mp4' exists in the folder ['$RENAMES']" $err
 then
@@ -22,5 +22,5 @@ then
     exit 1
 fi
 
-../clr green 'passed'
+clr green 'passed'
 echo " test $(basename "$0")"

@@ -16,11 +16,11 @@ EOF
 python3 -m mve log viewer $CONFIG < $session >/dev/null 2>$err
 if ! grep -E -q -x ".*the file '.*already.mp4.*' exists in the folder .*" $err
 then
-    ../clr red failed
+    clr red failed
     echo ': incorrect message produced'
     sed 's/^/    /' $err
     exit 2
 fi
 
-../clr cyan passed
+clr cyan passed
 echo ' test edit existence protection'
