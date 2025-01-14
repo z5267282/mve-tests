@@ -22,7 +22,7 @@ do
     dir="$(dirname "$raw")"
     ./verify-name-in-terms "$NAME_TERMS" "$dir" || continue
 
-    printf 'test [ %s of %d ]\n' $(./clr bright_yellow $i) $TOTAL_TESTS
+    printf 'test [ %s of %d ]\n' $(clr bright_yellow $i) $TOTAL_TESTS
 
     cd "$dir"
     if run_and_maybe_show_output "$dir"
