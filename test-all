@@ -1,6 +1,30 @@
 #!/usr/bin/env dash
 
-for i in "$@"
+# run all tests given as command line argument where each is a file structured:
+# ./[test]/run
+
+i=1
+alias nl='echo "" && echo ""'
+for raw in "$@"
 do
-    echo "mate: $i"
+    dir="$(dirname "$raw")"
+    cd "$dir"
+    printf 'test [ %d of %d ]\n' $i $TOTAL_TESTS
+
+    if run
+    then
+        nl
+        ../clr cyan 'passed'
+        echo " tests in: $dir"
+        nl
+    else
+        nl
+        ../clr magenta 'failed'
+        echo " tests in: $dir"
+        nl
+        exit 1
+    fi
+
+    cd ..
+    i=$((i + 1))
 done

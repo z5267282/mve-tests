@@ -1,9 +1,17 @@
 #!/usr/bin/env dash
 
+# usage: run [--clean]
+
 # This is a wrapper script to ensure that tests are run in the virtual
 # environment.
+# Testing files are left for inspection by default.
+
+# usage: run --
 
 . .venv/bin/activate
+
+# provide access to working directory shell scripts
+PATH="$PATH:$(pwd)"
 
 clean=no
 for arg in "$@"
@@ -19,45 +27,17 @@ find_tests() {
     find . -mindepth 2 -maxdepth 2 -name 'run' -exec "$script" {} +
 }
 
+export TOTAL_TESTS=$(find_tests count-tests)
+
 find_tests test-all
 
-# provide access to working directory shell scripts
-# PATH="$PATH:$(pwd)"
+nl
+clr bright_green 'passed'
+echo ' all tests!'
 
-# alias nl='echo "" && echo ""'
-# for dir in *
-# do
-#     [ -d "$dir" ] || continue
-#     [ -f "$dir/run" ] || continue
-#     cd "$dir"
-#     if echo "$dir" | grep -E -q "^swapper"
-#     then
-#         continue
-#     fi
-
-#     if run
-#     then
-#         nl
-#         ../clr cyan 'passed'
-#         echo " tests in: $dir"
-#         nl
-#     else
-#         nl
-#         ../clr magenta 'failed'
-#         echo " tests in: $dir"
-#         nl
-#         exit 1
-#     fi
-#     cd ..
-# done
-
-# nl
-# clr bright_green 'passed'
-# echo ' all tests!'
-
-# if [ $clean = yes ]
-# then
-#     clean-tests
-# fi
+if [ $clean = yes ]
+then
+    clean-tests
+fi
 
 deactivate
