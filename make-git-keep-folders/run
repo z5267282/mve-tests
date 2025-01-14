@@ -3,7 +3,7 @@
 # ensure that make correctly constructs the folder structure
 # this includes gitkeeps for the other config folders
 
-. ../setup-env
+. setup-env
 
 export CONFIG=fishing
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-. ../setup-env
+. setup-env
 
 printf 'e -5 dummy
 q' | python3 -m mve no-log moment \

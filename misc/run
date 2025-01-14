@@ -2,7 +2,7 @@
 
 #!/usr/bin/env dash
 
-. ../setup-env
+. setup-env
 
 [ -d outputs ] && rm -r outputs
 mkdir outputs

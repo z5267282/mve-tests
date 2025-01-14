@@ -7,7 +7,7 @@ time="$(mktemp)"
 trap 'rm -f "$time"' EXIT 
 
 run_benmark () {
-    . ../setup-env
+    . setup-env
 
     [ -d benchmark-videos ] && rm -r benchmark-videos
     mkdir benchmark-videos

@@ -2,7 +2,7 @@
 
 set -e
 
-. ../setup-env
+. setup-env
 
 out="$(mktemp)"
 trap 'rm -f "$out"' EXIT

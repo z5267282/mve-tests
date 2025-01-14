@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-. ../setup-env
+. setup-env
 
 # change RECENT to another option
 sed -E -i '' '/RECENT/ s/RECENT/fishing_in_the_river/' $MVE_CONFIGS/$CONFIG/config.json

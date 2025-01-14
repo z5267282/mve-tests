@@ -2,7 +2,7 @@
 
 # run make using command line flags
 
-. ../setup-env
+. setup-env
 
 export CONFIG=fishing
 
