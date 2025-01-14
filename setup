@@ -17,7 +17,7 @@ then
     :
 else
     echo 'generating testing videos'
-    ./make-videos
+    make-videos
 fi
 
 echo 'sucessfully set up testing environment'
