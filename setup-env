@@ -1,7 +1,6 @@
 #!/usr/bin/env dash
 
 # this will get deactivated when the script that sources it ends
-. ../.venv/bin/activate
 
 if [ ! -d ../../mve/mve ]
 then
@@ -19,9 +18,6 @@ export MVE_CONFIGS=configs
 
 export EDITS=outputs
 export RENAMES=renames
-
-# let us run scripts in current folder
-export PATH="$PATH:."
 
 [ -d $MVE_CONFIGS ] && rm -r $MVE_CONFIGS
 mkdir $MVE_CONFIGS
