@@ -1,12 +1,10 @@
 #!/usr/bin/env dash
 
-# usage: run [--clean]
+# usage: run [--clean] [--no-output] [--help]
 
 # This is a wrapper script to ensure that tests are run in the virtual
 # environment.
 # Testing files are left for inspection by default.
-
-# usage: run --
 
 . .venv/bin/activate
 
@@ -14,10 +12,13 @@
 PATH="$PATH:$(pwd)"
 
 clean=no
+output=yes
 for arg in "$@"
 do
     case "$arg" in
         --clean) clean=yes ;;
+        --no-output) output=yes ;;
+        --help) echo 'usage: run [--clean] [--no-output] [--help]'; exit 0 ;;
     esac
 done
 
@@ -28,10 +29,11 @@ find_tests() {
 }
 
 export TOTAL_TESTS=$(find_tests count-tests)
+export SHOW_OUTPUT=$output
 
-find_tests test-all
+find_tests test-all || exit 10
 
-nl
+echo ''
 clr bright_green 'passed'
 echo ' all tests!'
 

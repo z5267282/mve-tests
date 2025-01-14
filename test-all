@@ -3,29 +3,39 @@
 # run all tests given as command line argument where each is a file structured:
 # ./[test]/run
 
+run_single() {
+    dir="$1"
+    cd "$dir"
+
+    if [ $SHOW_OUTPUT = yes ]
+    then
+        run
+    else
+        run > /dev/null 2>&1
+    fi
+
+    cd ..
+}
+
 i=1
-alias nl='echo "" && echo ""'
 for raw in "$@"
 do
     printf 'test [ %s of %d ]\n' $(./clr bright_yellow $i) $TOTAL_TESTS
 
     dir="$(dirname "$raw")"
-    cd "$dir"
-
-    if run
+    if run_single "$dir"
     then
-        nl
-        ../clr cyan 'passed'
+        echo ''
+        clr cyan 'passed'
         echo " tests in: $dir"
-        nl
+        echo ''
     else
-        nl
-        ../clr magenta 'failed'
+        echo ''
+        clr magenta 'failed'
         echo " tests in: $dir"
-        nl
+        echo ''
         exit 1
     fi
 
-    cd ..
     i=$((i + 1))
 done
