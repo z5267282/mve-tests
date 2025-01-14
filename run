@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-# usage: run [--clean] [--no-output] [--name] <name1,name2...> [--help]
+# usage: run [--clean] [--debug] [--name] <name1,name2,...> [--help]
 
 # Run all tests.
 # Testing files are left for inspection by default.
@@ -18,7 +18,7 @@ export RUN_FROM_ROOT=yes
 export PATH="$(realpath helpers):$PATH"
 
 clean=no
-output=yes
+output=no
 name_terms=''
 
 while [ $# -gt 0 ]
@@ -29,15 +29,15 @@ do
         --clean)
             clean=yes
             ;;
-        --no-output)
-            output=no
+        --debug)
+            output=yes
             ;;
         --name)
             name_terms="$1"
             shift
             ;;
         --help)
-            echo '# usage: run [--clean] [--no-output] [--name] <name1,name2...> [--help]'
+            echo 'usage: run [--clean] [--debug] [--name] <name1,name2,...> [--help]'
             exit 0
             ;;
     esac

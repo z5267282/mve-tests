@@ -11,12 +11,28 @@ To run all tests, simply run:
 
 .
 
+## Options
+
+Usage:
+
+```
+run [--clean] [--debug] [--name] <name1,name2,...> [--help]
+```
+
+.
+
+| Flag                       | Description                                                      |
+| -------------------------- | ---------------------------------------------------------------- |
+| `--clean`                  | Delete all folders generated after testing is complete.          |
+| `--debug`                  | Show all output during testing.                                  |
+| `--name` <name1,name2,...> | Only run tests that contain either `name1` or `name2` or `...` . |
+
 # Test Structure
 
-Each folder is a test
+Each folder except `helpers` is a test.
 
-- automated tests have a root-level file called `run`
-- manual tests have a root-level file called `start`
+- Automated tests have a root-level file called `run`.
+- Manual tests have a root-level file called `start`.
 
 # Environment
 
