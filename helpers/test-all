@@ -20,7 +20,7 @@ i=1
 for raw in "$@"
 do
     dir="$(dirname "$raw")"
-    ./verify-name-in-terms "$NAME_TERMS" "$dir" || continue
+    verify-name-in-terms "$NAME_TERMS" "$dir" || continue
 
     printf 'test [ %s of %d ]\n' $(clr bright_yellow $i) $TOTAL_TESTS
 
