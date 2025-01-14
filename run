@@ -25,7 +25,7 @@ done
 find_tests() {
     # find any folder that has a run file and run a script on all such folders
     script="$1"
-    find . -mindepth 2 -maxdepth 2 -name 'run' -exec "$script" {} +
+    find -s . -mindepth 2 -maxdepth 2 -name 'run' -exec "$script" {} +
 }
 
 export TOTAL_TESTS=$(find_tests count-tests)

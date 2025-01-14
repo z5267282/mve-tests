@@ -5,7 +5,6 @@
 
 run_single() {
     dir="$1"
-    cd "$dir"
 
     if [ $SHOW_OUTPUT = yes ]
     then
@@ -14,7 +13,7 @@ run_single() {
         run > /dev/null 2>&1
     fi
 
-    cd ..
+    return $?
 }
 
 i=1
@@ -23,6 +22,7 @@ do
     printf 'test [ %s of %d ]\n' $(./clr bright_yellow $i) $TOTAL_TESTS
 
     dir="$(dirname "$raw")"
+    cd "$dir"
     if run_single "$dir"
     then
         echo ''
@@ -36,6 +36,7 @@ do
         echo ''
         exit 1
     fi
+    cd ..
 
     i=$((i + 1))
 done
