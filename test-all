@@ -7,9 +7,10 @@ i=1
 alias nl='echo "" && echo ""'
 for raw in "$@"
 do
+    printf 'test [ %s of %d ]\n' $(./clr bright_yellow $i) $TOTAL_TESTS
+
     dir="$(dirname "$raw")"
     cd "$dir"
-    printf 'test [ %d of %d ]\n' $i $TOTAL_TESTS
 
     if run
     then
