@@ -18,17 +18,30 @@ PATH="$PATH:$(pwd)"
 clean=no
 output=yes
 name_terms=''
-for arg in "$@"
+
+while [ $# -gt 0 ]
 do
+    arg="$1"
+    shift
     case "$arg" in
-        --clean) clean=yes ;;
-        --no-output) output=yes ;;
-        --name) name_terms="$(name_terms)" ;;
-        --help) echo 'usage: run [--clean] [--no-output] [--help]'; exit 0 ;;
+        --clean)
+            clean=yes
+            ;;
+        --no-output)
+            output=no
+            ;;
+        --name)
+            name_terms="$1"
+            shift
+            ;;
+        --help)
+            echo '# usage: run [--clean] [--no-output] [--name] <name1,name2...> [--help]'
+            exit 0
+            ;;
     esac
 done
 
-export NAME_TERMS="$(name_terms)"
+export NAME_TERMS="$name_terms"
 export SHOW_OUTPUT=$output
 
 find_tests() {

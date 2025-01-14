@@ -3,7 +3,7 @@
 # run all tests given as command line argument where each is a file structured:
 # ./[test]/run
 
-run_single() {
+run_and_maybe_show_output() {
     dir="$1"
 
     if [ $SHOW_OUTPUT = yes ]
@@ -19,11 +19,13 @@ run_single() {
 i=1
 for raw in "$@"
 do
+    dir="$(dirname "$raw")"
+    ./verify-name-in-terms "$NAME_TERMS" "$dir" || continue
+
     printf 'test [ %s of %d ]\n' $(./clr bright_yellow $i) $TOTAL_TESTS
 
-    dir="$(dirname "$raw")"
     cd "$dir"
-    if run_single "$dir"
+    if run_and_maybe_show_output "$dir"
     then
         echo ''
         clr cyan 'passed'
