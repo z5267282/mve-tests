@@ -17,7 +17,7 @@ sed -I '' '/RECENT/ s/true/42/' $MVE_CONFIGS/$CONFIG/config.json
 python3 -m mve log generator $CONFIG 2> "$err"
 [ $? -eq $BAD_TYPE ] || exit 20
 
-../clr-remover "$err"
+clr-remover "$err"
 
 grep -F -q 'incorrect type for Config option' $err || exit 21
 grep -F -q "[ error ] option 'recent':" $err || exit 22
@@ -31,7 +31,7 @@ sed -I '' '/RECENT/ s/42/null/' $MVE_CONFIGS/$CONFIG/config.json
 python3 -m mve log generator $CONFIG 2> "$err"
 [ $? -eq $BAD_TYPE ] || exit 30
 
-../clr-remover "$err"
+clr-remover "$err"
 
 grep -F -q 'incorrect type for Config option' $err || exit 31
 grep -F -q "[ error ] option 'recent':" $err || exit 32

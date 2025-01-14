@@ -11,9 +11,9 @@ run_test() {
     script=$4
     name=$5
 
-    printf "test [ %s/7 ] testing bad %s for %s:\n" "$(../clr bright_blue $num)" $type "$(../clr bright_magenta $option)"
+    printf "test [ %s/7 ] testing bad %s for %s:\n" "$(clr bright_blue $num)" $type "$(clr bright_magenta $option)"
     ./$script > /dev/null || exit 10${num}
-    printf "    bad %s - %s\n" $name "$(../clr bright_green passed)"
+    printf "    bad %s - %s\n" $name "$(clr bright_green passed)"
 }
 
 run_test 1 boolean RECENT bad-recent recent

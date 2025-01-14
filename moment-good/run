@@ -18,7 +18,7 @@ m 5 6 cat
 m 7 8 mouse
 EOF
 
-../clr-remover $out
+clr-remover $out
 cat $out
 
 grep -F -q 'exited with 0 files remaining' $out || exit 10

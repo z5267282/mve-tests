@@ -21,10 +21,10 @@ status=$?
 
 if [ $exp -ne $status ]
 then
-    ../clr 'red' 'failed'
+    clr 'red' 'failed'
     echo ": treater did not exit with an exit status of $exp (EMPTY_QUEUE)"
     exit 1
 fi
 
-../clr cyan passed
+clr cyan passed
 echo " test empty-queue"

@@ -15,7 +15,7 @@ python3 -m mve log generator $CONFIG 2> "$err" && exit 10
 
 [ $? -eq $exp_status ] || exit 20
 
-../clr-remover "$err"
+clr-remover "$err"
 grep -F -q 'unknown Config option: fishing_in_the_river' "$err" || exit 30
 
 echo 'recognised bad option in config file'

@@ -42,7 +42,7 @@ do_test() {
         exit 4
     fi
 
-    ../clr blue 'passed'
+    clr blue 'passed'
     echo ": $script"
 }
 
@@ -52,5 +52,5 @@ touch configs/$CONFIG/queue/blank.json
 do_test treater
 
 echo ''
-../clr cyan 'passed'
+clr cyan 'passed'
 echo ': no-renames'
