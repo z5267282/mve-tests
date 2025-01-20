@@ -1,0 +1,38 @@
+#!/usr/bin/env dash
+
+. ../setup-env
+
+BANNER_PATTERN='-'
+
+run() {
+    banner "$*"
+    python3 -m mve "$@"
+}
+
+line() {
+    len=$1
+    i=0
+    while [ $i -lt $((len + 3)) ]
+    do
+        printf '%s' "$BANNER_PATTERN"
+        i=$((i + 1))
+    done
+    printf '\n'
+}
+
+banner() {
+    msg="$1"
+    len="${#msg}"
+
+    echo ''
+    line $len
+    echo "${BANNER_PATTERN}${BANNER_PATTERN} $msg"
+    line $len
+    echo ''
+}
+
+run --info
+run log --scripts
+run no-log --scripts
+
+# run log make --help
