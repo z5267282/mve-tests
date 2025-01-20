@@ -1,5 +1,7 @@
 #!/usr/bin/env dash
 
+# view different combinations of help messages
+
 . ../setup-env
 
 BANNER_PATTERN='-'
