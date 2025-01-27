@@ -4,9 +4,9 @@
 plural='s'
 [ "$TOTAL_TESTS" -eq 1 ] && plural=''
 
-echo "matched $TOTAL_TESTS" test:
+echo "matched $TOTAL_TESTS" "test${plural}:"
 
-printf '['
+printf '  ['
 i=0
 for dir in "$@"
 do
