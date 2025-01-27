@@ -1,0 +1,17 @@
+#!/usr/bin/env dash
+
+. ../setup-env
+
+export CONFIG=input-make
+
+# cannot run heredoc with or chain
+if ! python3 -m mve log make $CONFIG > /dev/null << EOF
+../videos
+$EDITS
+$RENAMES
+EOF
+then
+    exit 10
+fi
+
+pytest test_config_made.py
