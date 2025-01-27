@@ -1,0 +1,34 @@
+#!/usr/bin/env dash
+
+out="$1"
+err="$2"
+
+if python3 -m mve log treater $CONFIG > "$out" 2>"$err"
+then
+    echo 'should have not been able to treat problematic files "bad" and "worse"'
+    exit 21
+fi
+
+clr-remover "$err"
+
+if ! grep -F -q '[ error ] 2 errors occurred during treatment logged in' "$err"
+then
+    echo 'did not print out error message for error'
+    exit 22
+fi
+
+# there should only be one error file
+seen=no
+for q in $MVE_CONFIGS/$CONFIG/errors/*
+do
+    if [ $seen = yes ]
+    then
+        echo 'more than one error file'
+        exit 23
+    fi
+
+    export ERROR_FILE="$q"
+    pytest test_errors_correct_order.py
+
+    seen=yes
+done

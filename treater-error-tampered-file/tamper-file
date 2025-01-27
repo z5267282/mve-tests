@@ -1,0 +1,38 @@
+#!/usr/bin/env dash
+
+pytest test_remaining_before_treatment.py || exit 11
+
+if ! python3 -m mve log viewer $CONFIG << EOF
+m 5 13 bad
+m 3 6 good
+m 40 45 worse
+q
+EOF
+then
+    echo 'could not log edits in the viewer'
+    exit 12
+fi
+
+pytest test_remaining_after_treatment.py || exit 13
+
+# there should only be one enqued file
+seen=no
+for q in $MVE_CONFIGS/$CONFIG/queue/*
+do
+    if [ $seen = yes ]
+    then
+        echo 'more than one file queued'
+        exit 14
+    fi
+
+    # add errors
+    sed -E -i '' 's/13/fire/' "$q"
+    sed -E -i '' 's/45/earth/' "$q"
+
+    export TREATMENT_FILE="$q"
+    pytest test_treatment_after_tamper.py
+
+    seen=yes
+done
+
+true

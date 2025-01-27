@@ -1,0 +1,40 @@
+#!/usr/bin/env dash
+
+if [ "$MVE_CONFIGS/$CONFIG/history/"* = "$MVE_CONFIGS/$CONFIG/history/*" ]
+then
+    echo 'there were no treated files'
+    exit 31
+fi
+
+count=0
+for treated in $MVE_CONFIGS/$CONFIG/history/*
+do
+    if [ $count -gt 1 ]
+    then
+        echo 'there was more than one treated file'
+        exit 32
+    fi
+
+    # the good file should have still been edited
+    if ! grep -F -q good "$treated"
+    then
+        echo 'the good file was not recorded to have been treated'
+        exit 33
+    fi
+
+    count=$((count + 1))
+done
+
+if ! [ -e outputs/good.mp4 ]
+then
+    echo 'good file was not edited, despite being logged as edited'
+    exit 34
+fi
+
+if ! pytest test_duration.py
+then
+    echo 'the good video did not have a duration of 3 seconds'
+    exit 35
+fi
+
+true

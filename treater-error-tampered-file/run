@@ -1,0 +1,41 @@
+#!/usr/bin/env dash
+
+# errors should only be local to files that had errors
+# others should be fine
+
+err="$(mktemp)"
+out="$(mktemp)"
+
+trap 'rm -f "$err" "$out"' EXIT
+
+. ../setup-env
+
+TOTAL_TESTS=4
+
+log_step() {
+    num=$1
+    message="$2"
+
+    echo ''
+    printf '['
+    clr 'bright_green' $num
+    echo "] of $TOTAL_TESTS : $message"
+    echo ''
+
+}
+
+./tamper-file || exit $?
+log_step 1 'tampered file'
+
+./detect-problematic-files "$err" "$out" || exit $?
+log_step 2 'ran treater on problematic file'
+
+./check-good-file || exit $?
+log_step 3 'checked that the good file still got treated properly'
+
+./re-treat-bad-files "$out" || exit $?
+log_step 4 're-treated error files'
+
+echo ''
+echo 'treater successfully detected bad timestamps'
+true
