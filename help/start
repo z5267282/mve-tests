@@ -36,4 +36,4 @@ banner() {
 # run --info
 # run log --scripts
 # run no-log --scripts
-# run log make --options
+run log make --help
