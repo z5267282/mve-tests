@@ -10,12 +10,28 @@ trap 'rm -f "$err" "$out"' EXIT
 
 . ../setup-env
 
+log_step() {
+    num=$1
+    message="$2"
+
+    echo ''
+    printf '['
+    clr 'bright_green' $num
+    echo "] $message"
+    echo ''
+
+}
+
 ./tamper-file || exit $?
+log_step 1 'tampered file'
 
 ./detect-problematic-files "$err" "$out" || exit $?
+log_step 2 'ran treater on problematic file'
 
 # the good file should have still been edited
 # if grep -F -q good 
+
+# TODO: add test number
 
 echo ''
 echo 'treater successfully detected bad timestamps'
