@@ -1,10 +1,19 @@
 #!/usr/bin/env dash
 
+# errors should only be local to files that had errors
+# others should be fine
+
+err="$(mktemp)"
+out="$(mktemp)"
+
+trap 'rm -f "$err" "$out"' EXIT
+
 . ../setup-env
 
 python3 -m mve log viewer $CONFIG << EOF
 m 5 13 bad 
 m 3 6 good
+m 40 45 worse
 q
 EOF
 
@@ -18,9 +27,27 @@ do
         exit 20
     fi
 
-    # replace the 13 with a large timestamp
-    sed -E -i '' 's/13/100000/' "$q"
+    # add errors
+    sed -E -i '' 's/13/fire/' "$q"
+    sed -E -i '' 's/45/earth/' "$q"
+
     seen=yes
 done
 
-python3 -m mve log treater $CONFIG
+if python3 -m mve log treater $CONFIG > "$out" 2>"$err"
+then
+    echo 'should have not been able to treat problematic files "bad" and "worse"'
+    exit 30
+fi
+
+clr-remover "$err"
+
+if ! grep -F -q '[ error ] 2 errors occurred during treatment logged in' "$err"
+then
+    echo 'did not print out error message for error'
+    exit 40
+fi
+
+echo ''
+echo 'treater successfully detected bad timestamps'
+true
