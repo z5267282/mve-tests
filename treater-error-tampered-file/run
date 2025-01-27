@@ -10,6 +10,8 @@ trap 'rm -f "$err" "$out"' EXIT
 
 . ../setup-env
 
+TOTAL_TESTS=4
+
 log_step() {
     num=$1
     message="$2"
@@ -17,7 +19,7 @@ log_step() {
     echo ''
     printf '['
     clr 'bright_green' $num
-    echo "] $message"
+    echo "] of $TOTAL_TESTS : $message"
     echo ''
 
 }
@@ -31,7 +33,8 @@ log_step 2 'ran treater on problematic file'
 ./check-good-file || exit $?
 log_step 3 'checked that the good file still got treated properly'
 
-# # TODO: add test number
+./re-treat-bad-files "$out" || exit $?
+log_step 4 're-treated error files'
 
 # echo ''
 # echo 'treater successfully detected bad timestamps'

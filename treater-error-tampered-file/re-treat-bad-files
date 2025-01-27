@@ -1,0 +1,42 @@
+#!/usr/bin/env dash
+
+out="$1"
+
+if ! python3 -m mve log viewer $CONFIG >/dev/null 2>&1 << EOF
+m 4 8 editing 04 good file
+m 1 4 fix of 01
+m 30 35 fix of 03
+q
+EOF
+then
+    echo 'could not re-treat bad files'
+    exit 41
+fi
+
+if ! python3 -m mve log treater $CONFIG >"$out" 2>/dev/null
+then
+    echo 'treater could not be run on bad files'
+    exit 42
+fi
+
+clr-remover "$out"
+
+if ! grep -F -q '[ reminder ] - there are no more remaining files to be viewed and the last treatment has been run, so deleter should be run' "$out"
+then
+    echo 'was not reminded about running the deleter after all files were treated'
+    exit 43
+fi
+
+if ! [ -e "${EDITS}/fix of 01.mp4" ]
+then
+    echo 'fix of 01 does not exist'
+    exit 44
+fi
+
+if ! [ -e "${EDITS}/fix of 03.mp4" ]
+then
+    echo 'fix of 03 does not exist'
+    exit 45
+fi
+
+true
