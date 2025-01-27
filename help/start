@@ -45,6 +45,12 @@ echo ''
 echo '### LOG'
 run log make --help
 run log integrity --help
+echo ''
+
+echo '### NO LOG'
+run no-log moment --help
+run no-log focus --help
+run no-log combine --help
 
 # legacy scripts that don't support help
 # run log generator --help
