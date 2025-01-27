@@ -2,9 +2,25 @@
 
 . ../setup-env
 
-set -e
-
 python3 -m mve log viewer $CONFIG << EOF
-m 5 10 throwaway
+m 5 13 bad 
+m 3 6 good
 q
 EOF
+
+# there should only be one enqued file
+seen=no
+for q in $MVE_CONFIGS/$CONFIG/queue/*
+do
+    if [ $seen = yes ]
+    then
+        echo 'more than one file queued'
+        exit 20
+    fi
+
+    # replace the 13 with a large timestamp
+    sed -E -i '' 's/13/100000/' "$q"
+    seen=yes
+done
+
+python3 -m mve log treater $CONFIG
