@@ -2,8 +2,13 @@
 
 . ../setup-env
 
+err="$(mktemp)"
+trap 'rm -f "$err"' EXIT
+
 main() {
     load_treatment
+    tamper_file
+    expect_treater_error
 }
 
 load_treatment() {
@@ -42,5 +47,23 @@ tamper_file() {
     return $?
 }
 
+expect_treater_error() {
+    if python3 -m mve log treater $CONFIG 2>/"$err" >/dev/null
+    then
+        echo 'treater was run sucessfully after being tampered with'
+        return 13
+    fi
+
+    clr-remover "$err"
+    if ! grep -F -q '[ error ] 1 error occurred during treatment logged in' "$err"
+    then
+        echo 'incorrect error message printed out for single tampered treater error'
+        return 14
+    fi
+
+    true
+    return $?
+}
+
 main
-exit $?
+echo 'treater successfully handled one tampered error'
