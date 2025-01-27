@@ -57,6 +57,7 @@ find_tests() {
 }
 
 export TOTAL_TESTS=$(find_tests count-tests)
+find_tests list-tests
 
 find_tests test-all || exit 10
 
