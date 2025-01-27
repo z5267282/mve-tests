@@ -11,7 +11,7 @@ fi
 
 clr-remover "$err"
 
-if ! grep -F -q '[ error ] 2 errors occurre during treatment logged in' "$err"
+if ! grep -F -q '[ error ] 2 errors occurred during treatment logged in' "$err"
 then
     echo 'did not print out error message for error'
     exit 40
