@@ -29,6 +29,9 @@ do
     sed -E -i '' 's/13/fire/' "$q"
     sed -E -i '' 's/45/earth/' "$q"
 
+    export TREATMENT_FILE="$q"
+    pytest test_treatment_after_tamper.py
+
     seen=yes
 done
 
