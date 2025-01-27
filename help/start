@@ -33,18 +33,18 @@ banner() {
     echo ''
 }
 
-echo 'TOP LEVEL'
+echo '### TOP LEVEL'
 run --info
 echo ''
 
-echo 'LOG/NO LOG LEVEL'
+echo '### LOG/NO LOG LEVEL'
 run log --scripts
 run no-log --scripts
 echo ''
 
-echo 'LOG'
+echo '### LOG'
 run log make --help
-# run log integity --help
+run log integrity --help
 # run log generator --help
 # run log viewer --help
 # run log treater --help
