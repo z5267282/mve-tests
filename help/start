@@ -45,8 +45,9 @@ echo ''
 echo '### LOG'
 run log make --help
 run log integrity --help
+
+# legacy scripts that don't support help
 # run log generator --help
 # run log viewer --help
 # run log treater --help
 # run log deleter --help
-# echo ''
