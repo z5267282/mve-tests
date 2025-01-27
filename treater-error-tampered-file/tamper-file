@@ -1,0 +1,31 @@
+#!/usr/bin/env dash
+
+if ! python3 -m mve log viewer $CONFIG << EOF
+m 5 13 bad 
+m 3 6 good
+m 40 45 worse
+q
+EOF
+then
+    echo 'could not log edits in the viewer'
+    exit 10
+fi
+
+# there should only be one enqued file
+seen=no
+for q in $MVE_CONFIGS/$CONFIG/queue/*
+do
+    if [ $seen = yes ]
+    then
+        echo 'more than one file queued'
+        exit 20
+    fi
+
+    # add errors
+    sed -E -i '' 's/13/fire/' "$q"
+    sed -E -i '' 's/45/earth/' "$q"
+
+    seen=yes
+done
+
+true

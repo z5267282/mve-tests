@@ -10,43 +10,9 @@ trap 'rm -f "$err" "$out"' EXIT
 
 . ../setup-env
 
-python3 -m mve log viewer $CONFIG << EOF
-m 5 13 bad 
-m 3 6 good
-m 40 45 worse
-q
-EOF
+./tamper-file || exit $?
 
-# there should only be one enqued file
-seen=no
-for q in $MVE_CONFIGS/$CONFIG/queue/*
-do
-    if [ $seen = yes ]
-    then
-        echo 'more than one file queued'
-        exit 20
-    fi
-
-    # add errors
-    sed -E -i '' 's/13/fire/' "$q"
-    sed -E -i '' 's/45/earth/' "$q"
-
-    seen=yes
-done
-
-if python3 -m mve log treater $CONFIG > "$out" 2>"$err"
-then
-    echo 'should have not been able to treat problematic files "bad" and "worse"'
-    exit 30
-fi
-
-clr-remover "$err"
-
-if ! grep -F -q '[ error ] 2 errors occurred during treatment logged in' "$err"
-then
-    echo 'did not print out error message for error'
-    exit 40
-fi
+./detect-problematic-files "$err" "$out" || exit $?
 
 # the good file should have still been edited
 # if grep -F -q good 
