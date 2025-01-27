@@ -39,4 +39,6 @@ then
     exit 45
 fi
 
+pytest test_repeated_durations.py || exit 46
+
 true
