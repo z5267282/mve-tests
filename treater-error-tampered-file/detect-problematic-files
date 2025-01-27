@@ -6,7 +6,7 @@ err="$2"
 if python3 -m mve log treater $CONFIG > "$out" 2>"$err"
 then
     echo 'should have not been able to treat problematic files "bad" and "worse"'
-    exit 30
+    exit 21
 fi
 
 clr-remover "$err"
@@ -14,5 +14,5 @@ clr-remover "$err"
 if ! grep -F -q '[ error ] 2 errors occurred during treatment logged in' "$err"
 then
     echo 'did not print out error message for error'
-    exit 40
+    exit 22
 fi

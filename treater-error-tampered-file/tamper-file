@@ -8,7 +8,7 @@ q
 EOF
 then
     echo 'could not log edits in the viewer'
-    exit 10
+    exit 11
 fi
 
 # there should only be one enqued file
@@ -18,7 +18,7 @@ do
     if [ $seen = yes ]
     then
         echo 'more than one file queued'
-        exit 20
+        exit 12
     fi
 
     # add errors
