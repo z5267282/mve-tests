@@ -1,0 +1,59 @@
+#!/usr/bin/env dash
+
+# view different combinations of help messages
+
+. ../setup-env
+
+BANNER_PATTERN='-'
+
+run() {
+    banner "$*"
+    python3 -m mve "$@"
+}
+
+line() {
+    len=$1
+    i=0
+    while [ $i -lt $((len + 3)) ]
+    do
+        printf '%s' "$BANNER_PATTERN"
+        i=$((i + 1))
+    done
+    printf '\n'
+}
+
+banner() {
+    msg="$1"
+    len="${#msg}"
+
+    echo ''
+    line $len
+    echo "${BANNER_PATTERN}${BANNER_PATTERN} $msg"
+    line $len
+    echo ''
+}
+
+echo '### TOP LEVEL'
+run --info
+echo ''
+
+echo '### LOG/NO LOG LEVEL'
+run log --scripts
+run no-log --scripts
+echo ''
+
+echo '### LOG'
+run log make --help
+run log integrity --help
+echo ''
+
+echo '### NO LOG'
+run no-log moment --help
+run no-log focus --help
+run no-log combine --help
+
+# legacy scripts that don't support help
+# run log generator --help
+# run log viewer --help
+# run log treater --help
+# run log deleter --help
