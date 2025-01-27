@@ -48,6 +48,9 @@ then
     exit 40
 fi
 
+# the good file should have still been edited
+# if grep -F -q good 
+
 echo ''
 echo 'treater successfully detected bad timestamps'
 true
