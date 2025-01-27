@@ -8,3 +8,12 @@
 VIEW=''
 
 . ../setup-env
+
+export CONFIG=robert
+
+#python3 -m mve log make \
+#    $CONFIG \
+#    --source '../videos' --renames . --edits $EDITS \
+#    --testing \
+#
+python3 -m mve log make --help

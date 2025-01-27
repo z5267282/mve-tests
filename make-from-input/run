@@ -1,0 +1,32 @@
+#!/usr/bin/env dash
+
+. ../setup-env
+
+# cannot run heredoc with or chain
+if ! python3 -m mve log make input-make > /dev/null << EOF
+../videos
+$EDITS
+$RENAMES
+EOF
+then
+    exit 10
+fi
+
+pytest test_config_from_input.py || exit 20
+
+echo ''
+echo 'make works from input'
+
+if ! python3 -m mve log make dot-path > /dev/null << EOF
+../videos
+.
+.
+EOF
+then
+    exit 30
+fi
+
+pytest test_dot_path_config.py || exit 40
+
+echo ''
+echo 'make works with dot files'
