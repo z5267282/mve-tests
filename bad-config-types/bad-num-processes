@@ -19,7 +19,7 @@ python3 -m mve log generator $CONFIG 2> "$err"
 
 clr-remover "$err"
 
-grep -F -q 'incorrect type for Config option' $err || exit 21
+grep -F -q 'incorrect type for configuration option' $err || exit 21
 grep -F -q "[ error ] option 'num_processes':" $err || exit 22
 grep -F -q '[ error ]   exp : int' $err || exit 23
 grep -F -q '[ error ]   got : bool' $err || exit 24
