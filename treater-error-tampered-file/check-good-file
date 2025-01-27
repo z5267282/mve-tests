@@ -3,7 +3,7 @@
 if [ "$MVE_CONFIGS/$CONFIG/history/"* = "$MVE_CONFIGS/$CONFIG/history/*" ]
 then
     echo 'there were no treated files'
-    exit 50
+    exit 31
 fi
 
 count=0
@@ -12,19 +12,17 @@ do
     if [ $count -gt 1 ]
     then
         echo 'there was more than one treated file'
-        exit 60
+        exit 32
     fi
 
     # the good file should have still been edited
     if ! grep -F -q good "$treated"
     then
         echo 'the good file was not recorded to have been treated'
-        echo 70
+        echo 33
     fi
 
     count=$((count + 1))
 done
-
-if 
 
 true
