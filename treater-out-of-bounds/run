@@ -1,0 +1,10 @@
+#!/usr/bin/env dash
+
+. ../setup-env
+
+set -e
+
+python3 -m mve log viewer $CONFIG << EOF
+m 5 10 throwaway
+q
+EOF
