@@ -1,0 +1,22 @@
+
+#!/usr/bin/env dash
+
+plural='s'
+[ "$TOTAL_TESTS" -eq 1 ] && plural=''
+
+echo "matched $TOTAL_TESTS" test:
+
+printf '['
+i=0
+for dir in "$@"
+do
+    verify-name-in-terms "$NAME_TERMS" "$dir" || continue
+    dirname "$dir" | tr -d '\n'
+    if [ $i -lt $((TOTAL_TESTS - 1)) ]
+    then
+        printf ', '
+    fi
+    i=$((i + 1))
+done
+echo ']'
+echo ''
