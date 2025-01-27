@@ -1,0 +1,46 @@
+#!/usr/bin/env dash
+
+. ../setup-env
+
+main() {
+    load_treatment
+}
+
+load_treatment() {
+    if ! python3 -m mve log viewer $CONFIG << EOF
+m 5 13 bad
+m 3 6 good
+q
+EOF
+    then
+        echo 'could not log edits in the viewer'
+        return 11
+    fi
+
+    true
+    return $?
+}
+
+tamper_file() {
+    # there should only be one enqued file
+    seen=no
+    for q in $MVE_CONFIGS/$CONFIG/queue/*
+    do
+        if [ $seen = yes ]
+        then
+            echo 'more than one file queued'
+            return 12
+        fi
+
+        # add errors
+        sed -E -i '' 's/13/fire/' "$q"
+
+        seen=yes
+    done
+
+    true
+    return $?
+}
+
+main
+exit $?
