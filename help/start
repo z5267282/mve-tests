@@ -33,7 +33,7 @@ banner() {
     echo ''
 }
 
-# run --info
-# run log --scripts
-# run no-log --scripts
+run --info
+run log --scripts
+run no-log --scripts
 run log make --help
