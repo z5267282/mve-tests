@@ -19,10 +19,22 @@ do
     if ! grep -F -q good "$treated"
     then
         echo 'the good file was not recorded to have been treated'
-        echo 33
+        exit 33
     fi
 
     count=$((count + 1))
 done
+
+if ! [ -e outputs/good.mp4 ]
+then
+    echo 'good file was not edited, despite being logged as edited'
+    exit 34
+fi
+
+if ! pytest test_duration.py
+then
+    echo 'the good video did not have a duration of 3 seconds'
+    exit 35
+fi
 
 true
