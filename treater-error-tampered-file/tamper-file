@@ -3,7 +3,7 @@
 pytest test_remaining_before_treatment.py || exit 11
 
 if ! python3 -m mve log viewer $CONFIG << EOF
-m 5 13 bad 
+m 5 13 bad
 m 3 6 good
 m 40 45 worse
 q
