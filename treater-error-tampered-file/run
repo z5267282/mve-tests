@@ -28,8 +28,8 @@ log_step 1 'tampered file'
 ./detect-problematic-files "$err" "$out" || exit $?
 log_step 2 'ran treater on problematic file'
 
-# the good file should have still been edited
-# if grep -F -q good 
+./check-good-file || exit $?
+log_step 3 'checked that the good file still got treated properly'
 
 # TODO: add test number
 
