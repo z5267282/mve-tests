@@ -1,6 +1,8 @@
 #!/usr/bin/env dash
 
 main() {
+    . ../setup-env
+
     test_start
     test_whole
 }
