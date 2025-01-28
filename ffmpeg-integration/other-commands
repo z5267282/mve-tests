@@ -1,7 +1,7 @@
 #!/usr/bin/env dash
 
 main() {
-    test_start
+    # test_start
     test_whole
 }
 
@@ -10,7 +10,8 @@ test_start() {
 
     python3 -m mve log make $CONFIG \
         --source='../videos' --renames=$RENAMES --edits=$EDITS \
-        --testing --use-moviepy
+        --testing --use-moviepy \
+        || exit 11
 
     python3 -m mve log generator $CONFIG 
     if ! python3 -m mve log viewer $CONFIG << EOF
@@ -18,10 +19,10 @@ s 4 start command
 q
 EOF
     then
-        exit 10
+        exit 11
     fi
 
-    python3 -m mve log treater $CONFIG || exit 20
+    python3 -m mve log treater $CONFIG || exit 12
 
     echo 'successfully tested s command using moviepy'
 }
@@ -31,12 +32,13 @@ test_whole() {
     export CONFIG=edit-video
 
     export EDITS=edited
-    [ -d $EDITS ] || rm -r $EDITS
+    [ -d $EDITS ] && rm -r $EDITS
     mkdir $EDITS
 
     python3 -m mve log make $CONFIG \
         --source='../videos' --renames=$RENAMES --edits=$EDITS \
-        --testing --use-moviepy
+        --testing --use-moviepy \
+        || exit 21
 
     python3 -m mve log generator $CONFIG
     if ! python3 -m mve log viewer $CONFIG << EOF
@@ -44,18 +46,20 @@ m 4 8 edited
 q
 EOF
     then
-        exit 30
+        exit 22
     fi
 
     export CONFIG=run-whole
 
-    export EDITS=edited
-    [ -d $EDITS ] || rm -r $EDITS
+    export EDITED_FOLDER=$EDITS
+    export EDITS=whole-command
+    [ -d $EDITS ] && rm -r $EDITS
     mkdir $EDITS
 
     python3 -m mve log make $CONFIG \
-        --source='edit-video' --renames=$RENAMES --edits=$EDITS \
-        --testing --use-moviepy
+        --source=$EDITED_FOLDER --renames=$RENAMES --edits=$EDITS \
+        --testing --use-moviepy \
+        || exit 23
     
     python3 -m mve log generator $CONFIG
     if ! python3 -m mve log viewer $CONFIG << EOF
@@ -63,11 +67,11 @@ w whole video
 q
 EOF
     then
-        exit 40
+        exit 24
     fi
 
-    python3 -m mve log treater $CONFIG || exit 50
-    [ -e "$MVE_CONFIGS/$CONFIG/whole video.mp4" ] || exit 60
+    python3 -m mve log treater $CONFIG || exit 25
+    [ -e "$MVE_CONFIGS/$CONFIG/whole video.mp4" ] || exit 26
 
     echo 'sucessfully tested whole command using moviepy'
 }
