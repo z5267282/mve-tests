@@ -1,0 +1,97 @@
+#!/usr/bin/env dash
+
+main() {
+    . ../setup-env
+
+    test_start
+    test_whole
+}
+
+test_start() {
+    export CONFIG=other
+
+    python3 -m mve log make $CONFIG \
+        --source='../videos' --renames=$RENAMES --edits=$EDITS \
+        --testing --use-moviepy \
+        || exit 11
+
+    python3 -m mve log generator $CONFIG 
+    if ! python3 -m mve log viewer $CONFIG << EOF
+s 5 start command
+q
+EOF
+    then
+        exit 11
+    fi
+
+    python3 -m mve log treater $CONFIG || exit 12
+
+    pytest test_start_duration.py || exit 13
+
+    echo ''
+    clr bright_green 1
+    echo ' of 2 successfully tested start command using moviepy'
+}
+
+test_whole() {
+    # to save time on edit make a smaller video then run whole on that
+    make_shorter_video
+
+    export CONFIG=run-whole
+
+    export EDITS=whole-command
+    [ -d $EDITS ] && rm -r $EDITS
+    mkdir $EDITS
+
+    python3 -m mve log make $CONFIG \
+        --source='short' --renames=$RENAMES --edits=$EDITS \
+        --testing --use-moviepy \
+        || exit 31
+    
+    python3 -m mve log generator $CONFIG
+    if ! python3 -m mve log viewer $CONFIG << EOF
+w whole command
+q
+EOF
+    then
+        exit 32
+    fi
+
+    python3 -m mve log treater $CONFIG || exit 33
+    [ -e "$EDITS/whole command.mp4" ] || exit 34
+    pytest test_whole_duration.py
+
+    echo ''
+    clr bright_green 2
+    echo ' of 2 sucessfully tested whole command using moviepy'
+}
+
+make_shorter_video() {
+    # make a shorter 4-second video called "short/shorter.mp4"
+
+    export CONFIG=make-short
+
+    export EDITS=short
+    [ -d $EDITS ] && rm -r $EDITS
+    mkdir $EDITS
+
+    python3 -m mve log make $CONFIG \
+        --source='../videos' --renames=$RENAMES --edits=$EDITS \
+        --testing --use-moviepy \
+        || exit 21
+
+    python3 -m mve log generator $CONFIG
+    if ! python3 -m mve log viewer $CONFIG << EOF
+m 4 8 shorter
+q
+EOF
+    then
+        exit 22
+    fi
+
+    python3 -m mve log treater $CONFIG || exit 23
+    [ -e short/shorter.mp4 ] || exit 24
+}
+
+main
+true
