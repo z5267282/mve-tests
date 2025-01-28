@@ -1,21 +1,78 @@
 #!/usr/bin/env dash
 
-cmds=$(mktemp)
-trap 'rm -f $cmds' EXIT
+main() {
+    test_start
+    test_whole
+}
 
-export CONFIG=other
+test_start() {
+    export CONFIG=other
 
-python3 -m mve log make $CONFIG \
-    --source='../videos' --renames=$RENAMES --edits=$EDITS \
-    --testing --use-moviepy
+    python3 -m mve log make $CONFIG \
+        --source='../videos' --renames=$RENAMES --edits=$EDITS \
+        --testing --use-moviepy
 
-python3 -m mve log generator $CONFIG
-
-cat << EOF > $cmds
-s 58 start command
-w whole command
+    python3 -m mve log generator $CONFIG 
+    if ! python3 -m mve log viewer $CONFIG << EOF
+s 4 start command
 q
 EOF
+    then
+        exit 10
+    fi
 
-python3 -m mve log viewer $CONFIG < $cmds > /dev/null || exit 10
-python3 -m mve log treater $CONFIG 2>/dev/null || exit 20
+    python3 -m mve log treater $CONFIG || exit 20
+
+    echo 'successfully tested s command using moviepy'
+}
+
+# to save time on edit make a smaller video then run whole on that
+test_whole() {
+    export CONFIG=edit-video
+
+    export EDITS=edited
+    [ -d $EDITS ] || rm -r $EDITS
+    mkdir $EDITS
+
+    python3 -m mve log make $CONFIG \
+        --source='../videos' --renames=$RENAMES --edits=$EDITS \
+        --testing --use-moviepy
+
+    python3 -m mve log generator $CONFIG
+    if ! python3 -m mve log viewer $CONFIG << EOF
+m 4 8 edited
+q
+EOF
+    then
+        exit 30
+    fi
+
+    export CONFIG=run-whole
+
+    export EDITS=edited
+    [ -d $EDITS ] || rm -r $EDITS
+    mkdir $EDITS
+
+    python3 -m mve log make $CONFIG \
+        --source='edit-video' --renames=$RENAMES --edits=$EDITS \
+        --testing --use-moviepy
+    
+    python3 -m mve log generator $CONFIG
+    if ! python3 -m mve log viewer $CONFIG << EOF
+w whole video
+q
+EOF
+    then
+        exit 40
+    fi
+
+    python3 -m mve log treater $CONFIG || exit 50
+    [ -e "$MVE_CONFIGS/$CONFIG/whole video.mp4" ] || exit 60
+
+    echo 'sucessfully tested whole command using moviepy'
+}
+
+# TODO: pytest
+
+main
+true
