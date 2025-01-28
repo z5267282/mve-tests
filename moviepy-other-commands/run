@@ -17,7 +17,7 @@ test_start() {
 
     python3 -m mve log generator $CONFIG 
     if ! python3 -m mve log viewer $CONFIG << EOF
-s 4 start command
+s 5 start command
 q
 EOF
     then
@@ -25,6 +25,8 @@ EOF
     fi
 
     python3 -m mve log treater $CONFIG || exit 12
+
+    pytest test_start_duration.py || exit 13
 
     echo ''
     clr bright_green 1
