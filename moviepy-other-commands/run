@@ -50,7 +50,7 @@ test_whole() {
     
     python3 -m mve log generator $CONFIG
     if ! python3 -m mve log viewer $CONFIG << EOF
-w whole video
+w whole command
 q
 EOF
     then
@@ -58,14 +58,13 @@ EOF
     fi
 
     python3 -m mve log treater $CONFIG || exit 33
-    [ -e "$EDITS/whole video.mp4" ] || exit 34
+    [ -e "$EDITS/whole command.mp4" ] || exit 34
+    pytest test_whole_duration.py
 
     echo ''
     clr bright_green 2
     echo ' of 2 sucessfully tested whole command using moviepy'
 }
-
-# TODO: pytest
 
 make_shorter_video() {
     # make a shorter 4-second video called "short/shorter.mp4"
