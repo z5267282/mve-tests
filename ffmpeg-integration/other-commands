@@ -1,7 +1,7 @@
 #!/usr/bin/env dash
 
 main() {
-    # test_start
+    test_start
     test_whole
 }
 
@@ -24,14 +24,51 @@ EOF
 
     python3 -m mve log treater $CONFIG || exit 12
 
-    echo 'successfully tested s command using moviepy'
+    echo ''
+    clr bright_green 1
+    echo ' of 2 successfully tested start command using moviepy'
 }
 
-# to save time on edit make a smaller video then run whole on that
 test_whole() {
-    export CONFIG=edit-video
+    # to save time on edit make a smaller video then run whole on that
+    make_shorter_video
 
-    export EDITS=edited
+    export CONFIG=run-whole
+
+    export EDITS=whole-command
+    [ -d $EDITS ] && rm -r $EDITS
+    mkdir $EDITS
+
+    python3 -m mve log make $CONFIG \
+        --source='short' --renames=$RENAMES --edits=$EDITS \
+        --testing --use-moviepy \
+        || exit 31
+    
+    python3 -m mve log generator $CONFIG
+    if ! python3 -m mve log viewer $CONFIG << EOF
+w whole video
+q
+EOF
+    then
+        exit 32
+    fi
+
+    python3 -m mve log treater $CONFIG || exit 33
+    [ -e "$EDITS/whole video.mp4" ] || exit 34
+
+    echo ''
+    clr bright_green 2
+    echo ' of 2 sucessfully tested whole command using moviepy'
+}
+
+# TODO: pytest
+
+make_shorter_video() {
+    # make a shorter 4-second video called "short/shorter.mp4"
+
+    export CONFIG=make-short
+
+    export EDITS=short
     [ -d $EDITS ] && rm -r $EDITS
     mkdir $EDITS
 
@@ -42,41 +79,16 @@ test_whole() {
 
     python3 -m mve log generator $CONFIG
     if ! python3 -m mve log viewer $CONFIG << EOF
-m 4 8 edited
+m 4 8 shorter
 q
 EOF
     then
         exit 22
     fi
 
-    export CONFIG=run-whole
-
-    export EDITED_FOLDER=$EDITS
-    export EDITS=whole-command
-    [ -d $EDITS ] && rm -r $EDITS
-    mkdir $EDITS
-
-    python3 -m mve log make $CONFIG \
-        --source=$EDITED_FOLDER --renames=$RENAMES --edits=$EDITS \
-        --testing --use-moviepy \
-        || exit 23
-    
-    python3 -m mve log generator $CONFIG
-    if ! python3 -m mve log viewer $CONFIG << EOF
-w whole video
-q
-EOF
-    then
-        exit 24
-    fi
-
-    python3 -m mve log treater $CONFIG || exit 25
-    [ -e "$MVE_CONFIGS/$CONFIG/whole video.mp4" ] || exit 26
-
-    echo 'sucessfully tested whole command using moviepy'
+    python3 -m mve log treater $CONFIG || exit 23
+    [ -e short/shorter.mp4 ] || exit 24
 }
-
-# TODO: pytest
 
 main
 true
