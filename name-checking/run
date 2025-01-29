@@ -1,0 +1,5 @@
+#!/usr/bin/env dash
+
+. ../setup-env
+
+pytest test_names.py
