@@ -1,5 +1,7 @@
 #!/usr/bin/env dash
 
+set -x
+
 . ../setup-env
 
 export BAD_TYPE=$(grep -F BAD_TYPE mve/src/constants/error.py | grep -E -o '[0-9]+')
@@ -12,7 +14,7 @@ run_test() {
     name=$5
 
     printf "test [ %s/7 ] testing bad %s for %s:\n" "$(clr bright_blue $num)" $type "$(clr bright_magenta $option)"
-    ./$script > /dev/null || exit 10${num}
+    ./$script > /dev/null || exit "1${num}"
     printf "    bad %s - %s\n" $name "$(clr bright_green passed)"
 }
 
