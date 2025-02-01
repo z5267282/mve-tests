@@ -33,6 +33,8 @@ do
     printf 'test [ %s of %d ]\n' $(clr bright_yellow $i) $TOTAL_TESTS
 
     cd "$dir"
+    echo "IN DIR: $dir"
+    echo "CONTENTS OF DIR: $(ls -1)"
     if run_and_maybe_show_output "$dir"
     then
         echo ''
