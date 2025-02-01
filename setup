@@ -2,6 +2,8 @@
 
 # usage: ./setup --no-videos
 
+set -x
+
 gen_videos=yes
 for opt in "$@"
 do
@@ -24,7 +26,8 @@ deactivate
 if [ $gen_videos = yes ]
 then
     echo 'generating testing videos'
-    make-videos
+    export PATH="$(realpath helpers):$PATH"
+    make-videos || exit 20
 fi
 
 echo 'sucessfully set up testing environment'
