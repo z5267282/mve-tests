@@ -24,7 +24,7 @@ deactivate
 if [ $gen_videos = yes ]
 then
     echo 'generating testing videos'
-    make-videos
+    make-videos || exit 20
 fi
 
 echo 'sucessfully set up testing environment'
