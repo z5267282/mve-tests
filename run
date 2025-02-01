@@ -9,6 +9,8 @@
 # eg to run only tests that contain either hello or bye
 # run --name hello,bye
 
+set -x
+
 . .venv/bin/activate
 
 # for standalone tests to know whether the root-level run was executed
