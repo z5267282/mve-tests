@@ -4,7 +4,8 @@
 # ./[test]/run
 
 run_and_maybe_show_output() {
-    dir="$1"
+    # run a test after already having changed into its folder
+    # we change folders outside the function in case any errors are encountered
 
     status=0
 
@@ -21,6 +22,9 @@ run_and_maybe_show_output() {
 
     return $status
 }
+
+# allow scripts for each test to be run without ./ needed
+export PATH=".:$PATH"
 
 i=1
 for raw in "$@"

@@ -2,8 +2,6 @@
 
 # usage: ./setup --no-videos
 
-set -x
-
 gen_videos=yes
 for opt in "$@"
 do
