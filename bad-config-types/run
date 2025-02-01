@@ -1,7 +1,5 @@
 #!/usr/bin/env dash
 
-set -x
-
 . ../setup-env
 
 export BAD_TYPE=$(grep -F BAD_TYPE mve/src/constants/error.py | grep -E -o '[0-9]+')

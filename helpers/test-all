@@ -22,8 +22,6 @@ run_and_maybe_show_output() {
     return $status
 }
 
-set -x
-
 i=1
 for raw in "$@"
 do
